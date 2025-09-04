@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.U2D.IK;
 
-public class ShopGridUI : MonoBehaviour, InterfaceDragHandler
+
+//inherit from base class
+public class ShopGridUI : GeneralUI, InterfaceDragHandler
 {
-    [SerializeField] private ShopItem item;
+    private ShopItem item;
 
 
 
@@ -23,6 +25,11 @@ public class ShopGridUI : MonoBehaviour, InterfaceDragHandler
     public void OnEndDrag(PointerEventData eventData)
     {
         ShopManager.instance.HandleDragEnd(item, eventData);
+    }
+
+    public void SetItem(ShopItem item)
+    {
+        this.item = item;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

@@ -15,6 +15,7 @@ public class ShopManager : MonoBehaviour
 
 
     private bool isEmpty = true;
+ 
 
     private void Awake()
     {
@@ -51,10 +52,12 @@ public class ShopManager : MonoBehaviour
         {
 
             //4/9 cheap method may change later 
-            GeneralUI gridUI = UIGrid[iter].GetComponentInChildren<GeneralUI>();
+            ShopGridUI gridUI = UIGrid[iter].GetComponentInChildren<ShopGridUI>();
             if (gridUI != null)
+            {
                 gridUI.GetImage().sprite = itemList[iter].GetSprite();
-
+                gridUI.SetItem(itemList[iter]);
+            }
         }
 
     }
