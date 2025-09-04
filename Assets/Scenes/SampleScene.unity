@@ -2111,6 +2111,7 @@ MonoBehaviour:
   - {fileID: 1714460735}
   - {fileID: 225931225}
   - {fileID: 64202158}
+  isDragging: 0
 --- !u!1 &2112091638
 GameObject:
   m_ObjectHideFlags: 0
@@ -2123,6 +2124,7 @@ GameObject:
   - component: {fileID: 2112091641}
   - component: {fileID: 2112091640}
   - component: {fileID: 2112091642}
+  - component: {fileID: 2112091643}
   m_Layer: 5
   m_Name: Shop Grid 1
   m_TagString: Untagged
@@ -2201,6 +2203,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GeneralUI
   image: {fileID: 897148344}
+--- !u!114 &2112091643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112091638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11f687af0cc755e45a5c84f6991bd645, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopGridUI
+  item: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

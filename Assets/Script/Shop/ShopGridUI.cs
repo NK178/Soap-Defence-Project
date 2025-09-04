@@ -1,11 +1,18 @@
+using Unity.Collections.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.U2D.IK;
 
-public class ShopGridUI : MonoBehaviour, AbstractDragHandler
+public class ShopGridUI : MonoBehaviour, InterfaceDragHandler
 {
+    [SerializeField] private ShopItem item;
+
+
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("Pls work I beg u ");
+        ShopManager.instance.HandleDragStart(item, eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -15,7 +22,7 @@ public class ShopGridUI : MonoBehaviour, AbstractDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        ShopManager.instance.HandleDragEnd(item, eventData);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
