@@ -9,7 +9,7 @@ public class ShopItem : ScriptableObject
 
 
     [SerializeField] private List<ShopItemCondition> conditions;
-    [SerializeField] private IShopItemOutput output;
+    [SerializeField] private ShopItemOutput output;
 
     [HideInInspector] public bool isBought;
 
@@ -18,10 +18,6 @@ public class ShopItem : ScriptableObject
     {
         isBought = false;
     }
-
-
-    
-
 
     public bool CheckIfCanBuy()
     {
@@ -44,8 +40,13 @@ public class ShopItem : ScriptableObject
         if (CheckIfCanBuy())
         {
             isBought = true;
-            ShopItem temp = null;
-            output.GetOutput();
+           
+            //technically not fully modular but it is what it 
+            ShopItem myItem = (ShopItem)output.GetOutputObject();
+            if (myItem != null)
+                return myItem;
+            else
+                return myItem; 
         }
         else
         {
