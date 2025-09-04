@@ -1,10 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
-using UnityEngine.UI; 
 
-
-public class ShopManager : MonoBehaviour, IBeginDragHandler
+public class ShopManager : MonoBehaviour
 {
 
     [SerializeField] private List<ShopItem> itemList;
@@ -48,8 +46,4 @@ public class ShopManager : MonoBehaviour, IBeginDragHandler
 
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
-    }
 }

@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [CreateAssetMenu(fileName = "ShopItem", menuName = "Scriptable Objects/ShopItem")]
 public class ShopItem : ScriptableObject
@@ -59,6 +60,4 @@ public class ShopItem : ScriptableObject
     {
         return sprite; 
     }
-
-
 }

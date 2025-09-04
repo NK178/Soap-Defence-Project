@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 64202159}
   - component: {fileID: 64202161}
   - component: {fileID: 64202160}
+  - component: {fileID: 64202162}
   m_Layer: 5
   m_Name: Shop Grid 8
   m_TagString: Untagged
@@ -195,6 +196,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64202158}
   m_CullTransparentMesh: 1
+--- !u!114 &64202162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64202158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a17c55f3de71c45b7d4ac30a36a11c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GeneralUI
+  image: {fileID: 1542080389}
 --- !u!1 &121545341
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,6 +220,7 @@ GameObject:
   - component: {fileID: 121545342}
   - component: {fileID: 121545344}
   - component: {fileID: 121545343}
+  - component: {fileID: 121545345}
   m_Layer: 5
   m_Name: Shop Grid 4
   m_TagString: Untagged
@@ -271,6 +286,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 121545341}
   m_CullTransparentMesh: 1
+--- !u!114 &121545345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121545341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a17c55f3de71c45b7d4ac30a36a11c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GeneralUI
+  image: {fileID: 2038673490}
 --- !u!1 &225931225
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,6 +310,7 @@ GameObject:
   - component: {fileID: 225931226}
   - component: {fileID: 225931228}
   - component: {fileID: 225931227}
+  - component: {fileID: 225931229}
   m_Layer: 5
   m_Name: Shop Grid 7
   m_TagString: Untagged
@@ -347,6 +376,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225931225}
   m_CullTransparentMesh: 1
+--- !u!114 &225931229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225931225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a17c55f3de71c45b7d4ac30a36a11c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GeneralUI
+  image: {fileID: 1354936086}
 --- !u!1 &425626157
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,6 +400,7 @@ GameObject:
   - component: {fileID: 425626158}
   - component: {fileID: 425626160}
   - component: {fileID: 425626159}
+  - component: {fileID: 425626161}
   m_Layer: 5
   m_Name: Shop Grid 5
   m_TagString: Untagged
@@ -423,6 +466,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 425626157}
   m_CullTransparentMesh: 1
+--- !u!114 &425626161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425626157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a17c55f3de71c45b7d4ac30a36a11c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GeneralUI
+  image: {fileID: 1893476249}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,6 +786,7 @@ GameObject:
   - component: {fileID: 822156517}
   - component: {fileID: 822156519}
   - component: {fileID: 822156518}
+  - component: {fileID: 822156520}
   m_Layer: 5
   m_Name: Shop Grid 3
   m_TagString: Untagged
@@ -795,6 +852,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 822156516}
   m_CullTransparentMesh: 1
+--- !u!114 &822156520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822156516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a17c55f3de71c45b7d4ac30a36a11c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GeneralUI
+  image: {fileID: 1014762109}
 --- !u!1 &823366969
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,7 +901,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -105.145996, y: 5.9623}
+  m_AnchoredPosition: {x: -105.145996, y: 5.962311}
   m_SizeDelta: {x: -635.939, y: -11.9249}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &823366971
@@ -1468,6 +1538,7 @@ GameObject:
   - component: {fileID: 1402117020}
   - component: {fileID: 1402117022}
   - component: {fileID: 1402117021}
+  - component: {fileID: 1402117023}
   m_Layer: 5
   m_Name: Shop Grid 2
   m_TagString: Untagged
@@ -1533,6 +1604,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1402117019}
   m_CullTransparentMesh: 1
+--- !u!114 &1402117023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402117019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a17c55f3de71c45b7d4ac30a36a11c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GeneralUI
+  image: {fileID: 612900401}
 --- !u!1 &1542080387
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,6 +1782,7 @@ GameObject:
   - component: {fileID: 1714460736}
   - component: {fileID: 1714460738}
   - component: {fileID: 1714460737}
+  - component: {fileID: 1714460739}
   m_Layer: 5
   m_Name: Shop Grid 6
   m_TagString: Untagged
@@ -1763,6 +1848,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1714460735}
   m_CullTransparentMesh: 1
+--- !u!114 &1714460739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714460735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a17c55f3de71c45b7d4ac30a36a11c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GeneralUI
+  image: {fileID: 907403046}
 --- !u!1 &1893476247
 GameObject:
   m_ObjectHideFlags: 0
@@ -2024,6 +2122,7 @@ GameObject:
   - component: {fileID: 2112091639}
   - component: {fileID: 2112091641}
   - component: {fileID: 2112091640}
+  - component: {fileID: 2112091642}
   m_Layer: 5
   m_Name: Shop Grid 1
   m_TagString: Untagged
@@ -2089,6 +2188,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2112091638}
   m_CullTransparentMesh: 1
+--- !u!114 &2112091642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112091638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a17c55f3de71c45b7d4ac30a36a11c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GeneralUI
+  image: {fileID: 897148344}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
