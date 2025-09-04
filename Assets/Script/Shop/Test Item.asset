@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
   conditions:
   - {fileID: 11400000, guid: 70dd3a0a1d9848944842075fe1db197c, type: 2}
-  output: {fileID: 0}
+  output: {fileID: 11400000, guid: 205faeaca0b75194f8d0c27a7febb9e6, type: 2}
   isBought: 0
