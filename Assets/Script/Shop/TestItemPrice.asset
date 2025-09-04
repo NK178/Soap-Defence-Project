@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TestItemPrice
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemPriceCondition
   playerMoney: {fileID: 11400000, guid: f2153ec8432e5cc4095bc51754f7dd49, type: 2}
-  price: 150
+  price: 50

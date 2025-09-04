@@ -1,7 +1,7 @@
 using Unity.Collections;
 using UnityEngine;
 
-//[CreateAssetMenu(fileName = "ShopItemOutput", menuName = "Scriptable Objects/ShopItemOutput")]
+
 //Note 4/9: was tryna figure out some better way to implement this but this should work for now 
 
 //weird work around where I make a non generic version of this class so that the inspector dont get mad at me 

@@ -71,7 +71,7 @@ public class ShopManager : MonoBehaviour
         if (item.CheckIfCanBuy())
         {
             selectedItem = item;
-            isDragging = true; 
+            isDragging = true;
         }
     }
 
@@ -83,8 +83,8 @@ public class ShopManager : MonoBehaviour
         {
             item.Buy();
             selectedItem = null;
-            isDragging = false;
         }
+        isDragging = false;
     }
 
     public ShopItem GetCurrentItem()
