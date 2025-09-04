@@ -5,17 +5,18 @@ using UnityEditor.UIElements;
 
 public class ShopManager : MonoBehaviour
 {
-
+    [SerializeField] private FloatSO playerMoney;
+    [SerializeField] private float maxMoney;
     [SerializeField] private List<ShopItem> itemList;
     [SerializeField] private List<GameObject> UIGrid;
 
     private ShopItem selectedItem;
     public static ShopManager instance { get; private set; }
-    [HideInInspector] public bool isDragging; 
+    [HideInInspector] public bool isDragging;
 
 
     private bool isEmpty = true;
- 
+
 
     private void Awake()
     {
@@ -30,6 +31,9 @@ public class ShopManager : MonoBehaviour
         if (itemList.Count > 0)
             isEmpty = false;
         selectedItem = null;
+
+        if (playerMoney.value > maxMoney)
+            playerMoney.value = maxMoney;
     }
 
     // Update is called once per frame
@@ -93,5 +97,19 @@ public class ShopManager : MonoBehaviour
             return selectedItem;
         else
             return null;
+    }
+
+    public void ReduceMoney(int amount)
+    {
+        playerMoney.value -= amount;
+        if (playerMoney.value < 0)
+            playerMoney.value = 0;
+    }
+
+    public void AddMoney(int amount)
+    {
+        playerMoney.value += amount;
+        if (playerMoney.value > maxMoney)
+            playerMoney.value = maxMoney;
     }
 }

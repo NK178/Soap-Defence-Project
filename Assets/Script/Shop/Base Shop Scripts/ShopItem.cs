@@ -1,3 +1,4 @@
+using Microsoft.Win32.SafeHandles;
 using NUnit.Framework;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -58,5 +59,6 @@ public class ShopItem : ScriptableObject
     {
         return sprite; 
     }
+
 
 }

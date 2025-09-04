@@ -2137,6 +2137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde5444fd55c9ab43b571ba66d901f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopManager
+  playerMoney: {fileID: 11400000, guid: f2153ec8432e5cc4095bc51754f7dd49, type: 2}
+  maxMoney: 500
   itemList:
   - {fileID: 11400000, guid: 6b89118c63d4cd84fa7b6a141c1600b0, type: 2}
   UIGrid:
