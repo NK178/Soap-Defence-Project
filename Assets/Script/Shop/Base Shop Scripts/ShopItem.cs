@@ -7,7 +7,7 @@ using UnityEngine;
 public class ShopItem : ScriptableObject
 {
 
-
+    [SerializeField] private Sprite sprite;
     [SerializeField] private List<ShopItemCondition> conditions;
     [SerializeField] private ShopItemOutput output;
 
@@ -55,5 +55,10 @@ public class ShopItem : ScriptableObject
     }
 
 
-
+    public Sprite GetSprite()
+    {
+        return sprite; 
     }
+
+
+}

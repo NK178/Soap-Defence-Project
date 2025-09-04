@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9647f2ddc3dfb4449712bf6907a120e, type: 3}
   m_Name: Test Item
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
+  sprite: {fileID: 3310002292416464744, guid: 54985d285f98c2f4483265fd5e1c9ede, type: 3}
   conditions:
   - {fileID: 11400000, guid: 70dd3a0a1d9848944842075fe1db197c, type: 2}
   output: {fileID: 11400000, guid: 205faeaca0b75194f8d0c27a7febb9e6, type: 2}
