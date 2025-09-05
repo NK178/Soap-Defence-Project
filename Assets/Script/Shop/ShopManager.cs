@@ -99,14 +99,14 @@ public class ShopManager : MonoBehaviour
             return null;
     }
 
-    public void ReduceMoney(int amount)
+    public void ReduceMoney(float amount)
     {
         playerMoney.value -= amount;
         if (playerMoney.value < 0)
             playerMoney.value = 0;
     }
 
-    public void AddMoney(int amount)
+    public void AddMoney(float amount)
     {
         playerMoney.value += amount;
         if (playerMoney.value > maxMoney)

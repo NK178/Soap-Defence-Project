@@ -4,12 +4,21 @@ using UnityEngine.UI;
 public class GeneralUI : MonoBehaviour
 {
 
-    [SerializeField] private Image image; 
+    [SerializeField] protected Image image; 
 
 
     public Image GetImage()
     {
-        return image;
+        if (image != null)
+            return image;
+        else 
+            return null;    
+    }
+
+
+    public void SetImage(Image image)
+    {
+        this.image = image;
     }
 
 }
