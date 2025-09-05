@@ -35,8 +35,12 @@ public class CheckColliderByTag : MonoBehaviour
         {
             if (target.tag == collision.gameObject.tag)
             {
-                currentColliding = null;
                 target.onTriggerExit.Invoke();
+            }
+
+            if (collision.gameObject == currentColliding)
+            {
+                currentColliding = null;
             }
         }
     }

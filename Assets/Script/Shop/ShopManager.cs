@@ -102,6 +102,7 @@ public class ShopManager : MonoBehaviour
             {
                 //apparenlty can do this and switch the typing so now entity got all the newpurchase stuff wow 
                 case Entity entity:
+                    Debug.Log("TYPE ENTITY");
                     HandleEntityDrop(entity); 
                     break;
                 default:
@@ -115,12 +116,28 @@ public class ShopManager : MonoBehaviour
     }
 
 
-    void HandleEntityDrop(Entity entity)
+    bool HandleEntityDrop(Entity entity)
     {
-
+        bool validDrop = false;
         //pls work I beg u
-        Vector3 gridPosition = mouseCollisionRef.currentColliding.transform.position;
-        GameObject newGameObject = Instantiate(entity.gameObject, gridPosition, transform.rotation);
+        if (mouseCollisionRef.currentColliding != null)
+        {
+            if (mouseCollisionRef.currentColliding.transform.childCount == 0)
+                validDrop = true;
+        }
+
+        if (validDrop)
+        {
+            Debug.Log("VALID DROP");
+            Vector3 gridPosition = mouseCollisionRef.currentColliding.transform.position;
+            GameObject newEntity = Instantiate(entity.gameObject, gridPosition, transform.rotation);
+            //make the entity be a child of the gameobejct 
+            newEntity.transform.SetParent(mouseCollisionRef.currentColliding.transform);
+            validDrop = true;
+        }
+        else
+            Debug.Log("INVALID DROP");
+        return validDrop;
     }
 
     public ShopItem GetCurrentItem()
@@ -143,5 +160,10 @@ public class ShopManager : MonoBehaviour
         playerMoney.value += amount;
         if (playerMoney.value > maxMoney)
             playerMoney.value = maxMoney;
+    }
+
+    public float GetCurrentMoney()
+    {
+        return playerMoney.value;
     }
 }

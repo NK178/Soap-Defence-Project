@@ -3,18 +3,24 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ShopItemPriceCondition", menuName = "Scriptable Objects/ShopItemPriceCondition")]
 public class ShopItemPriceCondition : ShopItemCondition
 {
-
-    public FloatSO playerMoney;
     public float price; 
     public override bool IsValid()
     {
-        float currentMoney = playerMoney.value; 
-        float leftover = currentMoney - price;
-        if (leftover > 0)
+
+        if (ShopManager.instance != null)
         {
-            return true; 
+            float currentMoney = ShopManager.instance.GetCurrentMoney();
+            float leftover = currentMoney - price;
+            if (leftover > 0)
+            {
+                return true;
+            }
+            else
+                return false;
         }
         else
+        {
             return false;
+        }
     }
 }
