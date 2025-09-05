@@ -1,6 +1,14 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class EntityType : ScriptableObject
+
+[CreateAssetMenu(fileName = "EntityType", menuName = "Scriptable Objects/EntityType")]
+public class EntityType : ScriptableObject
 {
-    string typeName;
+    [SerializeField] protected ENTITYTYPE type; 
+    
+    public ENTITYTYPE GetEntityType()
+    {
+        return type;
+    }
 }
