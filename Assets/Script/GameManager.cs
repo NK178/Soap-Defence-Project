@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 
     //private InputAction OnLeftMouse;
     //private InputAction OnRightMouse;
-
     [SerializeField] private GameObject mouseImage;
     private Mouse mouse;
     private Camera cam;
@@ -22,11 +21,9 @@ public class GameManager : MonoBehaviour
         //OnLeftMouse = InputSystem.actions.FindAction("LeftMouse");
         //OnRightMouse = InputSystem.actions.FindAction("RightMouse");
 
+
+
     }
-
-
-
-    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

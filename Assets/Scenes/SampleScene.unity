@@ -2555,6 +2555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShopManager
   playerMoney: {fileID: 11400000, guid: f2153ec8432e5cc4095bc51754f7dd49, type: 2}
   maxMoney: 500
+  startingCash: 100
   itemList:
   - {fileID: 11400000, guid: 6b89118c63d4cd84fa7b6a141c1600b0, type: 2}
   UIGrid:

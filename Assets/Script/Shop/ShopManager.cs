@@ -2,11 +2,13 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEditor.UIElements;
+using Unity.VisualScripting;
 
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] private FloatSO playerMoney;
     [SerializeField] private float maxMoney;
+    [SerializeField] private float startingCash;
     [SerializeField] private List<ShopItem> itemList;
     [SerializeField] private List<GameObject> UIGrid;
 
@@ -32,6 +34,7 @@ public class ShopManager : MonoBehaviour
             isEmpty = false;
         selectedItem = null;
 
+        playerMoney.value = startingCash;
         if (playerMoney.value > maxMoney)
             playerMoney.value = maxMoney;
     }
