@@ -32,7 +32,7 @@ public class Entity : MonoBehaviour
         //run all the coroutines 
         for (int iter = 0; iter < functionsList.Count; iter++)
         {
-            StartCoroutine(functionsList[iter].coroutine);
+            StartCoroutine(functionsList[iter].ExcuteCoroutine(this.gameObject));
         }
     }
 

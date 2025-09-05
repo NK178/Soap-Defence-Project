@@ -3,15 +3,6 @@ using UnityEngine;
 
 public abstract class EntityFunctions : ScriptableObject
 {
-    //public abstract void Excute();
+    public abstract IEnumerator ExcuteCoroutine(GameObject parentObject = null);
 
-
-    [HideInInspector] public IEnumerator coroutine;
-
-    private void OnEnable()
-    {
-        coroutine = ExcuteCoroutine();
-    }
-
-    public abstract IEnumerator ExcuteCoroutine();
 }
