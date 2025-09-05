@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] private FloatSO playerMoney;
+    [SerializeField] private CheckColliderByTag mouseCollisionRef;
     [SerializeField] private float maxMoney;
     [SerializeField] private float startingCash;
     [SerializeField] private List<ShopItem> itemList;
@@ -86,12 +87,40 @@ public class ShopManager : MonoBehaviour
     public void HandleDragEnd(ShopItem item, PointerEventData eventData)
     {
         Debug.Log($"Dropped {item.name}");
+        bool shouldResolve = false;
+        object newPurchase = null;
         if (item.CheckIfCanBuy())
         {
-            item.Buy();
-            selectedItem = null;
+            newPurchase = item.Buy();
+            if (newPurchase != null)
+                shouldResolve = true;
         }
+
+        if (shouldResolve)
+        {
+            switch (newPurchase)
+            {
+                //apparenlty can do this and switch the typing so now entity got all the newpurchase stuff wow 
+                case Entity entity:
+                    HandleEntityDrop(entity); 
+                    break;
+                default:
+                    newPurchase = null; 
+                    break;
+            }
+        }
+
+        selectedItem = null;
         isDragging = false;
+    }
+
+
+    void HandleEntityDrop(Entity entity)
+    {
+
+        //pls work I beg u
+        Vector3 gridPosition = mouseCollisionRef.currentColliding.transform.position;
+        GameObject newGameObject = Instantiate(entity.gameObject, gridPosition, transform.rotation);
     }
 
     public ShopItem GetCurrentItem()

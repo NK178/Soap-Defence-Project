@@ -12,7 +12,7 @@ public abstract class ShopItemOutput : ScriptableObject
 
 //actual generic version that will be used 
 public abstract class ShopItemOutput<T> : ShopItemOutput
-{
+{   
     public abstract T GetOutput();
 
     public override object GetOutputObject()

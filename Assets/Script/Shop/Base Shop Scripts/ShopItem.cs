@@ -23,36 +23,49 @@ public class ShopItem : ScriptableObject
     public bool CheckIfCanBuy()
     {
 
-        bool canBuy = true; 
+        bool canBuy = true;
         for (int iter = 0; iter < conditions.Count; iter++)
         {
             if (!conditions[iter].IsValid())
             {
-                canBuy = false; 
-                break; 
+                canBuy = false;
+                break;
             }
         }
 
-        return canBuy; 
+        return canBuy;
     }
 
-    public ShopItem Buy()
+    //let whoever is handling the buy do the casting 
+    public object Buy()
     {
+        object myOutput = null;
         if (CheckIfCanBuy())
-        {
-           
-            //technically not fully modular but it is what it 
-            ShopItem myItem = (ShopItem)output.GetOutputObject();
-            if (myItem != null)
-                return myItem;
-            else
-                return null; 
-        }
+            myOutput = output.GetOutputObject();
+       
+        if (myOutput != null)
+            return myOutput;
         else
-        {
-            return null; 
-        }
+            return null;
     }
+
+    //public ShopItem Buy()
+    //{
+    //    if (CheckIfCanBuy())
+    //    {
+
+    //        //technically not fully modular but it is what it 
+    //        ShopItem myItem = (ShopItem)output.GetOutputObject();
+    //        if (myItem != null)
+    //            return myItem;
+    //        else
+    //            return null; 
+    //    }
+    //    else
+    //    {
+    //        return null; 
+    //    }
+    //}
 
 
     public Sprite GetSprite()

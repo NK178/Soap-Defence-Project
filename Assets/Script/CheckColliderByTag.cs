@@ -14,14 +14,16 @@ public class CheckColliderByTag : MonoBehaviour
     //special just for tag checking and hopefully resolves my collision reference quams 
     public EventCollideByTag[] list;
 
+    [HideInInspector] public GameObject currentColliding;
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
-
         foreach (EventCollideByTag target in list)
         {
             if (target.tag == collision.gameObject.tag)
             {
                 //Debug.Log("COLLIDING WITH " + collision.gameObject.name);
+                currentColliding = collision.gameObject;
                 target.onTriggerEnter.Invoke();
             }
         }
@@ -33,6 +35,7 @@ public class CheckColliderByTag : MonoBehaviour
         {
             if (target.tag == collision.gameObject.tag)
             {
+                currentColliding = null;
                 target.onTriggerExit.Invoke();
             }
         }
