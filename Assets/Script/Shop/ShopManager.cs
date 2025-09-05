@@ -96,6 +96,8 @@ public class ShopManager : MonoBehaviour
                 shouldResolve = true;
         }
 
+        //manage dropping 
+        bool succesfulDrop = false;
         if (shouldResolve)
         {
             switch (newPurchase)
@@ -103,12 +105,20 @@ public class ShopManager : MonoBehaviour
                 //apparenlty can do this and switch the typing so now entity got all the newpurchase stuff wow 
                 case Entity entity:
                     Debug.Log("TYPE ENTITY");
-                    HandleEntityDrop(entity); 
+                    succesfulDrop = HandleEntityDrop(entity); 
                     break;
                 default:
-                    newPurchase = null; 
+                    newPurchase = null;
+                    succesfulDrop = false;
                     break;
             }
+        }
+
+        //manage money 
+        if (succesfulDrop)
+        {
+            //excute all respective conditions 
+            item.HandleConditionResponse();
         }
 
         selectedItem = null;

@@ -3,7 +3,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ShopItemPriceCondition", menuName = "Scriptable Objects/ShopItemPriceCondition")]
 public class ShopItemPriceCondition : ShopItemCondition
 {
-    public float price; 
+    public float price;
+
+    public override void ConditionResolve()
+    {
+        //deduct money 
+        if (ShopManager.instance != null)
+        {
+            ShopManager.instance.ReduceMoney(price);
+        }
+    }
+
     public override bool IsValid()
     {
 

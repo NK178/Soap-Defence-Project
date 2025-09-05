@@ -49,29 +49,20 @@ public class ShopItem : ScriptableObject
             return null;
     }
 
-    //public ShopItem Buy()
-    //{
-    //    if (CheckIfCanBuy())
-    //    {
-
-    //        //technically not fully modular but it is what it 
-    //        ShopItem myItem = (ShopItem)output.GetOutputObject();
-    //        if (myItem != null)
-    //            return myItem;
-    //        else
-    //            return null; 
-    //    }
-    //    else
-    //    {
-    //        return null; 
-    //    }
-    //}
-
+    public void HandleConditionResponse()
+    {
+        for (int iter = 0; iter < conditions.Count; iter++)
+        {
+            conditions[iter].ConditionResolve();
+        }
+    }
 
     public Sprite GetSprite()
     {
         return sprite; 
     }
+
+
 
 
 }
