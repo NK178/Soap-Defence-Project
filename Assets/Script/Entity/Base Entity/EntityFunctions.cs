@@ -8,7 +8,7 @@ public abstract class EntityFunctions : ScriptableObject
 
     [HideInInspector] public IEnumerator coroutine;
 
-    private void Awake()
+    private void OnEnable()
     {
         coroutine = ExcuteCoroutine();
     }
