@@ -59,4 +59,10 @@ public class GameManager : MonoBehaviour
             mouseImage.SetActive(false);
         }
     }
+
+
+    public void DebugCall()
+    {
+        Debug.Log("#### This is a Debug print ####");
+    }
 }
