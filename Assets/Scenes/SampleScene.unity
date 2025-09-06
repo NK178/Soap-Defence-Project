@@ -5759,9 +5759,9 @@ MonoBehaviour:
     onMouseRelease:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1647802735}
-          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-          m_MethodName: DebugCall
+        - m_Target: {fileID: 2068532523}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: HandleDragEndByMouse
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

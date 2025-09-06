@@ -85,17 +85,21 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    //complete the purchase 
-    public void HandleDragEnd(ShopItem item, PointerEventData eventData)
+    //this one is handled by the mouse functions not drag drop 
+    public void HandleDragEndByMouse()
     {
-        Debug.Log($"Dropped {item.name}");
+
         bool shouldResolve = false;
         object newPurchase = null;
-        if (item.CheckIfCanBuy())
+        if (selectedItem != null)
         {
-            newPurchase = item.Buy();
-            if (newPurchase != null)
-                shouldResolve = true;
+            Debug.Log($"Dropped {selectedItem.name}");
+            if (selectedItem.CheckIfCanBuy())
+            {
+                newPurchase = selectedItem.Buy();
+                if (newPurchase != null)
+                    shouldResolve = true;
+            }
         }
 
         //manage dropping 
@@ -107,7 +111,7 @@ public class ShopManager : MonoBehaviour
                 //apparenlty can do this and switch the typing so now entity got all the newpurchase stuff wow 
                 case Entity entity:
                     Debug.Log("TYPE ENTITY");
-                    succesfulDrop = HandleEntityDrop(entity); 
+                    succesfulDrop = HandleEntityDrop(entity);
                     break;
                 default:
                     newPurchase = null;
@@ -120,7 +124,7 @@ public class ShopManager : MonoBehaviour
         if (succesfulDrop)
         {
             //excute all respective conditions 
-            item.HandleConditionResponse();
+            selectedItem.HandleConditionResponse();
         }
 
         selectedItem = null;
@@ -128,28 +132,95 @@ public class ShopManager : MonoBehaviour
     }
 
 
+    ////complete the purchase 
+    //public void HandleDragEnd(ShopItem item, PointerEventData eventData)
+    //{
+    //    Debug.Log($"Dropped {item.name}");
+    //    bool shouldResolve = false;
+    //    object newPurchase = null;
+    //    if (item.CheckIfCanBuy())
+    //    {
+    //        newPurchase = item.Buy();
+    //        if (newPurchase != null)
+    //            shouldResolve = true;
+    //    }
+
+    //    //manage dropping 
+    //    bool succesfulDrop = false;
+    //    if (shouldResolve)
+    //    {
+    //        switch (newPurchase)
+    //        {
+    //            //apparenlty can do this and switch the typing so now entity got all the newpurchase stuff wow 
+    //            case Entity entity:
+    //                Debug.Log("TYPE ENTITY");
+    //                succesfulDrop = HandleEntityDrop(entity); 
+    //                break;
+    //            default:
+    //                newPurchase = null;
+    //                succesfulDrop = false;
+    //                break;
+    //        }
+    //    }
+
+    //    //manage money 
+    //    if (succesfulDrop)
+    //    {
+    //        //excute all respective conditions 
+    //        item.HandleConditionResponse();
+    //    }
+
+    //    selectedItem = null;
+    //    isDragging = false;
+    //}
+
+
     bool HandleEntityDrop(Entity entity)
     {
+
         bool validDrop = false;
         //pls work I beg u
-        if (mouseCollisionRef.currentColliding != null)
+        GameObject target = mouseReference.currentTarget;
+        if (target != null)
         {
-            if (mouseCollisionRef.currentColliding.transform.childCount == 0)
+            if (target.transform.childCount == 0)
                 validDrop = true;
         }
 
         if (validDrop)
         {
             Debug.Log("VALID DROP");
-            Vector3 gridPosition = mouseCollisionRef.currentColliding.transform.position;
+            Vector3 gridPosition = target.transform.position;
             GameObject newEntity = Instantiate(entity.gameObject, gridPosition, transform.rotation);
             //make the entity be a child of the gameobejct 
-            newEntity.transform.SetParent(mouseCollisionRef.currentColliding.transform);
+            newEntity.transform.SetParent(target.transform);
             validDrop = true;
         }
         else
             Debug.Log("INVALID DROP");
         return validDrop;
+
+
+        //bool validDrop = false;
+        ////pls work I beg u
+        //if (mouseCollisionRef.currentColliding != null)
+        //{
+        //    if (mouseCollisionRef.currentColliding.transform.childCount == 0)
+        //        validDrop = true;
+        //}
+
+        //if (validDrop)
+        //{
+        //    Debug.Log("VALID DROP");
+        //    Vector3 gridPosition = mouseCollisionRef.currentColliding.transform.position;
+        //    GameObject newEntity = Instantiate(entity.gameObject, gridPosition, transform.rotation);
+        //    //make the entity be a child of the gameobejct 
+        //    newEntity.transform.SetParent(mouseCollisionRef.currentColliding.transform);
+        //    validDrop = true;
+        //}
+        //else
+        //    Debug.Log("INVALID DROP");
+        //return validDrop;
     }
 
     public void HandleBubbleCollection()

@@ -24,7 +24,7 @@ public class ShopGridUI : GeneralUI, InterfaceDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        ShopManager.instance.HandleDragEnd(item, eventData);
+        //ShopManager.instance.HandleDragEnd(item, eventData);
     }
 
     public void SetItem(ShopItem item)
