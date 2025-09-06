@@ -7,46 +7,24 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
 
-    //private InputAction OnLeftMouse;
-    //private InputAction OnRightMouse;
+    [SerializeField] private MousePositionReference mousePosReference;
     [SerializeField] private SpriteRenderer mouseImage;
     //temp solution 
     [SerializeField] private Collider2D mouseCollider;
 
-    private Mouse mouse;
-    private Camera cam;
-
-
-    private void OnEnable()
-    {
-        //4/9 for the dragging system i dont need thsi find action response because I will be using drag drop handler to handle this 
-        // but for the clicking part I probably need this 
-        // unless I use the click handler i guess 
-        //OnLeftMouse = InputSystem.actions.FindAction("LeftMouse");
-        //OnRightMouse = InputSystem.actions.FindAction("RightMouse");
-
-
-
-    }
+   
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        mouse = Mouse.current;
-        cam = Camera.main;
         mouseImage.enabled = false;
         mouseCollider.enabled = false;
     }
 
-
-
-
-
     // Update is called once per frame
     void Update()
     {
-        Vector2 mousePos = mouse.position.ReadValue();
-        Vector3 worldMousePos = new Vector3(cam.ScreenToWorldPoint(mousePos).x, cam.ScreenToWorldPoint(mousePos).y, 0);
+        Vector3 worldMousePos = mousePosReference.GetWorldMousePos();
 
         if (ShopManager.instance.isDragging)
         {

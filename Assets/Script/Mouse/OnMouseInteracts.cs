@@ -12,6 +12,7 @@ public class MouseEventsByTag
     public string tagName;
     public UnityEvent onMouseEnter = null;
     public UnityEvent onMouseClick = null;
+    public UnityEvent onMouseRelease = null;
     public UnityEvent onMouseExit = null;
     [HideInInspector] public bool isColliding = false;
 }
@@ -20,24 +21,33 @@ public class OnMouseInteracts : MonoBehaviour
 {
     //idk if this is good or bad design but I will roll with it for now 
     [SerializeField] protected MousePositionReference mouseInstance;
-    [SerializeField] private string leftClickName;
+    [SerializeField] private string nameLeftClickPress;
+    [SerializeField] private string nameLeftClickRelease;
     [SerializeField] private List<MouseEventsByTag> responseList;
     [HideInInspector] public GameObject currentTarget;
     InputAction leftClick;
+    InputAction leftRelease;
 
     private void OnEnable()
     {
-        leftClick = InputSystem.actions.FindAction(leftClickName);
+        leftClick = InputSystem.actions.FindAction(nameLeftClickPress);
+        leftRelease = InputSystem.actions.FindAction(nameLeftClickRelease);
         if (leftClick != null)
         {
-            leftClick.performed += HandleMouseClick;
+            leftClick.performed += HandleMousePress;
             leftClick.Enable();
+        }
+        if (leftRelease != null)
+        {
+            leftRelease.performed += HandleMouseRelease;
+            leftRelease.Enable();
         }
     }
 
     private void OnDisable()
     {
-        leftClick.performed -= HandleMouseClick;
+        leftClick.performed -= HandleMousePress;
+        leftRelease.performed -= HandleMouseRelease;
     }
 
     public void HandleMouseEnterExit()
@@ -74,18 +84,34 @@ public class OnMouseInteracts : MonoBehaviour
         }
     }
 
-    public void HandleMouseClick(InputAction.CallbackContext ctx)
+    public void HandleMousePress(InputAction.CallbackContext ctx)
     {
 
         if (ctx.performed)
         {
             for (int iter = 0; iter < responseList.Count; iter++)
             {
-                GameObject referenceObject = null;
-                if (IsMouseCollidingValid(responseList[iter], ref referenceObject) && responseList[iter].onMouseClick != null)
+                GameObject notUsed = null;
+                if (IsMouseCollidingValid(responseList[iter], ref notUsed) && responseList[iter].onMouseClick != null)
                 {
                     responseList[iter].onMouseClick.Invoke();
-                    //currentTarget = referenceObject;
+                    break;
+                }
+            }
+        }
+    }
+
+    public void HandleMouseRelease(InputAction.CallbackContext ctx)
+    {
+
+        if (ctx.performed)
+        {
+            for (int iter = 0; iter < responseList.Count; iter++)
+            {
+                GameObject notUsed = null;
+                if (IsMouseCollidingValid(responseList[iter], ref notUsed) && responseList[iter].onMouseRelease != null)
+                {
+                    responseList[iter].onMouseRelease.Invoke();
                     break;
                 }
             }
@@ -114,6 +140,7 @@ public class OnMouseInteracts : MonoBehaviour
     }
 
 
+    //maybe can use in the future
     ////THIS FUNCTION HAS NO CHECKS WHETHER IS VAILD 
     //GameObject GetColliderUnderMouse()
     //{

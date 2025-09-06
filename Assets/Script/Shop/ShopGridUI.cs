@@ -19,7 +19,7 @@ public class ShopGridUI : GeneralUI, InterfaceDragHandler
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("Dragging");
+        //Debug.Log("Dragging");
     }
 
     public void OnEndDrag(PointerEventData eventData)
