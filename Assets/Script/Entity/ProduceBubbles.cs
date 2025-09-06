@@ -21,7 +21,7 @@ public class ProduceBubbles : EntityFunctions
             if (ShopManager.instance != null)
             {
                 //will replace with spawning bubbles but for now this will do 
-                ShopManager.instance.AddMoney(bubbleAmount);
+                //ShopManager.instance.AddMoney(bubbleAmount);
                 GameObject newBubble = Instantiate(bubblePrefab, parentObject.transform.position, parentObject.transform.rotation);
             }
 
