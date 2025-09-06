@@ -101,7 +101,6 @@ GameObject:
   - component: {fileID: 7957916736483239922}
   - component: {fileID: 3648063169859321775}
   - component: {fileID: 5547397407536514226}
-  - component: {fileID: 1756098751144291488}
   m_Layer: 0
   m_Name: 'Bubble '
   m_TagString: collectable
@@ -188,16 +187,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1756098751144291488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4972582961937331906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bd12bf1894383247971765792a0d6b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::OnMouseInteractBubble
-  amountToAdd: 10
