@@ -42,7 +42,6 @@ public class OnMouseInteracts : MonoBehaviour
 
     public void HandleMouseEnterExit()
     {
-        //bool noCollisionAtAll = true;
         //let this be useless first 
         GameObject referenceObject = null;
 
@@ -55,7 +54,6 @@ public class OnMouseInteracts : MonoBehaviour
                 {
                     responseList[iter].onMouseEnter.Invoke();
                     responseList[iter].isColliding = true;
-                    //noCollisionAtAll = false;
                 }
             }
             else
@@ -69,38 +67,11 @@ public class OnMouseInteracts : MonoBehaviour
             }
 
 
-            ////set the gameobejct 
-            //if (referenceObject != null)
-            //    currentTarget = referenceObject;
+            //set the gameobejct 
+            if (referenceObject != null)
+                currentTarget = referenceObject;
 
         }
-
-
-
-        //for (int iter = 0; iter < responseList.Count; iter++)
-        //{
-
-        //    if (IsMouseCollidingValid(responseList[iter]))
-        //    {
-        //        if (responseList[iter].onMouseEnter != null)
-        //        {
-        //            responseList[iter].onMouseEnter.Invoke();
-        //            responseList[iter].isColliding = true;
-        //            noCollisionAtAll = false;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        //dont keep repeating the exit invoke (so invoke only if is collidng is true)
-        //        if (responseList[iter].onMouseExit != null && responseList[iter].isColliding)
-        //        {
-        //            responseList[iter].onMouseEnter.Invoke();
-        //            responseList[iter].isColliding = false;
-        //        }
-        //    }
-        //}
-
-
     }
 
     public void HandleMouseClick(InputAction.CallbackContext ctx)
@@ -114,7 +85,7 @@ public class OnMouseInteracts : MonoBehaviour
                 if (IsMouseCollidingValid(responseList[iter], ref referenceObject) && responseList[iter].onMouseClick != null)
                 {
                     responseList[iter].onMouseClick.Invoke();
-                    currentTarget = referenceObject;
+                    //currentTarget = referenceObject;
                     break;
                 }
             }
