@@ -3,12 +3,16 @@ using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
 
+
 public class GameManager : MonoBehaviour
 {
 
     //private InputAction OnLeftMouse;
     //private InputAction OnRightMouse;
-    [SerializeField] private GameObject mouseImage;
+    [SerializeField] private SpriteRenderer mouseImage;
+    //temp solution 
+    [SerializeField] private Collider2D mouseCollider;
+
     private Mouse mouse;
     private Camera cam;
 
@@ -30,7 +34,8 @@ public class GameManager : MonoBehaviour
     {
         mouse = Mouse.current;
         cam = Camera.main;
-        mouseImage.SetActive(false);
+        mouseImage.enabled = false;
+        mouseCollider.enabled = false;
     }
 
 
@@ -51,12 +56,15 @@ public class GameManager : MonoBehaviour
             {
                 sR.sprite = currentItem.GetSprite();
             }
-            mouseImage.SetActive(true);
+            mouseImage.enabled = true;
+            mouseCollider.enabled = true;
             mouseImage.gameObject.transform.position = worldMousePos;
         }
         else
         {
-            mouseImage.SetActive(false);
+            mouseImage.enabled = false;
+            mouseCollider.enabled = false;
+
         }
     }
 

@@ -5545,6 +5545,8 @@ GameObject:
   - component: {fileID: 1179770085}
   - component: {fileID: 1179770088}
   - component: {fileID: 1179770087}
+  - component: {fileID: 1179770090}
+  - component: {fileID: 1179770089}
   m_Layer: 0
   m_Name: MouseImage
   m_TagString: Untagged
@@ -5641,19 +5643,7 @@ MonoBehaviour:
   - tag: gridTile
     onTriggerEnter:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1647802735}
-          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-          m_MethodName: DebugCall
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
     onTriggerExit:
       m_PersistentCalls:
         m_Calls: []
@@ -5704,6 +5694,58 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.074721836, y: 0.08339478}
   m_EdgeRadius: 0
+--- !u!114 &1179770089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179770084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f747af7bc9764934987cdc3ada38fa6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MousePositionReference
+  cam: {fileID: 519420031}
+--- !u!114 &1179770090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179770084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6262192ecef027b4d84d2eb805bb7b10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OnMouseInteracts
+  mouseInstance: {fileID: 1179770089}
+  leftClickName: LeftMouse
+  responseList:
+  - tagName: bubble
+    onMouseEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    onMouseClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2068532523}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: HandleBubbleCollection
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onMouseExit:
+      m_PersistentCalls:
+        m_Calls: []
+    isColliding: 0
+  currentTarget: {fileID: 0}
 --- !u!1 &1215330380
 GameObject:
   m_ObjectHideFlags: 0
@@ -8798,7 +8840,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 982236aa8909c264493d6a2f40eb25f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  mouseImage: {fileID: 1179770084}
+  mouseImage: {fileID: 1179770085}
+  mouseCollider: {fileID: 1179770088}
 --- !u!4 &1647802736
 Transform:
   m_ObjectHideFlags: 0
@@ -10917,8 +10960,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShopManager
   playerMoney: {fileID: 11400000, guid: f2153ec8432e5cc4095bc51754f7dd49, type: 2}
   mouseCollisionRef: {fileID: 1179770087}
+  mouseReference: {fileID: 1179770090}
   maxMoney: 500
   startingCash: 100
+  bubbleAddAmt: 10
   itemList:
   - {fileID: 11400000, guid: 4331ffcf677806e4395baa7f62330798, type: 2}
   UIGrid:

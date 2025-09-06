@@ -8,8 +8,10 @@ public class ShopManager : MonoBehaviour
 {
     [SerializeField] private FloatSO playerMoney;
     [SerializeField] private CheckColliderByTag mouseCollisionRef;
+    [SerializeField] private OnMouseInteracts mouseReference;
     [SerializeField] private float maxMoney;
     [SerializeField] private float startingCash;
+    [SerializeField] private float bubbleAddAmt;
     [SerializeField] private List<ShopItem> itemList;
     [SerializeField] private List<GameObject> UIGrid;
 
@@ -150,6 +152,15 @@ public class ShopManager : MonoBehaviour
         return validDrop;
     }
 
+    public void HandleBubbleCollection()
+    {
+        AddMoney(bubbleAddAmt);
+        if (mouseReference.currentTarget != null)
+        {
+            Destroy(mouseReference.currentTarget);
+        }
+    }
+
     public ShopItem GetCurrentItem()
     {
         if (selectedItem != null)
@@ -176,4 +187,7 @@ public class ShopManager : MonoBehaviour
     {
         return playerMoney.value;
     }
+
+
+
 }

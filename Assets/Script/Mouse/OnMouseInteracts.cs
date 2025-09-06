@@ -13,8 +13,7 @@ public class MouseEventsByTag
     public UnityEvent onMouseEnter = null;
     public UnityEvent onMouseClick = null;
     public UnityEvent onMouseExit = null;
-    public bool isColliding = false;
-
+    [HideInInspector] public bool isColliding = false;
 }
 
 public class OnMouseInteracts : MonoBehaviour
@@ -23,6 +22,7 @@ public class OnMouseInteracts : MonoBehaviour
     [SerializeField] protected MousePositionReference mouseInstance;
     [SerializeField] private string leftClickName;
     [SerializeField] private List<MouseEventsByTag> responseList;
+    [HideInInspector] public GameObject currentTarget;
     InputAction leftClick;
 
     private void OnEnable()
@@ -42,15 +42,20 @@ public class OnMouseInteracts : MonoBehaviour
 
     public void HandleMouseEnterExit()
     {
+        //bool noCollisionAtAll = true;
+        //let this be useless first 
+        GameObject referenceObject = null;
+
         for (int iter = 0; iter < responseList.Count; iter++)
         {
 
-            if (IsMouseColliding(responseList[iter]))
+            if (IsMouseCollidingValid(responseList[iter], ref referenceObject))
             {
                 if (responseList[iter].onMouseEnter != null)
                 {
                     responseList[iter].onMouseEnter.Invoke();
                     responseList[iter].isColliding = true;
+                    //noCollisionAtAll = false;
                 }
             }
             else
@@ -62,7 +67,40 @@ public class OnMouseInteracts : MonoBehaviour
                     responseList[iter].isColliding = false;
                 }
             }
+
+
+            ////set the gameobejct 
+            //if (referenceObject != null)
+            //    currentTarget = referenceObject;
+
         }
+
+
+
+        //for (int iter = 0; iter < responseList.Count; iter++)
+        //{
+
+        //    if (IsMouseCollidingValid(responseList[iter]))
+        //    {
+        //        if (responseList[iter].onMouseEnter != null)
+        //        {
+        //            responseList[iter].onMouseEnter.Invoke();
+        //            responseList[iter].isColliding = true;
+        //            noCollisionAtAll = false;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        //dont keep repeating the exit invoke (so invoke only if is collidng is true)
+        //        if (responseList[iter].onMouseExit != null && responseList[iter].isColliding)
+        //        {
+        //            responseList[iter].onMouseEnter.Invoke();
+        //            responseList[iter].isColliding = false;
+        //        }
+        //    }
+        //}
+
+
     }
 
     public void HandleMouseClick(InputAction.CallbackContext ctx)
@@ -72,9 +110,11 @@ public class OnMouseInteracts : MonoBehaviour
         {
             for (int iter = 0; iter < responseList.Count; iter++)
             {
-                if (IsMouseColliding(responseList[iter]) && responseList[iter].onMouseClick != null)
+                GameObject referenceObject = null;
+                if (IsMouseCollidingValid(responseList[iter], ref referenceObject) && responseList[iter].onMouseClick != null)
                 {
                     responseList[iter].onMouseClick.Invoke();
+                    currentTarget = referenceObject;
                     break;
                 }
             }
@@ -86,17 +126,30 @@ public class OnMouseInteracts : MonoBehaviour
         HandleMouseEnterExit();
     }
 
-    bool IsMouseColliding(MouseEventsByTag eventTag)
+    bool IsMouseCollidingValid(MouseEventsByTag eventTag, ref GameObject referenceObject)
     {
         bool validCollide = false;
         Vector2 worldMousePos = mouseInstance.GetWorldMousePos();
         Collider2D hit = Physics2D.OverlapPoint(worldMousePos);
-        if (hit == GetComponent<Collider2D>() && hit.gameObject.CompareTag(eventTag.tagName))
+        if (hit != null && hit.gameObject.CompareTag(eventTag.tagName))
         {
-            Debug.Log("Collider2D is being hit! " + hit.gameObject.name);
+            //Debug.Log("Collider2D is being hit! " + hit.gameObject.name);
             validCollide = true;
+            referenceObject = hit.gameObject;
         }
+        else
+            referenceObject = null;
         return validCollide;
     }
+
+
+    ////THIS FUNCTION HAS NO CHECKS WHETHER IS VAILD 
+    //GameObject GetColliderUnderMouse()
+    //{
+    //    Vector2 worldMousePos = mouseInstance.GetWorldMousePos();
+    //    Collider2D hit = Physics2D.OverlapPoint(worldMousePos);
+    //    if (hit)
+    //        return GameObject
+    //}
 }
 

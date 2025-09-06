@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 5547397407536514226}
   m_Layer: 0
   m_Name: 'Bubble '
-  m_TagString: collectable
+  m_TagString: bubble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
