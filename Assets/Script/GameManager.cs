@@ -9,8 +9,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private MousePositionReference mousePosReference;
     [SerializeField] private SpriteRenderer mouseImage;
-    //temp solution 
-    [SerializeField] private Collider2D mouseCollider;
 
    
 
@@ -18,7 +16,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         mouseImage.enabled = false;
-        mouseCollider.enabled = false;
     }
 
     // Update is called once per frame
@@ -35,14 +32,11 @@ public class GameManager : MonoBehaviour
                 sR.sprite = currentItem.GetSprite();
             }
             mouseImage.enabled = true;
-            mouseCollider.enabled = true;
             mouseImage.gameObject.transform.position = worldMousePos;
         }
         else
         {
             mouseImage.enabled = false;
-            mouseCollider.enabled = false;
-
         }
     }
 

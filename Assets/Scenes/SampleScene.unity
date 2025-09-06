@@ -5544,9 +5544,8 @@ GameObject:
   - component: {fileID: 1179770086}
   - component: {fileID: 1179770085}
   - component: {fileID: 1179770088}
-  - component: {fileID: 1179770087}
-  - component: {fileID: 1179770090}
   - component: {fileID: 1179770089}
+  - component: {fileID: 1179770090}
   m_Layer: 0
   m_Name: MouseHandler
   m_TagString: Untagged
@@ -5627,27 +5626,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1179770087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179770084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ea3d81ee5d6ff14fa5d9094fca8b3b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CheckColliderByTag
-  list:
-  - tag: gridTile
-    onTriggerEnter:
-      m_PersistentCalls:
-        m_Calls: []
-    onTriggerExit:
-      m_PersistentCalls:
-        m_Calls: []
-  currentColliding: {fileID: 0}
 --- !u!61 &1179770088
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8872,7 +8850,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   mousePosReference: {fileID: 1179770089}
   mouseImage: {fileID: 1179770085}
-  mouseCollider: {fileID: 1179770088}
 --- !u!4 &1647802736
 Transform:
   m_ObjectHideFlags: 0
@@ -10990,7 +10967,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopManager
   playerMoney: {fileID: 11400000, guid: f2153ec8432e5cc4095bc51754f7dd49, type: 2}
-  mouseCollisionRef: {fileID: 1179770087}
   mouseReference: {fileID: 1179770090}
   maxMoney: 500
   startingCash: 100

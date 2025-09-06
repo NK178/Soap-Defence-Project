@@ -21,7 +21,7 @@ public class ShopItemPriceCondition : ShopItemCondition
         {
             float currentMoney = ShopManager.instance.GetCurrentMoney();
             float leftover = currentMoney - price;
-            if (leftover > 0)
+            if (leftover >= 0)
             {
                 return true;
             }
