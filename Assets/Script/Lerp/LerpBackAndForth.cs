@@ -1,4 +1,7 @@
 using System.Collections;
+using System.Net.Mail;
+using System.Runtime.Serialization;
+using TMPro;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
@@ -26,14 +29,16 @@ public class LerpBackAndForth : LerpFunction
     [SerializeField] private START_DIRECTION oscillation_startDirection; 
 
     private float oscillationTime = 0f;
-    private Vector3 centerPos;
+    private Vector3 startingPos;
 
     public override void Init(GameObject reference)
     {
         if (!isActive)
         {
-            centerPos = reference.transform.position;
+            lerpType = LERPTYPE.TRANSLATE_VELOCITY;
+            startingPos = reference.transform.position;
             isActive = true;
+            lerpData = new LerpData<Vector3>();
         }
     }
 
@@ -48,6 +53,8 @@ public class LerpBackAndForth : LerpFunction
 
     public override IEnumerator ExcuteLerp(GameObject reference)
     {
+
+        Vector3 lastPosition = startingPos;
         while (isActive)
         {
             //power of math 
@@ -57,7 +64,14 @@ public class LerpBackAndForth : LerpFunction
             Rigidbody2D rb = reference.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
+                Vector3 moveDirection = GetDirection();
+                Vector3 targetPos = startingPos + moveDirection * sineValue * amplitude;
+                Vector3 velocity = (targetPos - lastPosition) / Time.deltaTime;
 
+                //rb.linearVelocity = velocity;
+
+                lerpData.SetData(velocity);
+                lastPosition = targetPos;
                 yield return null;
             }
         }
@@ -65,10 +79,21 @@ public class LerpBackAndForth : LerpFunction
 
     private Vector3 GetDirection()
     {
-        //if (oscillation_axis == OSCILLATION_AXIS.X_AXIS)
-        //{
-            
-        //}
-        //if (oscillation_startDirection == START_DIRECTION.POSTIVE)
+        Vector3 direction = Vector3.zero; 
+        if (oscillation_axis == OSCILLATION_AXIS.X_AXIS)
+        {
+            if (oscillation_startDirection == START_DIRECTION.POSTIVE)
+                direction = Vector2.right;
+            else
+                direction = Vector2.left; 
+        }
+        else
+        {
+            if (oscillation_startDirection == START_DIRECTION.POSTIVE)
+                direction = Vector2.up;
+            else
+                direction = Vector2.down;
+        }
+        return direction;
     }
 }

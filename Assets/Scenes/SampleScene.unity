@@ -6952,7 +6952,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LerpManager
   reference: {fileID: 1343657473}
   lerpList:
-  - {fileID: 11400000, guid: 7b1d38a37c830a144840ce5ef62ca1df, type: 2}
+  - {fileID: 11400000, guid: eda9adc43d283824eb60943da558141d, type: 2}
 --- !u!212 &1343657475
 SpriteRenderer:
   m_ObjectHideFlags: 0

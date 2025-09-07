@@ -20,6 +20,7 @@ public class LerpToDirection : LerpFunction
     [SerializeField] private float moveSpeed;
     [SerializeField] private float accelerationTime = 1f;
 
+  
     private LERP_DIRECTION defaultDirection;
     private float defaultMoveSpeed;
     private float currentSpeed = 0f;
@@ -30,6 +31,7 @@ public class LerpToDirection : LerpFunction
     {
         if (!isActive)
         {
+            lerpType = LERPTYPE.TRANSLATE_VELOCITY;
             defaultMoveSpeed = moveSpeed;
             defaultDirection = directionToLerp;
             currentSpeed = 0f;
@@ -58,7 +60,7 @@ public class LerpToDirection : LerpFunction
                 Vector3 moveDirection = GetDirection();
                 currentSpeed = Mathf.Lerp(currentSpeed, moveSpeed, Time.deltaTime / accelerationTime);
                 Vector2 targetVelocity = moveDirection * currentSpeed;
-                rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, Time.deltaTime * 5f);
+                //rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, Time.deltaTime * 5f);
                 yield return null;
             }
         }
