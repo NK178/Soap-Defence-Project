@@ -32,7 +32,7 @@ public class LerpManager : MonoBehaviour
             {
                 foreach (LerpFunction lerp in lerpList)
                 {
-                    lerp.Init();
+                    lerp.Init(reference);
                     StartCoroutine(lerp.ExcuteLerp(reference));
                 }
                 areCoroutinesActived = true; 

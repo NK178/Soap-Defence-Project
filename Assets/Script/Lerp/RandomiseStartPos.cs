@@ -1,16 +1,16 @@
 using System.Collections;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "LerpBackAndForth", menuName = "Scriptable Objects/LerpBackAndForth")]
-public class LerpBackAndForth : LerpFunction
+[CreateAssetMenu(fileName = "RandomiseStartPos", menuName = "Scriptable Objects/RandomiseStartPos")]
+public class RandomiseStartPos : LerpFunction
 {
     public override IEnumerator ExcuteLerp(GameObject reference)
     {
-        Debug.Log("Blank");
+        Debug.Log("BLANK FOR NOW");
         yield return null;
     }
 
-    public override void Init()
+    public override void Init(GameObject reference)
     {
         Debug.Log("Blank");
     }

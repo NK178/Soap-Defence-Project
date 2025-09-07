@@ -26,7 +26,7 @@ public class LerpToDirection : LerpFunction
 
 
 
-    public override void Init()
+    public override void Init(GameObject reference)
     {
         if (!isActive)
         {
@@ -53,12 +53,14 @@ public class LerpToDirection : LerpFunction
         while (isActive)
         {
             Rigidbody2D rb = reference.GetComponent<Rigidbody2D>();
-            Vector3 moveDirection = GetDirection();
-            currentSpeed = Mathf.Lerp(currentSpeed, moveSpeed, Time.deltaTime / accelerationTime);
-            Vector2 targetVelocity = moveDirection * currentSpeed;
-            rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, Time.deltaTime * 5f);
-            yield return null;
-
+            if (rb != null)
+            {
+                Vector3 moveDirection = GetDirection();
+                currentSpeed = Mathf.Lerp(currentSpeed, moveSpeed, Time.deltaTime / accelerationTime);
+                Vector2 targetVelocity = moveDirection * currentSpeed;
+                rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, Time.deltaTime * 5f);
+                yield return null;
+            }
         }
 
         ///////////////////////////////////  method one that works 
