@@ -16,6 +16,7 @@ public enum ENTITYTYPE
 {
     DEFENCE,
     SUPPORT,
+    ATTACK,
     NUM_TYPE
 }
 
