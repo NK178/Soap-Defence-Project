@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a47b6f14b8f0b4f88f287e778320a2, type: 3}
-  m_Name: LerpBubbleUp
-  m_EditorClassIdentifier: Assembly-CSharp::LerpToDirection
+  m_Script: {fileID: 11500000, guid: 7d6fa6abf7bc4184abce8e99ad6b753a, type: 3}
+  m_Name: LerpResponsePhyVelocity
+  m_EditorClassIdentifier: Assembly-CSharp::LerpResponsePhyVelocity
   lerpType: {fileID: 11400000, guid: c8be9072ed864064bbf656d6f54f4020, type: 2}
-  isActive: 0
-  directionToLerp: 0
-  moveSpeed: 40
-  accelerationTime: 2

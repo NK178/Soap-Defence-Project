@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae78f056e78a3847bdaef68dcb3a12c, type: 3}
   m_Name: LerpBubbleBackForth
   m_EditorClassIdentifier: Assembly-CSharp::LerpBackAndForth
+  lerpType: {fileID: 11400000, guid: c8be9072ed864064bbf656d6f54f4020, type: 2}
   isActive: 0
   amplitude: 10
   frequency: 2

@@ -31,7 +31,6 @@ public class LerpToDirection : LerpFunction
     {
         if (!isActive)
         {
-            lerpType = LERPTYPE.TRANSLATE_VELOCITY;
             defaultMoveSpeed = moveSpeed;
             defaultDirection = directionToLerp;
             currentSpeed = 0f;

@@ -1,10 +1,6 @@
 using System.Collections;
-using System.Net.Mail;
-using System.Runtime.Serialization;
-using TMPro;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
+
 
 [CreateAssetMenu(fileName = "LerpBackAndForth", menuName = "Scriptable Objects/LerpBackAndForth")]
 public class LerpBackAndForth : LerpFunction
@@ -35,7 +31,6 @@ public class LerpBackAndForth : LerpFunction
     {
         if (!isActive)
         {
-            lerpType = LERPTYPE.TRANSLATE_VELOCITY;
             startingPos = reference.transform.position;
             isActive = true;
             lerpData = new LerpData<Vector3>();
@@ -61,19 +56,23 @@ public class LerpBackAndForth : LerpFunction
             oscillationTime += Time.deltaTime * frequency;
             float sineValue = Mathf.Sin(oscillationTime * 2f * Mathf.PI);
 
-            Rigidbody2D rb = reference.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                Vector3 moveDirection = GetDirection();
-                Vector3 targetPos = startingPos + moveDirection * sineValue * amplitude;
-                Vector3 velocity = (targetPos - lastPosition) / Time.deltaTime;
+            Vector3 moveDirection = GetDirection();
+            Vector3 targetPos = startingPos + moveDirection * sineValue * amplitude;
+            Vector3 velocity = (targetPos - lastPosition) / Time.deltaTime;
+            lerpData.SetData(velocity);
+            lastPosition = targetPos;
+            yield return null;
 
-                //rb.linearVelocity = velocity;
+            //Rigidbody2D rb = reference.GetComponent<Rigidbody2D>();
+            //if (rb != null)
+            //{
 
-                lerpData.SetData(velocity);
-                lastPosition = targetPos;
-                yield return null;
-            }
+
+            //    //rb.linearVelocity = velocity;
+
+
+
+            //}
         }
     }
 

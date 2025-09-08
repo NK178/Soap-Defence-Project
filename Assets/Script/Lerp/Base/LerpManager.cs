@@ -48,21 +48,12 @@ public class LerpData<T> : ILerpData
     }
 }
 
-
-//makes it easier to sort through different types of lerp 
-[System.Serializable]
-public enum LERPTYPE
-{
-    TRANSLATE_VELOCITY,
-    NUM_LERP
-}
-
-
 public class LerpManager : MonoBehaviour
 {
 
     [SerializeField] private GameObject reference;
-    [SerializeField] private List<LerpFunction> lerpList;
+    [SerializeField] private List<LerpFunction> lerpFunctionList;
+    [SerializeField] private List<LerpResponse> lerpResponseList;
     private bool isActive;
     private bool areCoroutinesActived = false;
 
@@ -71,7 +62,7 @@ public class LerpManager : MonoBehaviour
         isActive = true;
         areCoroutinesActived = false;
         //disable all at first 
-        foreach (LerpFunction lerp in lerpList)
+        foreach (LerpFunction lerp in lerpFunctionList)
         {
             lerp.isActive = false;
         }
@@ -84,34 +75,26 @@ public class LerpManager : MonoBehaviour
     {
         if (isActive)
         {
-            //starting 
-            if (!areCoroutinesActived)
-            {
-                foreach (LerpFunction lerp in lerpList)
-                {
-                    lerp.Init(reference);
-                    StartCoroutine(lerp.ExcuteLerp(reference));
-                }
-                areCoroutinesActived = true; 
-            }
-
+            ActiveCoroutines();
+            AddResponseData();
+            ResolveResponseData();
 
             //do lerp values 
-            foreach (LerpFunction lerp in lerpList)
-            {
-                LERPTYPE lerpType = lerp.lerpType;
-                switch (lerpType)
-                {
-                    case LERPTYPE.TRANSLATE_VELOCITY:
-                        //if (lerp.lerpData is LerpData<Vector3> vector3Lerp)
-                        //    ResponseTranslateVelocity(vector3Lerp.GetTypedData());
-                    break;
-                }
-            }
+            //foreach (LerpFunction lerp in lerpList)
+            //{
+            //    //LERPTYPE lerpType = lerp.lerpType;
+            //    //switch (lerpType)
+            //    //{
+            //    //    case LERPTYPE.TRANSLATE_VELOCITY:
+            //    //        //if (lerp.lerpData is LerpData<Vector3> vector3Lerp)
+            //    //        //    ResponseTranslateVelocity(vector3Lerp.GetTypedData());
+            //    //    break;
+            //    //}
+            //}
         }
         else
         {
-            foreach (LerpFunction lerp in lerpList)
+            foreach (LerpFunction lerp in lerpFunctionList)
             {
                 lerp.Reset();
             }
@@ -119,19 +102,54 @@ public class LerpManager : MonoBehaviour
         }
     }
 
+    private void ActiveCoroutines()
+    {
+        if (!areCoroutinesActived)
+        {
+            foreach (LerpFunction lerp in lerpFunctionList)
+            {
+                lerp.Init(reference);
+                StartCoroutine(lerp.ExcuteLerp(reference));
+            }
+            areCoroutinesActived = true;
+        }
+    }
 
+    private void AddResponseData()
+    {
+        foreach (LerpFunction lerpFunc in lerpFunctionList)
+        {
+            LerpResponse lerpResponse = null;
+            foreach (LerpResponse lerpRes in lerpResponseList)
+            {
+                if (lerpRes.lerpType.stringName == lerpFunc.lerpType.stringName)
+                {
+                    lerpResponse = lerpRes;
+                    break;
+                }
+            }
 
-    //private void ResponseTranslateVelocity(Vector3 velocity) 
-    //{
-        
-    //}
+            if (lerpResponse != null)
+            {
+                lerpResponse.AddValueToCalculation(lerpFunc.lerpData);
+            }
+        }
+    }
+
+    private void ResolveResponseData()
+    {
+        foreach (LerpResponse lerpRes in lerpResponseList)
+        {
+            lerpRes.HandleResponse(reference);
+        }
+    }
 
     private void OnDisable()
     {
         if (isActive)
         {
             isActive = false;
-            foreach (LerpFunction lerp in lerpList)
+            foreach (LerpFunction lerp in lerpFunctionList)
             {
                 lerp.Reset();
             }
