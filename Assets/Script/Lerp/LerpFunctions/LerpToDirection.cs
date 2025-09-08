@@ -89,4 +89,13 @@ public class LerpToDirection : LerpFunction
     }
 
 
+    public override void CopyClassData(LerpFunction reference)
+    {
+        if (reference is LerpToDirection lerpDirection)
+        {
+            lerpType = reference.lerpType;
+            directionToLerp = lerpDirection.directionToLerp;
+            moveSpeed = lerpDirection.moveSpeed; 
+        }
+    }
 }

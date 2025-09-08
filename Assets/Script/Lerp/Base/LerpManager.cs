@@ -51,20 +51,43 @@ public class LerpData<T> : ILerpData
 public class LerpManager : MonoBehaviour
 {
 
-    [SerializeField] private GameObject reference;
-    [SerializeField] private List<LerpFunction> lerpFunctionList;
-    [SerializeField] private List<LerpResponse> lerpResponseList;
+    //dont use field reference cos uhh it will reference all prefabs
+    private GameObject reference;
+    [SerializeField] private List<LerpFunction> lerpFunctionTemplates;
+    [SerializeField] private List<LerpResponse> lerpResponseTemplates;
     private bool isActive;
     private bool areCoroutinesActived = false;
+
+    //The actual list used in the lerp 
+    private List<LerpFunction> lerpFunctionList;
+    private List<LerpResponse> lerpResponseList;
 
     private void Awake()
     {
         isActive = true;
         areCoroutinesActived = false;
-        //disable all at first 
-        foreach (LerpFunction lerp in lerpFunctionList)
+        reference = gameObject;
+
+        //creating instances of the scriptable object so that they are able to run seperately and not cause bugs 
+        lerpFunctionList = new List<LerpFunction>();
+        foreach (LerpFunction template in lerpFunctionTemplates)
         {
-            lerp.isActive = false;
+            ////need to init first 
+            //template.Init(reference);
+            //need to get the concrete type as u cant create instance of abstract class 
+            Type concreteType = template.GetType();
+            LerpFunction copy = ScriptableObject.CreateInstance(concreteType) as LerpFunction;
+            copy.CopyClassData(template);
+            copy.isActive = false;
+            lerpFunctionList.Add(copy);
+        }
+        lerpResponseList = new List<LerpResponse>();
+        foreach (LerpResponse template in lerpResponseTemplates)
+        {
+            Type concreteType = template.GetType();
+            LerpResponse copy = ScriptableObject.CreateInstance(concreteType) as LerpResponse;
+            copy.CopyClassData(template);
+            lerpResponseList.Add(copy);
         }
 
     }
@@ -78,19 +101,6 @@ public class LerpManager : MonoBehaviour
             ActiveCoroutines();
             AddResponseData();
             ResolveResponseData();
-
-            //do lerp values 
-            //foreach (LerpFunction lerp in lerpList)
-            //{
-            //    //LERPTYPE lerpType = lerp.lerpType;
-            //    //switch (lerpType)
-            //    //{
-            //    //    case LERPTYPE.TRANSLATE_VELOCITY:
-            //    //        //if (lerp.lerpData is LerpData<Vector3> vector3Lerp)
-            //    //        //    ResponseTranslateVelocity(vector3Lerp.GetTypedData());
-            //    //    break;
-            //    //}
-            //}
         }
         else
         {
@@ -124,6 +134,7 @@ public class LerpManager : MonoBehaviour
             {
                 if (lerpRes.lerpType.stringName == lerpFunc.lerpType.stringName)
                 {
+                    Debug.Log("ARE U RUNNING");
                     lerpResponse = lerpRes;
                     break;
                 }

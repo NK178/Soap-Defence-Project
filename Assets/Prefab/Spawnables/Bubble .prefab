@@ -78,7 +78,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: -5712959122012955994, guid: 0b38b6f3bab1cab4ea800b345b3c44a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 7957916736483239922}
   - component: {fileID: 3648063169859321775}
   - component: {fileID: 5547397407536514226}
+  - component: {fileID: 6368222511993819691}
   m_Layer: 0
   m_Name: 'Bubble '
   m_TagString: bubble
@@ -187,3 +188,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6368222511993819691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4972582961937331906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c48fca4e885de44990bb95747d8dd23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LerpManager
+  lerpFunctionTemplates:
+  - {fileID: 11400000, guid: eda9adc43d283824eb60943da558141d, type: 2}
+  - {fileID: 11400000, guid: 7b1d38a37c830a144840ce5ef62ca1df, type: 2}
+  lerpResponseTemplates:
+  - {fileID: 11400000, guid: f8c6b41485b3ff042a5d454eb410e3b1, type: 2}

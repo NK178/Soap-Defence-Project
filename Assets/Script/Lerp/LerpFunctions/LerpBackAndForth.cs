@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Properties;
 using UnityEngine;
 
 
@@ -17,12 +18,12 @@ public class LerpBackAndForth : LerpFunction
         NEGATIVE
     }
 
-
+    [SerializeField] private OSCILLATION_AXIS oscillation_axis;
+    [SerializeField] private START_DIRECTION oscillation_startDirection;
     // lerp based on this
     [SerializeField] private float amplitude;
     [SerializeField] private float frequency;
-    [SerializeField] private OSCILLATION_AXIS oscillation_axis; 
-    [SerializeField] private START_DIRECTION oscillation_startDirection; 
+
 
     private float oscillationTime = 0f;
     private Vector3 startingPos;
@@ -83,5 +84,17 @@ public class LerpBackAndForth : LerpFunction
                 direction = Vector2.down;
         }
         return direction;
+    }
+
+    public override void CopyClassData(LerpFunction reference)
+    {
+        if (reference is LerpBackAndForth lerpBackForth)
+        {
+            lerpType = reference.lerpType;
+            amplitude = lerpBackForth.amplitude;
+            frequency = lerpBackForth.frequency;
+            oscillation_axis = lerpBackForth.oscillation_axis;
+            oscillation_startDirection = lerpBackForth.oscillation_startDirection;
+        }
     }
 }

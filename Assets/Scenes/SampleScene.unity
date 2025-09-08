@@ -6929,33 +6929,15 @@ GameObject:
   m_Component:
   - component: {fileID: 1343657476}
   - component: {fileID: 1343657475}
-  - component: {fileID: 1343657474}
   - component: {fileID: 1343657477}
+  - component: {fileID: 1343657478}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1343657474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1343657473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c48fca4e885de44990bb95747d8dd23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LerpManager
-  reference: {fileID: 1343657473}
-  lerpFunctionList:
-  - {fileID: 11400000, guid: eda9adc43d283824eb60943da558141d, type: 2}
-  - {fileID: 11400000, guid: 7b1d38a37c830a144840ce5ef62ca1df, type: 2}
-  lerpResponseList:
-  - {fileID: 11400000, guid: f8c6b41485b3ff042a5d454eb410e3b1, type: 2}
+  m_IsActive: 0
 --- !u!212 &1343657475
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7056,6 +7038,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1343657478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343657473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c48fca4e885de44990bb95747d8dd23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LerpManager
+  lerpFunctionTemplates:
+  - {fileID: 11400000, guid: eda9adc43d283824eb60943da558141d, type: 2}
+  - {fileID: 11400000, guid: 7b1d38a37c830a144840ce5ef62ca1df, type: 2}
+  lerpResponseTemplates:
+  - {fileID: 11400000, guid: f8c6b41485b3ff042a5d454eb410e3b1, type: 2}
 --- !u!1 &1354936084
 GameObject:
   m_ObjectHideFlags: 0

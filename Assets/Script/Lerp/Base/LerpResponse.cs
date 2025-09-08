@@ -10,4 +10,9 @@ public abstract class LerpResponse : ScriptableObject
     public abstract void HandleResponse(GameObject reference);
     public abstract void AddValueToCalculation(ILerpData lerpData);
 
+    public void CopyClassData(LerpResponse reference)
+    {
+        lerpType = reference.lerpType;
+    }
+
 }
