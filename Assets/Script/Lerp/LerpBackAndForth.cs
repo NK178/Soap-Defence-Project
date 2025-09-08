@@ -62,17 +62,6 @@ public class LerpBackAndForth : LerpFunction
             lerpData.SetData(velocity);
             lastPosition = targetPos;
             yield return null;
-
-            //Rigidbody2D rb = reference.GetComponent<Rigidbody2D>();
-            //if (rb != null)
-            //{
-
-
-            //    //rb.linearVelocity = velocity;
-
-
-
-            //}
         }
     }
 

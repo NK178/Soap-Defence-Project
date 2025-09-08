@@ -6953,6 +6953,7 @@ MonoBehaviour:
   reference: {fileID: 1343657473}
   lerpFunctionList:
   - {fileID: 11400000, guid: eda9adc43d283824eb60943da558141d, type: 2}
+  - {fileID: 11400000, guid: 7b1d38a37c830a144840ce5ef62ca1df, type: 2}
   lerpResponseList:
   - {fileID: 11400000, guid: f8c6b41485b3ff042a5d454eb410e3b1, type: 2}
 --- !u!212 &1343657475

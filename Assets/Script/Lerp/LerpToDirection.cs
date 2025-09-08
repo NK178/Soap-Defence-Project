@@ -35,6 +35,7 @@ public class LerpToDirection : LerpFunction
             defaultDirection = directionToLerp;
             currentSpeed = 0f;
             isActive = true;
+            lerpData = new LerpData<Vector3>();
         }
     }
 
@@ -58,17 +59,11 @@ public class LerpToDirection : LerpFunction
             {
                 Vector3 moveDirection = GetDirection();
                 currentSpeed = Mathf.Lerp(currentSpeed, moveSpeed, Time.deltaTime / accelerationTime);
-                Vector2 targetVelocity = moveDirection * currentSpeed;
-                //rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, Time.deltaTime * 5f);
+                Vector3 targetVelocity = moveDirection * currentSpeed;
+                lerpData.SetData(targetVelocity);
                 yield return null;
             }
         }
-
-        ///////////////////////////////////  method one that works 
-        //currentSpeed = Mathf.Lerp(currentSpeed, moveSpeed, Time.deltaTime / accelerationTime);
-        //Vector3 moveDirection = GetDirection();
-        //reference.transform.position += moveDirection * currentSpeed * Time.deltaTime;
-        //yield return null;
     }
 
     private Vector3 GetDirection()
