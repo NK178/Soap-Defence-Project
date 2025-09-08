@@ -20,8 +20,7 @@ public class ProduceBubbles : EntityFunctions
         {
             if (ShopManager.instance != null)
             {
-                //float xFactor = Random.Range(-spawnRadius, spawnRadius);
-                float xFactor = 0f;
+                float xFactor = Random.Range(-spawnRadius, spawnRadius);
                 Vector3 spawnPosition = new Vector3(xFactor + parentObject.transform.position.x, parentObject.transform.position.y, parentObject.transform.position.z);
                 GameObject newBubble = Instantiate(bubblePrefab, spawnPosition, parentObject.transform.rotation);
             }

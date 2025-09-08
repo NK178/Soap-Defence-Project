@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 3648063169859321775}
   - component: {fileID: 5547397407536514226}
   - component: {fileID: 6368222511993819691}
+  - component: {fileID: 8862625116096743630}
   m_Layer: 0
   m_Name: 'Bubble '
   m_TagString: bubble
@@ -205,3 +206,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7b1d38a37c830a144840ce5ef62ca1df, type: 2}
   lerpResponseTemplates:
   - {fileID: 11400000, guid: f8c6b41485b3ff042a5d454eb410e3b1, type: 2}
+--- !u!114 &8862625116096743630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4972582961937331906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2dd097c33eefa408e7b8a8b8a01ed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckColliderDeleteSelf
+  tagNameList:
+  - topCollider
