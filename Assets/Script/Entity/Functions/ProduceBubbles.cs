@@ -18,12 +18,10 @@ public class ProduceBubbles : EntityFunctions
         //run infintely until stopped 
         while (true)
         {
-            if (ShopManager.instance != null)
-            {
-                float xFactor = Random.Range(-spawnRadius, spawnRadius);
-                Vector3 spawnPosition = new Vector3(xFactor + parentObject.transform.position.x, parentObject.transform.position.y, parentObject.transform.position.z);
-                GameObject newBubble = Instantiate(bubblePrefab, spawnPosition, parentObject.transform.rotation);
-            }
+
+            float xFactor = Random.Range(-spawnRadius, spawnRadius);
+            Vector3 spawnPosition = new Vector3(xFactor + parentObject.transform.position.x, parentObject.transform.position.y, parentObject.transform.position.z);
+            GameObject newBubble = Instantiate(bubblePrefab, spawnPosition, parentObject.transform.rotation);
 
             yield return new WaitForSeconds(productionRate);
         }
