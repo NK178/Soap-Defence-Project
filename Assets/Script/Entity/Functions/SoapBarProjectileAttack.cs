@@ -19,21 +19,21 @@ public class SoapBarProjectileAttack : EntityFunctions
         //run infintely until stopped 
         while (true)
         {
-            //Vector3 spawnPosition = new Vector3(parentObject.transform.position.x, parentObject.transform.position.y, parentObject.transform.position.z);
-            ////raycast to find nearest enemy 
-            //RaycastHit2D hit = Physics2D.Raycast(spawnPosition, Vector2.right,40f, LayerMask.GetMask("enemy"));
-            //Vector3 endPosition = spawnPosition + Vector3.right * 20f;
-            //Debug.DrawRay(spawnPosition, endPosition, Color.red);
+            Vector3 spawnPosition = new Vector3(parentObject.transform.position.x, parentObject.transform.position.y, parentObject.transform.position.z);
+            //raycast to find nearest enemy 
+            RaycastHit2D hit = Physics2D.Raycast(spawnPosition, Vector2.right, 75f, LayerMask.GetMask("enemy"));
+            Vector3 endPosition = spawnPosition + Vector3.right * 75f;
+            Debug.DrawRay(spawnPosition, endPosition, Color.red);
 
             //Debug.Log("SPAWN " + spawnPosition);
             //Debug.Log("END " + endPosition);
-            //if (hit.collider != null)
-            //{
-            //    Debug.Log("ENEMY HIT");
-            //}
-            //else
-            //    Debug.Log("CANT FIND");
-            ////calculate trajectory which will be hard bruh cyka
+            if (hit.collider != null)
+            {
+                Debug.Log("ENEMY HIT");
+            }
+            else
+                Debug.Log("CANT FIND");
+            //calculate trajectory which will be hard bruh cyka
             //GameObject projectile = Instantiate(soapChipPrefab, spawnPosition, parentObject.transform.rotation);
 
 
@@ -41,6 +41,7 @@ public class SoapBarProjectileAttack : EntityFunctions
             //Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
             //rb.AddForce(Vector2.right * 50,ForceMode2D.Impulse);
             //yield return new WaitForSeconds(attackRate);
+            yield return new WaitForSeconds(0.1f); // Wait 0.1 seconds between casts
             yield return null;
         }
     }

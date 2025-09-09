@@ -134,7 +134,6 @@ public class LerpManager : MonoBehaviour
             {
                 if (lerpRes.lerpType.stringName == lerpFunc.lerpType.stringName)
                 {
-                    Debug.Log("ARE U RUNNING");
                     lerpResponse = lerpRes;
                     break;
                 }
