@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.PlayerLoop;
 
 
 [System.Serializable]
@@ -98,8 +100,11 @@ public class OnMouseInteracts : MonoBehaviour
                     break;
                 }
             }
+
+            TESTING = true;
         }
     }
+
 
     public void HandleMouseRelease(InputAction.CallbackContext ctx)
     {
@@ -118,12 +123,38 @@ public class OnMouseInteracts : MonoBehaviour
         }
     }
 
+    bool TESTING = false;
     private void Update()
     {
         HandleMouseEnterExit();
+
+
+        if (TESTING)
+        {
+
+            //TESTING 
+            Vector3 spawnPosition = new Vector3(400, 300, 0);
+
+            // Clear any existing debug lines first
+            Debug.ClearDeveloperConsole();
+
+            RaycastHit2D hit = Physics2D.Raycast(spawnPosition, Vector2.right, 20f, LayerMask.GetMask("enemy"));
+
+            Vector3 endPosition = spawnPosition + Vector3.right * 200f;
+            Debug.DrawLine(spawnPosition, endPosition, Color.red, 2f); // 2 second duration
+
+            Debug.Log($"SPAWN: {spawnPosition}");
+            Debug.Log($"END: {endPosition}");
+
+            if (hit.collider != null)
+            {
+                Debug.Log("ENEMY HIT: " + hit.collider.name);
+                Debug.DrawLine(spawnPosition, hit.point, Color.green, 2f);
+            }
+        }
     }
 
-    bool IsMouseCollidingValid(MouseEventsByTag eventTag, ref GameObject referenceObject)
+        bool IsMouseCollidingValid(MouseEventsByTag eventTag, ref GameObject referenceObject)
     {
         bool validCollide = false;
         Vector2 worldMousePos = mouseInstance.GetWorldMousePos();
