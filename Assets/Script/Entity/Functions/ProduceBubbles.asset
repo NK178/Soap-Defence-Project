@@ -15,4 +15,4 @@ MonoBehaviour:
   bubblePrefab: {fileID: 4972582961937331906, guid: e39664b8a247118468fc2b1d45565757, type: 3}
   bubbleAmount: 10
   productionRate: 2
-  spawnRadius: 60
+  spawnRadius: 0.5
