@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2d1178fffed8e4092ec1d75381bdf2, type: 3}
+  m_Name: Soap Kettle Output
+  m_EditorClassIdentifier: Assembly-CSharp::DefenceOutput
+  defence: {fileID: 907992520066352434, guid: c1265b3399785a045a1942f4d332fc1b, type: 3}
