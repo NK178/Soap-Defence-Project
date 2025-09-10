@@ -23,6 +23,7 @@ public enum ENTITYTYPE
     ATTACK,
     D_SOAP, //defences 
     E_GREASE, //enemies
+    E_DIRT,
     NUM_TYPE
 }
 
@@ -75,6 +76,18 @@ public class Entity : MonoBehaviour
         return currentStatsList[index];
     }
 
+    public void SetCurrentStatValue(STATSTYPE statType, float value)
+    {
+        for (int iter = 0; iter < statsList.Count; iter++)
+        {
+            if (statsList[iter].GetStatType() == statType)
+            {
+                currentStatsList[iter] = value;
+                break;
+            }
+        }
+    }
+
 
     public bool CheckIfThisEntityType(ENTITYTYPE entityType)
     {
@@ -89,16 +102,6 @@ public class Entity : MonoBehaviour
         }
         return isTypeCorrect;
     }
-
-    //public EntityType GetEntityTypeObject(ENTITYTYPE entityType)
-    //{
-    //    for (int iter = 0; iter < typeList.Count; iter++)
-    //    {
-    //        if (typeList[iter].GetEntityType() == entityType)
-    //            return typeList[iter];
-    //    }
-    //    return null;
-    //}
 
     //to find the enum and use in the type damage calculations 
     public EntityType GetMaterialType()
@@ -120,7 +123,7 @@ public class Entity : MonoBehaviour
         //check if it is a projectile with the type 
         if (tagCollider.currentColliding != null)
         {
-            TypeInteractionData typeData = tagCollider.currentColliding.GetComponent<TypeInteractionData>();
+            RequireParentReference typeData = tagCollider.currentColliding.GetComponent<RequireParentReference>();
             if (typeData != null)
                 refEntity = typeData.GetReferenceEntity();
 
@@ -149,8 +152,9 @@ public class Entity : MonoBehaviour
     private void DealDamage(float damage)
     {
         float currentHealth = GetCurrentStatValue(STATSTYPE.HEALTH);
-        currentHealth -= damage;
+        float newHealth = currentHealth - damage;
+        SetCurrentStatValue(STATSTYPE.HEALTH, newHealth);
+        Debug.Log("HEALTH " + newHealth);
         Debug.Log("DAMAGE " + damage);
-        Debug.Log("HEALTH " + currentHealth);
     }
 }

@@ -8,8 +8,8 @@ using UnityEngine;
 public class EntityStats : ScriptableObject
 {
 
-    [SerializeField] protected float value;
-    protected STATSTYPE statType;
+    [SerializeField] private float value;
+    [SerializeField] private STATSTYPE statType;
 
     public void SetValue(float newValue)
     {

@@ -46,7 +46,7 @@ public class SoapBarProjectileAttack : EntityFunctions
                 rb.AddForce(Vector2.right * 20, ForceMode2D.Impulse);
 
                 //bad system probably needs to change but will do for now 
-                TypeInteractionData typeData = projectile.GetComponent<TypeInteractionData>();
+                RequireParentReference typeData = projectile.GetComponent<RequireParentReference>();
                 if (typeData != null)
                     typeData.SetReferenceEntity(parentObject.GetComponent<Entity>());
                 CalculateProjectileVelocity(parentObject, hit.collider.gameObject);
