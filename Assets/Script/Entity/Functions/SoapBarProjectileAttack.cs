@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using Mono.Cecil;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.Compilation;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
@@ -56,6 +58,33 @@ public class SoapBarProjectileAttack : EntityFunctions
         }
     }
 
+    //public Vector3 CalculateProjectileVelocity(GameObject self, GameObject targetObj)
+    //{
+    //    float maxHeight = 3f;
+    //    float S = 30f;
+    //    Vector3 fireVelocity = Vector3.zero;
+    //    float gravity = float.NaN;
+    //    Vector3 displacement = targetObj.transform.position - self.transform.position;
+    //    float groundDist = displacement.magnitude;
+
+    //    float time = groundDist / S;
+    //    fireVelocity = displacement.normalized * S;
+    //    float a = self.transform.position.y;       // initial
+    //    float b = maxHeight;       // peak
+    //    float c = targetObj.transform.position.y;     // final
+
+    //    gravity = -4 * (a - 2 * b + c) / (time * time);
+    //    Rigidbody2D rb = targetObj.GetComponent<Rigidbody2D>();
+    //    if (rb != null)
+    //    {
+    //        float newGravityScale = gravity / Mathf.Abs(Physics2D.gravity.y);
+    //        rb.gravityScale = newGravityScale;
+    //        Debug.Log(rb.gravityScale);
+    //    }
+    //    fireVelocity.y = -(3 * a - 4 * b + c) / time;
+    //    return fireVelocity;
+    //}
+
     //this works, lets see if it can be better 
     public Vector3 CalculateProjectileVelocity(GameObject self, GameObject targetObj)
     {
@@ -78,6 +107,6 @@ public class SoapBarProjectileAttack : EntityFunctions
 
         finalVector = displacement.normalized * Mathf.Cos(highAng) * S + Vector3.up * Mathf.Sin(highAng) * S;
         Debug.Log("FINAL VECTOR " + finalVector);
-        return finalVector; 
+        return finalVector;
     }
 }
