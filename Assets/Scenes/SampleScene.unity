@@ -8610,6 +8610,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1647802736}
   - component: {fileID: 1647802735}
+  - component: {fileID: 1647802737}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -8646,6 +8647,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1647802737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1647802734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e40924c1ad6b240a1cc78e760d8bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TypeInteractionMap
+  interactionsList:
+  - baseType: {fileID: 11400000, guid: 940dc97fb86db7b478f98c4dce0d517e, type: 2}
+    strongAgainst: {fileID: 11400000, guid: 7284dc2cb52bd954f9d8d87082e7311e, type: 2}
+    weakAgainst: {fileID: 11400000, guid: 0532a1eb48224c54abffd02dbb2ad578, type: 2}
+  - baseType: {fileID: 11400000, guid: 7284dc2cb52bd954f9d8d87082e7311e, type: 2}
+    strongAgainst: {fileID: 11400000, guid: 0532a1eb48224c54abffd02dbb2ad578, type: 2}
+    weakAgainst: {fileID: 11400000, guid: 940dc97fb86db7b478f98c4dce0d517e, type: 2}
 --- !u!1 &1675142362
 GameObject:
   m_ObjectHideFlags: 0
@@ -8923,13 +8943,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f5888e96301334d85ae508ba060ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entity
+  tagCollider: {fileID: 0}
   statsList:
   - {fileID: 11400000, guid: 2175a28795420d0429cd80e7f91852e1, type: 2}
+  - {fileID: 11400000, guid: 84f85179352f609478f1a43360e4afe4, type: 2}
   functionsList:
   - {fileID: 11400000, guid: 325a8d5733d788f45acb411922e156df, type: 2}
   typeList:
-  - {fileID: 11400000, guid: 48e54eaa626ea06498fd50ffe9e6374a, type: 2}
   - {fileID: 11400000, guid: 465e4f7826ac1d94d9985374d43a4e0a, type: 2}
+  - {fileID: 11400000, guid: 940dc97fb86db7b478f98c4dce0d517e, type: 2}
 --- !u!4 &1694795875
 Transform:
   m_ObjectHideFlags: 0
@@ -11644,11 +11666,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3274630691947792957, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.45
+      value: -3.81
       objectReference: {fileID: 0}
     - target: {fileID: 3274630691947792957, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.09
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3274630691947792957, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
       propertyPath: m_LocalPosition.z

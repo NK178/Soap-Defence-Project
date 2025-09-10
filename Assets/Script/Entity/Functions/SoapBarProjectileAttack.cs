@@ -44,6 +44,11 @@ public class SoapBarProjectileAttack : EntityFunctions
                 //testing 
                 Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
                 rb.AddForce(Vector2.right * 20, ForceMode2D.Impulse);
+
+                //bad system probably needs to change but will do for now 
+                TypeInteractionData typeData = projectile.GetComponent<TypeInteractionData>();
+                if (typeData != null)
+                    typeData.SetReferenceEntity(parentObject.GetComponent<Entity>());
                 CalculateProjectileVelocity(parentObject, hit.collider.gameObject);
             }
 

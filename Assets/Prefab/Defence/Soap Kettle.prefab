@@ -158,10 +158,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f5888e96301334d85ae508ba060ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entity
+  tagCollider: {fileID: 0}
   statsList:
   - {fileID: 11400000, guid: eab44dada62ba0040ae817b2cc9720d5, type: 2}
   functionsList:
   - {fileID: 11400000, guid: 318042cd3b6d89d4e8e20346b1c8743e, type: 2}
   typeList:
-  - {fileID: 11400000, guid: 48e54eaa626ea06498fd50ffe9e6374a, type: 2}
   - {fileID: 11400000, guid: 286a7c895450db844a70e2bf22a2a7e1, type: 2}

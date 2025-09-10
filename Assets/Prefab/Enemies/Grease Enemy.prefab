@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3274630691947792957}
   - component: {fileID: 204423227281940706}
   - component: {fileID: 3017120372458054782}
+  - component: {fileID: 2270786319815938782}
   m_Layer: 6
   m_Name: Grease Enemy
   m_TagString: 'enemy '
@@ -46,13 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f5888e96301334d85ae508ba060ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entity
+  tagCollider: {fileID: 2270786319815938782}
   statsList:
   - {fileID: 11400000, guid: 0f34c855174aa4746b326288b4b6482b, type: 2}
   functionsList:
   - {fileID: 11400000, guid: 318042cd3b6d89d4e8e20346b1c8743e, type: 2}
   typeList:
-  - {fileID: 11400000, guid: b4a27725198095e459c9c4c35fc38a50, type: 2}
   - {fileID: 11400000, guid: 465e4f7826ac1d94d9985374d43a4e0a, type: 2}
+  - {fileID: 11400000, guid: 7284dc2cb52bd954f9d8d87082e7311e, type: 2}
 --- !u!61 &3017120372458054782
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -99,6 +101,39 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2270786319815938782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060069644945781301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea3d81ee5d6ff14fa5d9094fca8b3b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckColliderByTag
+  list:
+  - tag: defenceProjectiles
+    onTriggerEnter:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 204423227281940706}
+          m_TargetAssemblyTypeName: Entity, Assembly-CSharp
+          m_MethodName: HandleDamage
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onTriggerExit:
+      m_PersistentCalls:
+        m_Calls: []
+  currentColliding: {fileID: 0}
 --- !u!1 &3905345270759740428
 GameObject:
   m_ObjectHideFlags: 0
