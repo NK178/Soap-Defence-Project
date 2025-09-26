@@ -40,27 +40,22 @@ public class SoapBarProjectileAttack : EntityFunctions
             if (isEnemyFound)
             {
                 //calculate trajectory which will be hard bruh cyka
-                GameObject projectile = Instantiate(soapChipPrefab, spawnPosition, parentObject.transform.rotation);
-
-
-                //testing 
-                Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-                //rb.AddForce(Vector2.right * 20, ForceMode2D.Impulse);
+                GameObject objectReference = Instantiate(soapChipPrefab, spawnPosition, parentObject.transform.rotation);
+                ProjectileBallistics projectile = objectReference.GetComponent<ProjectileBallistics>();
 
                 //bad system probably needs to change but will do for now 
                 RequireParentReference typeData = projectile.GetComponent<RequireParentReference>();
                 if (typeData != null)
                     typeData.SetReferenceEntity(parentObject.GetComponent<Entity>());
 
-                float lateralSpeed = 10f;
-                float maxHeight = 3f;
+                float lateralSpeed = 13f;
+                float maxHeight = 8f;
                 Vector3 fireVelocity = Vector3.zero;
                 float projGravity = 0f;
                 solve_ballistic_arc_lateral(projectile.transform.position, lateralSpeed, hit.collider.gameObject.transform.position,
                     maxHeight, out fireVelocity, out projGravity);
-                rb.gravityScale = projGravity;
-                rb.linearVelocity = fireVelocity;
-
+                projectile.Initialize(projectile.transform.position, projGravity);
+                projectile.AddImpulse(fireVelocity);
             }
 
 
@@ -87,8 +82,8 @@ public class SoapBarProjectileAttack : EntityFunctions
     }
 
 
-
-    //I dont understand this what the hell 
+    //kay this one works 
+    //quite good for artilery shells I think just not in this case 
     public static bool solve_ballistic_arc_lateral(Vector3 proj_pos, float lateral_speed, Vector3 target_pos, float max_height, out Vector3 fire_velocity, out float gravity)
     {
 
