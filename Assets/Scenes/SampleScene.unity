@@ -11589,7 +11589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3274630691947792957, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.12
+      value: 33.98
       objectReference: {fileID: 0}
     - target: {fileID: 3274630691947792957, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11655,7 +11655,7 @@ MonoBehaviour:
   self: {fileID: 166052081113741216}
   movespeed: 5
   direction: {x: -1, y: 0}
-  shouldMove: 0
+  shouldMove: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

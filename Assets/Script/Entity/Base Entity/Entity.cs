@@ -1,11 +1,6 @@
-using NUnit.Framework;
-using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements.Experimental;
 
 
 // for programmer to choose 
@@ -33,10 +28,11 @@ public class Entity : MonoBehaviour
     [SerializeField] private List<EntityStats> statsList;
     [SerializeField] private List<EntityFunctions> functionsList;
     [SerializeField] private List<EntityType> typeList;
+    [SerializeField] private List<EntityState> stateList;
 
     //to be used in calculation like health and whatever 
-    private float[] currentStatsList; 
-
+    private float[] currentStatsList;
+    private EntityState currentState;
 
     private void Awake()
     {
@@ -156,5 +152,27 @@ public class Entity : MonoBehaviour
         SetCurrentStatValue(STATSTYPE.HEALTH, newHealth);
         Debug.Log("HEALTH " + newHealth);
         Debug.Log("DAMAGE " + damage);
+    }
+
+
+    //to run the state condition checks 
+    public IEnumerator HandleStateUpdates()
+    {
+        while (true)
+        {
+            //handle state excution 
+
+            //checking for state change 
+            for (int i = 0; i < stateList.Count; i++)
+            {
+                EntityState newState = stateList[i].StateTransitionCheck();
+                if (newState != null) 
+                    currentState = newState; 
+            }
+
+
+
+            yield return null;
+        }
     }
 }
