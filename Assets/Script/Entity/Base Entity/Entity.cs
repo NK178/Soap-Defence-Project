@@ -154,25 +154,32 @@ public class Entity : MonoBehaviour
         Debug.Log("DAMAGE " + damage);
     }
 
-
-    //to run the state condition checks 
-    public IEnumerator HandleStateUpdates()
+    public void TransitionState(EntityState newState)
     {
-        while (true)
-        {
-            //handle state excution 
-
-            //checking for state change 
-            for (int i = 0; i < stateList.Count; i++)
-            {
-                EntityState newState = stateList[i].StateTransitionCheck();
-                if (newState != null) 
-                    currentState = newState; 
-            }
-
-
-
-            yield return null;
-        }
+        currentState = newState;
+        //need to resolve previous state's coroutines here 
+        //StopAllCoroutines();
     }
+
+
+    ////to run the state condition checks 
+    //public IEnumerator HandleStateUpdates()
+    //{
+    //    while (true)
+    //    {
+    //        //handle state excution 
+
+    //        //checking for state change 
+    //        for (int i = 0; i < stateList.Count; i++)
+    //        {
+    //            EntityState newState = stateList[i].StateTransitionCheck();
+    //            if (newState != null) 
+    //                currentState = newState; 
+    //        }
+
+
+
+    //        yield return null;
+    //    }
+    //}
 }

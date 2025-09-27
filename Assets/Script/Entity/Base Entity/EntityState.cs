@@ -15,27 +15,49 @@ public class EntityState : ScriptableObject
         public EntityStateDecision decision;
         public EntityState state; 
     }
-    [SerializeField] private List<TransitionState> transitionList; 
+    [SerializeField] private List<EntityFunctions> functionsList; 
+    [SerializeField] private List<TransitionState> transitionsList;
+    private bool isFunctionsActive = false; 
 
+    //i might do coroutine to this via the entity
     public void UpdateState(Entity entity)
     {
-        //ExcuteCoroutine(Entity) 
-        
+        //only trigger once else bad things will happen 
+        if (!isFunctionsActive)
+        {
+            ExcuteFunctions(entity);
+            isFunctionsActive = true;   
+        }
+        CheckTransition(entity);
     }
 
-    public void CheckTransition()
+    public void ExcuteFunctions(Entity entity)
     {
-        for (int i = 0; i < transitionList.Count; i++)
+        for (int i = 0; i < functionsList.Count; i++)
         {
-            if (transitionList[i].decision.DecisionCheck())
+            entity.StartCoroutine(functionsList[i].ExcuteCoroutine(entity.gameObject));
+        }
+    }
+
+
+    public void CheckTransition(Entity entity)
+    {
+        for (int i = 0; i < transitionsList.Count; i++)
+        {
+            if (transitionsList[i].decision.DecisionCheck())
             {
-                return transitionList[i].state; 
+                //coroutines resolved in entity monobehvaiour
+                //isFunctionsActive = false;
+                StopAllFunctions(entity);
+                entity.TransitionState(transitionsList[i].state);
+                break;
             }
         }
-        return null;
     }
-
-    //need to have run coroutine funciton bruh 
-
-
+    
+    private void StopAllFunctions(Entity entity)
+    {
+        entity.StopAllCoroutines();
+        isFunctionsActive = false;
+    }
 }
