@@ -15,6 +15,7 @@ public class EntityState : ScriptableObject
         public EntityStateDecision decision;
         public EntityState state; 
     }
+
     [SerializeField] private List<EntityFunctions> functionsList; 
     [SerializeField] private List<TransitionState> transitionsList;
     private bool isFunctionsActive = false; 
@@ -55,6 +56,7 @@ public class EntityState : ScriptableObject
         }
     }
     
+    //this will stop main coroutine so its kinda bad 
     private void StopAllFunctions(Entity entity)
     {
         entity.StopAllCoroutines();

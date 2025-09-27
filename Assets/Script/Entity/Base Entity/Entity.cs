@@ -29,10 +29,13 @@ public class Entity : MonoBehaviour
     [SerializeField] private List<EntityFunctions> functionsList;
     [SerializeField] private List<EntityType> typeList;
     [SerializeField] private List<EntityState> stateList;
+    [SerializeField] private EntityState startState; 
 
     //to be used in calculation like health and whatever 
     private float[] currentStatsList;
     private EntityState currentState;
+
+    private Coroutine stateUpdateCoroutine;
 
     private void Awake()
     {
@@ -43,12 +46,20 @@ public class Entity : MonoBehaviour
             StartCoroutine(functionsList[iter].ExcuteCoroutine(this.gameObject));
         }
 
-        currentStatsList = new float[statsList.Count];  
+        currentStatsList = new float[statsList.Count];
         for (int iter = 0; iter < statsList.Count; iter++)
         {
             currentStatsList[iter] = statsList[iter].GetValue();
         }
 
+
+        ///////////////////////////////////////temp 
+        stateUpdateCoroutine = StartCoroutine(HandleStateUpdates());
+        ////initalize
+        //if (startState)
+        //{
+        //    startState.UpdateState(this);
+        //}
     }
 
     // Update is called once per frame
@@ -157,29 +168,20 @@ public class Entity : MonoBehaviour
     public void TransitionState(EntityState newState)
     {
         currentState = newState;
-        //need to resolve previous state's coroutines here 
-        //StopAllCoroutines();
+
+        //must reactive coroutine 
+        if (stateUpdateCoroutine == null)
+            stateUpdateCoroutine = StartCoroutine(HandleStateUpdates());
     }
 
 
-    ////to run the state condition checks 
-    //public IEnumerator HandleStateUpdates()
-    //{
-    //    while (true)
-    //    {
-    //        //handle state excution 
-
-    //        //checking for state change 
-    //        for (int i = 0; i < stateList.Count; i++)
-    //        {
-    //            EntityState newState = stateList[i].StateTransitionCheck();
-    //            if (newState != null) 
-    //                currentState = newState; 
-    //        }
-
-
-
-    //        yield return null;
-    //    }
-    //}
+    //to run the state condition checks 
+    public IEnumerator HandleStateUpdates()
+    {
+        while (true)
+        {
+            currentState.UpdateState(this);
+            yield return null;
+        }
+    }
 }
