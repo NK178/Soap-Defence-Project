@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -35,16 +36,16 @@ public class Entity : MonoBehaviour
     private float[] currentStatsList;
     private EntityState currentState;
 
-    private Coroutine stateUpdateCoroutine;
+    private IEnumerator stateUpdateCoroutine;
 
     private void Awake()
     {
-        //run all the coroutines 
-        for (int iter = 0; iter < functionsList.Count; iter++)
-        {
-            //to change to entity reference instead
-            StartCoroutine(functionsList[iter].ExcuteCoroutine(this.gameObject));
-        }
+        ////run all the coroutines 
+        //for (int iter = 0; iter < functionsList.Count; iter++)
+        //{
+        //    //to change to entity reference instead
+        //    StartCoroutine(functionsList[iter].ExcuteCoroutine(this.gameObject));
+        //}
 
         currentStatsList = new float[statsList.Count];
         for (int iter = 0; iter < statsList.Count; iter++)
@@ -54,12 +55,18 @@ public class Entity : MonoBehaviour
 
 
         ///////////////////////////////////////temp 
-        stateUpdateCoroutine = StartCoroutine(HandleStateUpdates());
-        ////initalize
-        //if (startState)
-        //{
-        //    startState.UpdateState(this);
-        //}
+        //initalize 
+        if (startState != null)
+        {
+            currentState = startState;
+            currentState.UpdateState(this);
+        }
+        else
+        {
+            Debug.Log("START STATE NULL");
+        }
+        stateUpdateCoroutine = HandleStateUpdates();
+        StartCoroutine(stateUpdateCoroutine);
     }
 
     // Update is called once per frame
@@ -171,7 +178,10 @@ public class Entity : MonoBehaviour
 
         //must reactive coroutine 
         if (stateUpdateCoroutine == null)
-            stateUpdateCoroutine = StartCoroutine(HandleStateUpdates());
+        {
+            stateUpdateCoroutine = HandleStateUpdates();
+            StartCoroutine(stateUpdateCoroutine);
+        }
     }
 
 
@@ -180,7 +190,10 @@ public class Entity : MonoBehaviour
     {
         while (true)
         {
-            currentState.UpdateState(this);
+            if (currentState != null)
+                currentState.UpdateState(this);
+            else
+                Debug.Log("CURRENT STATE NULL");
             yield return null;
         }
     }

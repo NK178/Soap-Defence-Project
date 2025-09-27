@@ -45,10 +45,8 @@ public class EntityState : ScriptableObject
     {
         for (int i = 0; i < transitionsList.Count; i++)
         {
-            if (transitionsList[i].decision.DecisionCheck())
+            if (transitionsList[i].decision.DecisionCheck(entity))
             {
-                //coroutines resolved in entity monobehvaiour
-                //isFunctionsActive = false;
                 StopAllFunctions(entity);
                 entity.TransitionState(transitionsList[i].state);
                 break;

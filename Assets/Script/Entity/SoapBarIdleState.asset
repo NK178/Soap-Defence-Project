@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9481e47e7ba618841897bd0f50d26fc7, type: 3}
+  m_Name: SoapBarIdleState
+  m_EditorClassIdentifier: Assembly-CSharp::EntityState
+  functionsList:
+  - {fileID: 11400000, guid: 318042cd3b6d89d4e8e20346b1c8743e, type: 2}
+  transitionsList:
+  - decision: {fileID: 11400000, guid: 73da19b7e38913b448b6b141179c1480, type: 2}
+    state: {fileID: 11400000, guid: 2d6b5cb532a4085438a5ade7876674d2, type: 2}

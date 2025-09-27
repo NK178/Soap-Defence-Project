@@ -10,5 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9481e47e7ba618841897bd0f50d26fc7, type: 3}
-  m_Name: TestIdleState
+  m_Name: SoapBarAttackState
   m_EditorClassIdentifier: Assembly-CSharp::EntityState
+  functionsList:
+  - {fileID: 11400000, guid: 325a8d5733d788f45acb411922e156df, type: 2}
+  transitionsList: []

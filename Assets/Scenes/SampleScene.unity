@@ -8891,6 +8891,10 @@ MonoBehaviour:
   typeList:
   - {fileID: 11400000, guid: 465e4f7826ac1d94d9985374d43a4e0a, type: 2}
   - {fileID: 11400000, guid: 940dc97fb86db7b478f98c4dce0d517e, type: 2}
+  stateList:
+  - {fileID: 11400000, guid: 0d87f75a9b9bc7c448f6ed4cd59e5aea, type: 2}
+  - {fileID: 11400000, guid: 2d6b5cb532a4085438a5ade7876674d2, type: 2}
+  startState: {fileID: 11400000, guid: 0d87f75a9b9bc7c448f6ed4cd59e5aea, type: 2}
 --- !u!4 &1694795875
 Transform:
   m_ObjectHideFlags: 0
@@ -11589,11 +11593,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3274630691947792957, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33.98
+      value: 37.16
       objectReference: {fileID: 0}
     - target: {fileID: 3274630691947792957, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.3
+      value: 14.21
       objectReference: {fileID: 0}
     - target: {fileID: 3274630691947792957, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11655,7 +11659,7 @@ MonoBehaviour:
   self: {fileID: 166052081113741216}
   movespeed: 5
   direction: {x: -1, y: 0}
-  shouldMove: 1
+  shouldMove: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
