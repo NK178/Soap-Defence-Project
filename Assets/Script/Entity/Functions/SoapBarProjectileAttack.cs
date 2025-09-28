@@ -37,31 +37,7 @@ public class SoapBarProjectileAttack : EntityFunctions
             if (hit.collider != null)
                 isEnemyFound = true;
 
-            //testing fixed speed version 
-            if (isEnemyFound)
-            {
-                //calculate trajectory which will be hard bruh cyka
-                GameObject objectReference = Instantiate(soapChipPrefab, spawnPosition, parentObject.transform.rotation);
-                ProjectileBallistics projectile = objectReference.GetComponent<ProjectileBallistics>();
-
-                //bad system probably needs to change but will do for now 
-                RequireParentReference typeData = projectile.GetComponent<RequireParentReference>();
-                if (typeData != null)
-                    typeData.SetReferenceEntity(parentObject.GetComponent<Entity>());
-
-                float projectileSpeed = 15f;
-                Vector3 targetPosition = projectile.transform.position - parentObject.transform.position;
-                Vector3 targetSpeed = 5f * Vector2.right;
-                Vector3 projectileGravity = 9.81f * Vector2.down; 
-                Vector3 fireVelocity = Vector3.zero;
-
-                solve_ballistic_with_fixed_speed(targetPosition, targetSpeed, projectileGravity, projectileSpeed, out fireVelocity);
-                projectile.Initialize(projectile.transform.position, 9.81f);
-                projectile.AddImpulse(fireVelocity);
-                Debug.Log(fireVelocity);
-            }
-
-            ////this one works, lateral speed version 
+            ////testing fixed speed version 
             //if (isEnemyFound)
             //{
             //    //calculate trajectory which will be hard bruh cyka
@@ -73,15 +49,39 @@ public class SoapBarProjectileAttack : EntityFunctions
             //    if (typeData != null)
             //        typeData.SetReferenceEntity(parentObject.GetComponent<Entity>());
 
-            //    float lateralSpeed = 13f;
-            //    float maxHeight = 8f;
+            //    float projectileSpeed = 15f;
+            //    Vector3 targetPosition = projectile.transform.position - parentObject.transform.position;
+            //    Vector3 targetSpeed = 5f * Vector2.right;
+            //    Vector3 projectileGravity = 9.81f * Vector2.down; 
             //    Vector3 fireVelocity = Vector3.zero;
-            //    float projGravity = 0f;
-            //    solve_ballistic_arc_lateral(projectile.transform.position, lateralSpeed, hit.collider.gameObject.transform.position,
-            //        maxHeight, out fireVelocity, out projGravity);
-            //    projectile.Initialize(projectile.transform.position, projGravity);
+
+            //    solve_ballistic_with_fixed_speed(targetPosition, targetSpeed, projectileGravity, projectileSpeed, out fireVelocity);
+            //    projectile.Initialize(projectile.transform.position, 9.81f);
             //    projectile.AddImpulse(fireVelocity);
+            //    Debug.Log(fireVelocity);
             //}
+
+            //this one works, lateral speed version 
+            if (isEnemyFound)
+            {
+                //calculate trajectory which will be hard bruh cyka
+                GameObject objectReference = Instantiate(soapChipPrefab, spawnPosition, parentObject.transform.rotation);
+                ProjectileBallistics projectile = objectReference.GetComponent<ProjectileBallistics>();
+
+                //bad system probably needs to change but will do for now 
+                RequireParentReference typeData = projectile.GetComponent<RequireParentReference>();
+                if (typeData != null)
+                    typeData.SetReferenceEntity(parentObject.GetComponent<Entity>());
+
+                float lateralSpeed = 13f;
+                float maxHeight = 8f;
+                Vector3 fireVelocity = Vector3.zero;
+                float projGravity = 0f;
+                solve_ballistic_arc_lateral(projectile.transform.position, lateralSpeed, hit.collider.gameObject.transform.position,
+                    maxHeight, out fireVelocity, out projGravity);
+                projectile.Initialize(projectile.transform.position, projGravity);
+                projectile.AddImpulse(fireVelocity);
+            }
 
             //this one works, actual speed version 
             //if (isEnemyFound)

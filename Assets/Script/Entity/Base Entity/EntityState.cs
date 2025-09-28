@@ -18,7 +18,7 @@ public class EntityState : ScriptableObject
 
     [SerializeField] private List<EntityFunctions> functionsList; 
     [SerializeField] private List<TransitionState> transitionsList;
-    private bool isFunctionsActive = false; 
+    public bool isFunctionsActive = false; 
 
 
     public void Init()
@@ -37,7 +37,7 @@ public class EntityState : ScriptableObject
             isFunctionsActive = true;   
         }
         CheckTransition(entity);
-
+            
     }
 
     public void ExcuteFunctions(Entity entity)

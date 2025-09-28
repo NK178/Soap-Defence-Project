@@ -11591,6 +11591,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grease Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1060069644945781301, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3274630691947792957, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 37.16
