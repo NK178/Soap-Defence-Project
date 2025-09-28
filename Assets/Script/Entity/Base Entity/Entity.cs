@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -55,15 +56,15 @@ public class Entity : MonoBehaviour
 
 
         ///////////////////////////////////////temp 
-        //initalize 
+        //initalize  
         if (startState != null)
         {
+            startState.Init();
             currentState = startState;
-            currentState.UpdateState(this);
-        }
-        else
-        {
-            Debug.Log("START STATE NULL");
+            foreach(EntityState state in stateList)
+            {
+                state.Init();
+            }
         }
         stateUpdateCoroutine = HandleStateUpdates();
         StartCoroutine(stateUpdateCoroutine);

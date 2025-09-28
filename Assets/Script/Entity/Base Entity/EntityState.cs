@@ -20,16 +20,24 @@ public class EntityState : ScriptableObject
     [SerializeField] private List<TransitionState> transitionsList;
     private bool isFunctionsActive = false; 
 
+
+    public void Init()
+    {
+        isFunctionsActive = false;
+    }
+
     //i might do coroutine to this via the entity
     public void UpdateState(Entity entity)
     {
         //only trigger once else bad things will happen 
         if (!isFunctionsActive)
         {
+            Debug.Log("FUNCTION EXCUTING");
             ExcuteFunctions(entity);
             isFunctionsActive = true;   
         }
         CheckTransition(entity);
+
     }
 
     public void ExcuteFunctions(Entity entity)
