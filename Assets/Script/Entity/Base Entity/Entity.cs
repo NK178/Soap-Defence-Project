@@ -30,8 +30,7 @@ public class Entity : MonoBehaviour
     [SerializeField] private List<EntityStats> statsList;
     [SerializeField] private List<EntityFunctions> functionsList;
     [SerializeField] private List<EntityType> typeList;
-    [SerializeField] private List<EntityState> stateList;
-    [SerializeField] private EntityState startState; 
+    [SerializeField] private List<EntityState> statesList;
 
     //to be used in calculation like health and whatever 
     private float[] currentStatsList;
@@ -48,14 +47,13 @@ public class Entity : MonoBehaviour
             currentStatsList[iter] = statsList[iter].GetValue();
         }
 
-
-        ///////////////////////////////////////temp 
         //initalize  
-        if (startState != null)
+        if (statesList.Count > 0)
         {
-            startState.Init();
-            currentState = startState;
-            foreach(EntityState state in stateList)
+            //assume first state as starting state
+            currentState = statesList[0];
+            currentState.Init();
+            foreach (EntityState state in statesList)
             {
                 state.Init();
             }
@@ -178,7 +176,7 @@ public class Entity : MonoBehaviour
 
     public void TransitionState(EntityState newState)
     {
-        if (newState.name != "RemainState")
+        if (newState.name != "RemainState") 
         {
             currentState = newState;
             Debug.Log("NEW STATE " + newState.name);
@@ -194,17 +192,17 @@ public class Entity : MonoBehaviour
         }
     }
 
-        /////////////////////// can consider using in a upgraded version but for now dont use this 
-        //public IEnumerator HandleStateUpdates()
-        //{
-        //    while (true)
-        //    {
-        //        if (currentState != null)
-        //            currentState.UpdateState(this);
-        //        else
-        //            Debug.Log(this.gameObject.name + " CURRENT STATE NULL");
-        //        Debug.Log(this.gameObject.name + " RUNNING");
-        //        yield return null;
-        //    }
-        //}
-    }
+    /////////////////////// can consider using in a upgraded version but for now dont use this 
+    //public IEnumerator HandleStateUpdates()
+    //{
+    //    while (true)
+    //    {
+    //        if (currentState != null)
+    //            currentState.UpdateState(this);
+    //        else
+    //            Debug.Log(this.gameObject.name + " CURRENT STATE NULL");
+    //        Debug.Log(this.gameObject.name + " RUNNING");
+    //        yield return null;
+    //    }
+    //}
+}

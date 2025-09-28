@@ -13,7 +13,6 @@ public class EntityState : ScriptableObject
     [System.Serializable]
     public class TransitionState {
         public EntityStateDecision decision;
-        //public EntityState state; 
         public EntityState trueState; 
         public EntityState falseState; 
     }
@@ -36,13 +35,22 @@ public class EntityState : ScriptableObject
         {
             Debug.Log("FUNCTION EXCUTING");
             ExcuteFunctions(entity);
+            ExcuteDecisionCoroutine(entity);
             isFunctionsActive = true;   
         }
         CheckTransition(entity);
             
     }
 
-    public void ExcuteFunctions(Entity entity)
+    private void ExcuteDecisionCoroutine(Entity entity)
+    {
+        for (int i = 0; i < transitionsList.Count; i++)
+        {
+            entity.StartCoroutine(transitionsList[i].decision.ExcuteCoroutine(entity));
+        }
+    }
+
+    private void ExcuteFunctions(Entity entity)
     {
         for (int i = 0; i < functionsList.Count; i++)
         {
@@ -50,8 +58,7 @@ public class EntityState : ScriptableObject
         }
     }
 
-
-    public void CheckTransition(Entity entity)
+    private void CheckTransition(Entity entity)
     {
         for (int i = 0; i < transitionsList.Count; i++)
         {
@@ -69,16 +76,6 @@ public class EntityState : ScriptableObject
                     StopAllFunctions(entity);
                 entity.TransitionState(transitionsList[i].falseState);
             }
-
-
-            //string thisSOName = AssetDatabase.GetAssetPath(this);
-            /////////////// old way 
-            //if (transitionsList[i].decision.DecisionCheck(entity))
-            //{
-            //    StopAllFunctions(entity);
-            //    entity.TransitionState(transitionsList[i].state);
-            //    break;
-            //}
         }
     }
     
