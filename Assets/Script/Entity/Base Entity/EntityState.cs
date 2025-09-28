@@ -13,12 +13,14 @@ public class EntityState : ScriptableObject
     [System.Serializable]
     public class TransitionState {
         public EntityStateDecision decision;
-        public EntityState state; 
+        //public EntityState state; 
+        public EntityState trueState; 
+        public EntityState falseState; 
     }
 
     [SerializeField] private List<EntityFunctions> functionsList; 
     [SerializeField] private List<TransitionState> transitionsList;
-    public bool isFunctionsActive = false; 
+    private bool isFunctionsActive = false; 
 
 
     public void Init()
@@ -53,12 +55,30 @@ public class EntityState : ScriptableObject
     {
         for (int i = 0; i < transitionsList.Count; i++)
         {
-            if (transitionsList[i].decision.DecisionCheck(entity))
+            //stop all coroutines before changing to a new state(unless remain state) 
+            bool decisionSucceed = transitionsList[i].decision.DecisionCheck(entity);
+            if (decisionSucceed)
             {
-                StopAllFunctions(entity);
-                entity.TransitionState(transitionsList[i].state);
-                break;
+                if (transitionsList[i].trueState.name != "RemainState")
+                    StopAllFunctions(entity);
+                entity.TransitionState(transitionsList[i].trueState);
             }
+            else
+            {
+                if (transitionsList[i].falseState.name != "RemainState")
+                    StopAllFunctions(entity);
+                entity.TransitionState(transitionsList[i].falseState);
+            }
+
+
+            //string thisSOName = AssetDatabase.GetAssetPath(this);
+            /////////////// old way 
+            //if (transitionsList[i].decision.DecisionCheck(entity))
+            //{
+            //    StopAllFunctions(entity);
+            //    entity.TransitionState(transitionsList[i].state);
+            //    break;
+            //}
         }
     }
     

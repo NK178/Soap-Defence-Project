@@ -178,29 +178,33 @@ public class Entity : MonoBehaviour
 
     public void TransitionState(EntityState newState)
     {
-        currentState = newState;
-        Debug.Log("NEW STATE " + newState.name);
+        if (newState.name != "RemainState")
+        {
+            currentState = newState;
+            Debug.Log("NEW STATE " + newState.name);
+        }
     }
 
     private void EntityStateUpdate()
     {
         if (currentState != null)
+        {
             currentState.UpdateState(this);
-        else
-            Debug.Log(this.gameObject.name + " CURRENT STATE NULL");
+            Debug.Log("Current State: " + currentState.name);
+        }
     }
 
-    /////////////////////// can consider using in a upgraded version but for now dont use this 
-    //public IEnumerator HandleStateUpdates()
-    //{
-    //    while (true)
-    //    {
-    //        if (currentState != null)
-    //            currentState.UpdateState(this);
-    //        else
-    //            Debug.Log(this.gameObject.name + " CURRENT STATE NULL");
-    //        Debug.Log(this.gameObject.name + " RUNNING");
-    //        yield return null;
-    //    }
-    //}
-}
+        /////////////////////// can consider using in a upgraded version but for now dont use this 
+        //public IEnumerator HandleStateUpdates()
+        //{
+        //    while (true)
+        //    {
+        //        if (currentState != null)
+        //            currentState.UpdateState(this);
+        //        else
+        //            Debug.Log(this.gameObject.name + " CURRENT STATE NULL");
+        //        Debug.Log(this.gameObject.name + " RUNNING");
+        //        yield return null;
+        //    }
+        //}
+    }
