@@ -11645,6 +11645,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grease Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 2270786319815938782, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
+      propertyPath: list.Array.data[0].onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HandleDamageFromProjectiles
+      objectReference: {fileID: 0}
     - target: {fileID: 3017120372458054782, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
       propertyPath: m_Size.x
       value: 5.995304

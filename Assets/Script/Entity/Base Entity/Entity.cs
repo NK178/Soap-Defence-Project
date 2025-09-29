@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -131,8 +132,23 @@ public class Entity : MonoBehaviour
         return null;
     }
 
+    //melee attacks 
+    public void HandleDamageFromEntity(Entity attacker)
+    {
+        TypeInteractions typeInteraction = null;
+        if (attacker != null)
+            typeInteraction = TypeInteractionMap.instance.GetTypeInteraction(attacker.GetMaterialType());
 
-    public void HandleDamage()
+        if (typeInteraction != null)
+        {
+            float damageToTake = CalculateDamageByType(typeInteraction, attacker.GetCurrentStatValue(STATSTYPE.DAMAGE));
+            TakeDamage(damageToTake);
+        }
+    }
+
+    //29/9 could be a future problem if there are more than one projectiles acting on the entity but we'll deal with that later 
+    //ranged attacks
+    public void HandleDamageFromProjectiles()
     {
         TypeInteractions typeInteraction = null;
         Entity refEntity = null;
@@ -147,31 +163,36 @@ public class Entity : MonoBehaviour
                 typeInteraction = TypeInteractionMap.instance.GetTypeInteraction(refEntity.GetMaterialType());
         }
 
-        //compare attacker type to the defender type 
         if (typeInteraction != null)
         {
-            float damageMultipler = 1f;
-            EntityType selfMaterialType = GetMaterialType();
-            if (selfMaterialType.GetEntityType() == typeInteraction.strongAgainst.GetEntityType())
-                damageMultipler = 2f;
-            else if (selfMaterialType.GetEntityType() == typeInteraction.weakAgainst.GetEntityType())
-                damageMultipler = 0.5f;
-
-            // apply damage 
-            float baseDamage = refEntity.GetCurrentStatValue(STATSTYPE.DAMAGE);
-            float totalDamage = baseDamage * damageMultipler;
-            DealDamage(totalDamage);
+            float damageToTake = CalculateDamageByType(typeInteraction, refEntity.GetCurrentStatValue(STATSTYPE.DAMAGE));
+            TakeDamage(damageToTake);
         }
     }
 
+    //compare attacker type to the defender type 
+    private float CalculateDamageByType(TypeInteractions typeInteraction, float refEntityDamage)
+    {
+        float damageMultipler = 1f;
+        EntityType selfMaterialType = GetMaterialType();
+        if (selfMaterialType.GetEntityType() == typeInteraction.strongAgainst.GetEntityType())
+            damageMultipler = 2f;
+        else if (selfMaterialType.GetEntityType() == typeInteraction.weakAgainst.GetEntityType())
+            damageMultipler = 0.5f;
 
-    private void DealDamage(float damage)
+        // apply damage 
+        float baseDamage = refEntityDamage;
+        float totalDamage = baseDamage * damageMultipler;
+        return totalDamage;
+    }
+
+
+    private void TakeDamage(float damage)
     {
         float currentHealth = GetCurrentStatValue(STATSTYPE.HEALTH);
         float newHealth = currentHealth - damage;
         SetCurrentStatValue(STATSTYPE.HEALTH, newHealth);
-        Debug.Log("HEALTH " + newHealth);
-        Debug.Log("DAMAGE " + damage);
+        Debug.Log(this.gameObject.name + "'S NEW HEALTH " + newHealth);
     }
 
     public void TransitionState(EntityState newState)
@@ -179,7 +200,7 @@ public class Entity : MonoBehaviour
         if (newState.name != "RemainState") 
         {
             currentState = newState;
-            Debug.Log("NEW STATE " + newState.name);
+            //Debug.Log("NEW STATE " + newState.name);
         }
     }
 
@@ -187,8 +208,7 @@ public class Entity : MonoBehaviour
     {
         if (currentState != null)
         {
-            currentState.UpdateState(this);
-            Debug.Log("Current State: " + currentState.name);
+            currentState.UpdateState(this);  
         }
     }
 

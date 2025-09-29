@@ -26,14 +26,10 @@ public class DoMeleeDamage : EntityFunctions
                     validTarget = true;
             }
 
+
+            //let entity handle this themselves
             if (validTarget)
-            {
-                float targetHealth = target.GetCurrentStatValue(STATSTYPE.HEALTH);
-                float selfDamage = entity.GetCurrentStatValue(STATSTYPE.DAMAGE);
-                float newTargetHealth = targetHealth - selfDamage;
-                target.SetCurrentStatValue(STATSTYPE.HEALTH, newTargetHealth);
-                //Debug.Log("PREV HEALTH: " + targetHealth + "  CURR HEALTH " + newTargetHealth);
-            }
+                target.HandleDamageFromEntity(entity);
             yield return new WaitForSeconds(attackCooldown);    
         }
     }
