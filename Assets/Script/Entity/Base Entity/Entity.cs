@@ -1,8 +1,10 @@
+using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
+using UnityEditor.XR;
 using UnityEngine;
 
 
@@ -25,17 +27,27 @@ public enum ENTITYTYPE
     NUM_TYPE
 }
 
+
+public enum ENTITYANIMS { 
+    DEFAULT,
+    ATTACK, 
+    SPECIAL,
+    NUM_ANIMS
+}
+
 public class Entity : MonoBehaviour
 {
     [SerializeField] private CheckColliderByTag tagCollider;
+    [SerializeField] private Animator animator; 
     [SerializeField] private List<EntityStats> statsList;
     [SerializeField] private List<EntityFunctions> functionsList;
     [SerializeField] private List<EntityType> typeList;
     [SerializeField] private List<EntityState> statesList;
-
+       
     //to be used in calculation like health and whatever 
     private float[] currentStatsList;
     private EntityState currentState;
+   
 
     //private IEnumerator stateUpdateCoroutine;
     private bool isActive;
@@ -77,6 +89,91 @@ public class Entity : MonoBehaviour
 
         
     }
+
+    private void EntityStateUpdate()
+    {
+        if (currentState != null)
+        {
+            currentState.UpdateState(this);
+        }
+    }
+
+    //compare attacker type to the defender type 
+    private float CalculateDamageByType(TypeInteractions typeInteraction, float refEntityDamage)
+    {
+        float damageMultipler = 1f;
+        EntityType selfMaterialType = GetMaterialType();
+        if (selfMaterialType.GetEntityType() == typeInteraction.strongAgainst.GetEntityType())
+            damageMultipler = 2f;
+        else if (selfMaterialType.GetEntityType() == typeInteraction.weakAgainst.GetEntityType())
+            damageMultipler = 0.5f;
+
+        // apply damage 
+        float baseDamage = refEntityDamage;
+        float totalDamage = baseDamage * damageMultipler;
+        return totalDamage;
+    }
+
+
+    private void TakeDamage(float damage)
+    {
+        float currentHealth = GetCurrentStatValue(STATSTYPE.HEALTH);
+        float newHealth = currentHealth - damage;
+        SetCurrentStatValue(STATSTYPE.HEALTH, newHealth);
+        //Debug.Log(this.gameObject.name + "'S NEW HEALTH " + newHealth);
+    }
+
+
+    //melee attacks 
+    public void HandleDamageFromEntity(Entity attacker)
+    {
+        TypeInteractions typeInteraction = null;
+        if (attacker != null)
+            typeInteraction = TypeInteractionMap.instance.GetTypeInteraction(attacker.GetMaterialType());
+
+        if (typeInteraction != null)
+        {
+            float damageToTake = CalculateDamageByType(typeInteraction, attacker.GetCurrentStatValue(STATSTYPE.DAMAGE));
+            TakeDamage(damageToTake);
+        }
+    }
+
+    //29/9 could be a future problem if there are more than one projectiles acting on the entity but we'll deal with that later 
+    //ranged attacks
+    public void HandleDamageFromProjectiles()
+    {
+        TypeInteractions typeInteraction = null;
+        Entity refEntity = null;
+        //check if it is a projectile with the type 
+        if (tagCollider.currentColliding != null)
+        {
+            RequireParentReference typeData = tagCollider.currentColliding.GetComponent<RequireParentReference>();
+            if (typeData != null)
+                refEntity = typeData.GetReferenceEntity();
+
+            if (refEntity != null)
+                typeInteraction = TypeInteractionMap.instance.GetTypeInteraction(refEntity.GetMaterialType());
+        }
+
+        if (typeInteraction != null)
+        {
+            float damageToTake = CalculateDamageByType(typeInteraction, refEntity.GetCurrentStatValue(STATSTYPE.DAMAGE));
+            TakeDamage(damageToTake);
+        }
+    }
+
+
+    public void TransitionState(EntityState newState)
+    {
+        if (newState.name != "RemainState")
+        {
+            currentState = newState;
+            //Debug.Log(this.gameObject.name + " ACTIVE STATE " + newState.name);
+        }
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////    GETTERS AND SETTERS 
 
     //look for the values in the active float list not the stats template list 
     public float GetCurrentStatValue(STATSTYPE statType)
@@ -132,85 +229,35 @@ public class Entity : MonoBehaviour
         return null;
     }
 
-    //melee attacks 
-    public void HandleDamageFromEntity(Entity attacker)
-    {
-        TypeInteractions typeInteraction = null;
-        if (attacker != null)
-            typeInteraction = TypeInteractionMap.instance.GetTypeInteraction(attacker.GetMaterialType());
 
-        if (typeInteraction != null)
+    public void PlayAnimation(ENTITYANIMS anim)
+    {
+        //check required activation parameter
+        AnimatorControllerParameterType paramType = AnimatorControllerParameterType.Bool;
+        string enumName = anim.ToString();
+
+        foreach (AnimatorControllerParameter param in animator.parameters)
         {
-            float damageToTake = CalculateDamageByType(typeInteraction, attacker.GetCurrentStatValue(STATSTYPE.DAMAGE));
-            TakeDamage(damageToTake);
+            if (param.name == enumName)
+            {
+                paramType = param.type;
+                break;
+            }
+        }
+
+        switch (paramType) {
+
+            case AnimatorControllerParameterType.Bool:
+                bool currentCondition = animator.GetBool(enumName);
+                currentCondition = !currentCondition;
+                animator.SetBool(enumName, currentCondition);
+                break;
+            case AnimatorControllerParameterType.Trigger:
+                animator.SetTrigger(enumName);
+                break;
         }
     }
 
-    //29/9 could be a future problem if there are more than one projectiles acting on the entity but we'll deal with that later 
-    //ranged attacks
-    public void HandleDamageFromProjectiles()
-    {
-        TypeInteractions typeInteraction = null;
-        Entity refEntity = null;
-        //check if it is a projectile with the type 
-        if (tagCollider.currentColliding != null)
-        {
-            RequireParentReference typeData = tagCollider.currentColliding.GetComponent<RequireParentReference>();
-            if (typeData != null)
-                refEntity = typeData.GetReferenceEntity();
-
-            if (refEntity != null)
-                typeInteraction = TypeInteractionMap.instance.GetTypeInteraction(refEntity.GetMaterialType());
-        }
-
-        if (typeInteraction != null)
-        {
-            float damageToTake = CalculateDamageByType(typeInteraction, refEntity.GetCurrentStatValue(STATSTYPE.DAMAGE));
-            TakeDamage(damageToTake);
-        }
-    }
-
-    //compare attacker type to the defender type 
-    private float CalculateDamageByType(TypeInteractions typeInteraction, float refEntityDamage)
-    {
-        float damageMultipler = 1f;
-        EntityType selfMaterialType = GetMaterialType();
-        if (selfMaterialType.GetEntityType() == typeInteraction.strongAgainst.GetEntityType())
-            damageMultipler = 2f;
-        else if (selfMaterialType.GetEntityType() == typeInteraction.weakAgainst.GetEntityType())
-            damageMultipler = 0.5f;
-
-        // apply damage 
-        float baseDamage = refEntityDamage;
-        float totalDamage = baseDamage * damageMultipler;
-        return totalDamage;
-    }
-
-
-    private void TakeDamage(float damage)
-    {
-        float currentHealth = GetCurrentStatValue(STATSTYPE.HEALTH);
-        float newHealth = currentHealth - damage;
-        SetCurrentStatValue(STATSTYPE.HEALTH, newHealth);
-        Debug.Log(this.gameObject.name + "'S NEW HEALTH " + newHealth);
-    }
-
-    public void TransitionState(EntityState newState)
-    {
-        if (newState.name != "RemainState") 
-        {
-            currentState = newState;
-            //Debug.Log("NEW STATE " + newState.name);
-        }
-    }
-
-    private void EntityStateUpdate()
-    {
-        if (currentState != null)
-        {
-            currentState.UpdateState(this);  
-        }
-    }
 
     /////////////////////// can consider using in a upgraded version but for now dont use this 
     //public IEnumerator HandleStateUpdates()

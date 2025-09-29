@@ -11,8 +11,8 @@ public class ProduceBubbles : EntityFunctions
 
     public override IEnumerator ExcuteCoroutine(Entity entity = null)
     {
+        entity.PlayAnimation(ENTITYANIMS.SPECIAL);
         Vector3 position = entity.gameObject.transform.position;
-
         float xFactor = Random.Range(-spawnRadius, spawnRadius);
         Vector3 spawnPosition = new Vector3(xFactor + position.x, position.y, position.z);
         GameObject newBubble = Instantiate(bubblePrefab, spawnPosition, entity.gameObject.transform.rotation);

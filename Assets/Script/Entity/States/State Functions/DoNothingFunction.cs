@@ -9,6 +9,4 @@ public class DoNothingFunction : EntityFunctions
     {
         yield return null; 
     }
-
-
 }

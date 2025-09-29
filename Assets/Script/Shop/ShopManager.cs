@@ -75,7 +75,7 @@ public class ShopManager : MonoBehaviour
     public void HandleDragStart(ShopItem item, PointerEventData eventData)
     {
 
-        Debug.Log($"Started dragging {item.name}");
+        //Debug.Log($"Started dragging {item.name}");
         //check price 
         if (item.CheckIfCanBuy())
         {
@@ -92,7 +92,7 @@ public class ShopManager : MonoBehaviour
         object newPurchase = null;
         if (selectedItem != null)
         {
-            Debug.Log($"Dropped {selectedItem.name}");
+            //Debug.Log($"Dropped {selectedItem.name}");
             if (selectedItem.CheckIfCanBuy())
             {
                 newPurchase = selectedItem.Buy();
@@ -109,7 +109,7 @@ public class ShopManager : MonoBehaviour
             {
                 //apparenlty can do this and switch the typing so now entity got all the newpurchase stuff wow 
                 case Entity entity:
-                    Debug.Log("TYPE ENTITY");
+                    //Debug.Log("TYPE ENTITY");
                     succesfulDrop = HandleEntityDrop(entity);
                     break;
                 default:
@@ -144,15 +144,15 @@ public class ShopManager : MonoBehaviour
 
         if (validDrop)
         {
-            Debug.Log("VALID DROP");
+            //Debug.Log("VALID DROP");
             Vector3 gridPosition = target.transform.position;
             GameObject newEntity = Instantiate(entity.gameObject, gridPosition, transform.rotation);
             //make the entity be a child of the gameobejct 
             newEntity.transform.SetParent(target.transform);
             validDrop = true;
         }
-        else
-            Debug.Log("INVALID DROP");
+        //else
+            //Debug.Log("INVALID DROP");
         return validDrop;
     }
 

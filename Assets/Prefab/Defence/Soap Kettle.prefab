@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entity
   tagCollider: {fileID: 0}
+  animator: {fileID: 2441641294123858148}
   statsList:
   - {fileID: 11400000, guid: eab44dada62ba0040ae817b2cc9720d5, type: 2}
   functionsList:
