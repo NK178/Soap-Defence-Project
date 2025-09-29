@@ -9,15 +9,13 @@ public class ProduceBubbles : EntityFunctions
     [SerializeField] private float productionRate;
     [SerializeField] private float spawnRadius;
 
-    public override IEnumerator ExcuteCoroutine(GameObject parentObject = null)
+    public override IEnumerator ExcuteCoroutine(Entity entity = null)
     {
-        //run only once per enter into this state
-        if (parentObject == null)
-            yield return null;
+        Vector3 position = entity.gameObject.transform.position;
 
         float xFactor = Random.Range(-spawnRadius, spawnRadius);
-        Vector3 spawnPosition = new Vector3(xFactor + parentObject.transform.position.x, parentObject.transform.position.y, parentObject.transform.position.z);
-        GameObject newBubble = Instantiate(bubblePrefab, spawnPosition, parentObject.transform.rotation);
+        Vector3 spawnPosition = new Vector3(xFactor + position.x, position.y, position.z);
+        GameObject newBubble = Instantiate(bubblePrefab, spawnPosition, entity.gameObject.transform.rotation);
         yield return null;
     }
 }

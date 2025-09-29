@@ -11633,6 +11633,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 204423227281940706, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
+      propertyPath: statsList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 204423227281940706, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
+      propertyPath: 'statsList.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: e20e4f56b7d67124d855e9539d49f306, type: 2}
     - target: {fileID: 1060069644945781301, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
       propertyPath: m_Name
       value: Grease Enemy

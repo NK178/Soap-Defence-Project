@@ -54,7 +54,7 @@ public class EntityState : ScriptableObject
     {
         for (int i = 0; i < functionsList.Count; i++)
         {
-            entity.StartCoroutine(functionsList[i].ExcuteCoroutine(entity.gameObject));
+            entity.StartCoroutine(functionsList[i].ExcuteCoroutine(entity));
         }
     }
 

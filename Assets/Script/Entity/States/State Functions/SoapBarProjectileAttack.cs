@@ -19,15 +19,13 @@ public class SoapBarProjectileAttack : EntityFunctions
     private float fixedSpeed = 10f;
     
     
-    public override IEnumerator ExcuteCoroutine(GameObject parentObject = null)
+    public override IEnumerator ExcuteCoroutine(Entity entity = null)
     {
-        if (parentObject == null)
-            yield return null;
-
         //run infintely until stopped 
         while (true)
         {
-            Vector3 spawnPosition = new Vector3(parentObject.transform.position.x, parentObject.transform.position.y, parentObject.transform.position.z);
+            Vector3 position = entity.gameObject.transform.position;
+            Vector3 spawnPosition = new Vector3(position.x, position.y, position.z);
 
             //raycast to find nearest enemy 
             bool isEnemyFound = false;
@@ -65,13 +63,13 @@ public class SoapBarProjectileAttack : EntityFunctions
             if (isEnemyFound)
             {
                 //calculate trajectory which will be hard bruh cyka
-                GameObject objectReference = Instantiate(soapChipPrefab, spawnPosition, parentObject.transform.rotation);
+                GameObject objectReference = Instantiate(soapChipPrefab, spawnPosition, entity.gameObject.transform.rotation);
                 ProjectileBallistics projectile = objectReference.GetComponent<ProjectileBallistics>();
 
                 //bad system probably needs to change but will do for now 
                 RequireParentReference typeData = projectile.GetComponent<RequireParentReference>();
                 if (typeData != null)
-                    typeData.SetReferenceEntity(parentObject.GetComponent<Entity>());
+                    typeData.SetReferenceEntity(entity);
 
                 float lateralSpeed = 13f;
                 float maxHeight = 8f;

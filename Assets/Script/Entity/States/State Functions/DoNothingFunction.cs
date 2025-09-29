@@ -5,8 +5,10 @@ using UnityEngine;
 public class DoNothingFunction : EntityFunctions
 {
     //literally do nothing 
-    public override IEnumerator ExcuteCoroutine(GameObject parentObject = null)
+    public override IEnumerator ExcuteCoroutine(Entity entity = null)
     {
         yield return null; 
     }
+
+
 }
