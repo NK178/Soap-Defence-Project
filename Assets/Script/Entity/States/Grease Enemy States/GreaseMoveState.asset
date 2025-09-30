@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9481e47e7ba618841897bd0f50d26fc7, type: 3}
   m_Name: GreaseMoveState
   m_EditorClassIdentifier: Assembly-CSharp::EntityState
-  functionsTemplate:
+  functionsList:
   - {fileID: 11400000, guid: 847d68287f78202428b6fcfe3f258981, type: 2}
-  transitionsTemplate:
+  transitionsList:
   - decision: {fileID: 11400000, guid: 97c23149e76280f429772969b57c89ef, type: 2}
     trueState: {fileID: 11400000, guid: c3647773c1d28f94886858606bfee6ed, type: 2}
     falseState: {fileID: 11400000, guid: 422d9ec84283f2049862f281ca13f4be, type: 2}
