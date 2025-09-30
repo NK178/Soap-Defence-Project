@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -18,39 +17,14 @@ public class EntityState : ScriptableObject
         public EntityState falseState; 
     }
 
-    //[SerializeField] private List<EntityFunctions> functionsList; 
-    //[SerializeField] private List<TransitionState> transitionsList;
-
-    [SerializeField] private List<EntityFunctions> functionsTemplate;
-    [SerializeField] private List<TransitionState> transitionsTemplate;
-
-    private List<EntityFunctions> functionsList; 
-    private List<TransitionState> transitionsList;
-
+    [SerializeField] private List<EntityFunctions> functionsList; 
+    [SerializeField] private List<TransitionState> transitionsList;
     private bool isFunctionsActive = false; 
 
 
     public void Init()
     {
         isFunctionsActive = false;
-        //need to create a own copy of da SOs
-        foreach (EntityFunctions template in functionsTemplate)
-        {
-            Type concreteType = template.GetType();
-            EntityFunctions copy = ScriptableObject.CreateInstance(concreteType) as EntityFunctions;
-            functionsList.Add(copy);
-        }
-        //only need to copy the decision then add it into the transition
-        foreach (TransitionState template in transitionsTemplate)
-        {
-            TransitionState updatedTransitionState = new TransitionState(); 
-            Type concreteType = template.decision.GetType();
-            EntityStateDecision copy = ScriptableObject.CreateInstance(concreteType) as EntityStateDecision;
-            updatedTransitionState.decision = copy;
-            updatedTransitionState.trueState = template.trueState;
-            updatedTransitionState.falseState = template.falseState;
-            transitionsList.Add(updatedTransitionState);
-        }
     }
 
     //i might do coroutine to this via the entity

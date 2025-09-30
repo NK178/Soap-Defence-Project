@@ -40,7 +40,7 @@ public class Entity : MonoBehaviour
     [SerializeField] private CheckColliderByTag tagCollider;
     [SerializeField] private Animator animator; 
     [SerializeField] private List<EntityStats> statsList;
-    //[SerializeField] private List<EntityFunctions> functionsList;
+    [SerializeField] private List<EntityFunctions> functionsList;
     [SerializeField] private List<EntityType> typeList;
     [SerializeField] private List<EntityState> statesList;
        
@@ -63,14 +63,13 @@ public class Entity : MonoBehaviour
         //initalize  
         if (statesList.Count > 0)
         {
+            //assume first state as starting state
+            currentState = statesList[0];
+            currentState.Init();
             foreach (EntityState state in statesList)
             {
                 state.Init();
             }
-            //assume first state as starting state
-            currentState = statesList[0];
-            //currentState.Init();
-
         }
         //stateUpdateCoroutine = HandleStateUpdates();
         //StartCoroutine(stateUpdateCoroutine);

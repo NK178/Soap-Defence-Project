@@ -15,7 +15,12 @@ public abstract class LerpFunction : ScriptableObject
 
     public abstract void CopyClassData(LerpFunction reference);
 
-
+    //public void CopyClassData(LerpFunction reference)
+    //{
+    //    //incase the function hasnt been init yet 
+    //    lerpType = reference.lerpType;
+    //    lerpData = reference.lerpData; 
+    //}
 
 
 }
