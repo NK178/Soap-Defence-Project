@@ -7800,6 +7800,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soap Kettle
       objectReference: {fileID: 0}
+    - target: {fileID: 5891929248567244599, guid: c1265b3399785a045a1942f4d332fc1b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5987510789221886561, guid: c1265b3399785a045a1942f4d332fc1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -26.42

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9481e47e7ba618841897bd0f50d26fc7, type: 3}
   m_Name: SoapBarIdleState
   m_EditorClassIdentifier: Assembly-CSharp::EntityState
-  functionsList:
+  functionsTemplate:
   - {fileID: 11400000, guid: e41cbbd9522145849ab7678dfc9069ba, type: 2}
-  transitionsList:
+  transitionsTemplate:
   - decision: {fileID: 11400000, guid: 73da19b7e38913b448b6b141179c1480, type: 2}
     trueState: {fileID: 11400000, guid: 2d6b5cb532a4085438a5ade7876674d2, type: 2}
     falseState: {fileID: 11400000, guid: 422d9ec84283f2049862f281ca13f4be, type: 2}
