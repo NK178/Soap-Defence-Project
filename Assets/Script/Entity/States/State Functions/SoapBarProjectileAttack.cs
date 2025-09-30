@@ -16,16 +16,9 @@ public class SoapBarProjectileAttack : EntityFunctions
     [SerializeField] private GameObject soapChipPrefab;
     [SerializeField] private float attackRate; 
 
-    //copy failed
-    public override void CopyData(EntityFunctions reference)
-    {
-        if (reference is SoapBarProjectileAttack projectileAttack)
-        {
-            soapChipPrefab = projectileAttack.soapChipPrefab; 
-            attackRate = projectileAttack.attackRate;   
-        }
-    }
-
+    private float fixedSpeed = 10f;
+    
+    
     public override IEnumerator ExcuteCoroutine(Entity entity = null)
     {
         //run infintely until stopped 

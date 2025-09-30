@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class EntityStateDecision : ScriptableObject
 {
     public abstract bool DecisionCheck(Entity entity);
-    public abstract void CopyData(EntityStateDecision reference);
 
     //not necessary to implement 
     virtual public IEnumerator ExcuteCoroutine(Entity entity)

@@ -8949,6 +8949,8 @@ MonoBehaviour:
   statsList:
   - {fileID: 11400000, guid: 2175a28795420d0429cd80e7f91852e1, type: 2}
   - {fileID: 11400000, guid: 84f85179352f609478f1a43360e4afe4, type: 2}
+  functionsList:
+  - {fileID: 11400000, guid: 325a8d5733d788f45acb411922e156df, type: 2}
   typeList:
   - {fileID: 11400000, guid: 465e4f7826ac1d94d9985374d43a4e0a, type: 2}
   - {fileID: 11400000, guid: 940dc97fb86db7b478f98c4dce0d517e, type: 2}
@@ -11704,10 +11706,6 @@ PrefabInstance:
     - target: {fileID: 1060069644945781301, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
       propertyPath: m_Name
       value: Grease Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 1060069644945781301, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2270786319815938782, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
       propertyPath: list.Array.data[0].onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
