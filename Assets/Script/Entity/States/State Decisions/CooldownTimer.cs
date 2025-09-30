@@ -6,8 +6,10 @@ using TMPro;
 [CreateAssetMenu(fileName = "CooldownTimer", menuName = "Scriptable Objects/CooldownTimer")]
 public class CooldownTimer : EntityStateDecision
 {
-    [SerializeField] private float coolDownTime; 
-    bool isCoolDownDone = false; 
+    [SerializeField] private float coolDownTime;
+    bool isCoolDownDone = false;
+
+
 
     public override bool DecisionCheck(Entity entity)
     {
@@ -15,9 +17,9 @@ public class CooldownTimer : EntityStateDecision
         if (isCoolDownDone)
         {
             isCoolDownDone = false;
-            return true; 
+            return true;
         }
-        else 
+        else
             return false;
     }
 
@@ -27,5 +29,14 @@ public class CooldownTimer : EntityStateDecision
         yield return new WaitForSeconds(coolDownTime);
         isCoolDownDone = true;
         //Debug.Log("TIMER HAS RAN DOWN");
+    }
+
+    public override void CopyData(EntityStateDecision reference)
+    {
+        if (reference is CooldownTimer CDTimer)
+        {
+            coolDownTime = CDTimer.coolDownTime;
+            isCoolDownDone = CDTimer.isCoolDownDone;
+        }
     }
 }

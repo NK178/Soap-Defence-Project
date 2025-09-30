@@ -11,6 +11,8 @@ public class DoMeleeDamage : EntityFunctions
     [SerializeField] private Vector2 attackDirection;
     [SerializeField] private float attackCooldown;
 
+
+
     public override IEnumerator ExcuteCoroutine(Entity entity = null)
     {
 
@@ -30,7 +32,18 @@ public class DoMeleeDamage : EntityFunctions
             //let entity handle this themselves
             if (validTarget)
                 target.HandleDamageFromEntity(entity);
-            yield return new WaitForSeconds(attackCooldown);    
+            yield return new WaitForSeconds(attackCooldown);
+        }
+    }
+
+    public override void CopyData(EntityFunctions reference)
+    {
+        if (reference is DoMeleeDamage MeleeDamage)
+        {
+            layerName = MeleeDamage.layerName; 
+            attackRange = MeleeDamage.attackRange; 
+            attackDirection = MeleeDamage.attackDirection; 
+            attackCooldown = MeleeDamage.attackCooldown; 
         }
     }
 

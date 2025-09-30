@@ -69,8 +69,6 @@ public class Entity : MonoBehaviour
             }
             //assume first state as starting state
             currentState = statesList[0];
-            //currentState.Init();
-
         }
         //stateUpdateCoroutine = HandleStateUpdates();
         //StartCoroutine(stateUpdateCoroutine);

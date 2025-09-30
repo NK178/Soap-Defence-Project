@@ -38,7 +38,9 @@ public class EntityState : ScriptableObject
         {
             Type concreteType = template.GetType();
             EntityFunctions copy = ScriptableObject.CreateInstance(concreteType) as EntityFunctions;
+            copy.CopyData(template);
             functionsList.Add(copy);
+            //Debug.Log("FUNCTION: " + copy.name);
         }
         //only need to copy the decision then add it into the transition
         foreach (TransitionState template in transitionsTemplate)
@@ -49,6 +51,7 @@ public class EntityState : ScriptableObject
             updatedTransitionState.decision = copy;
             updatedTransitionState.trueState = template.trueState;
             updatedTransitionState.falseState = template.falseState;
+            copy.CopyData(template.decision);
             transitionsList.Add(updatedTransitionState);
         }
     }

@@ -9,6 +9,7 @@ public class ProduceBubbles : EntityFunctions
     [SerializeField] private float productionRate;
     [SerializeField] private float spawnRadius;
 
+
     public override IEnumerator ExcuteCoroutine(Entity entity = null)
     {
         entity.PlayAnimation(ENTITYANIMS.SPECIAL);
@@ -18,4 +19,17 @@ public class ProduceBubbles : EntityFunctions
         GameObject newBubble = Instantiate(bubblePrefab, spawnPosition, entity.gameObject.transform.rotation);
         yield return null;
     }
+
+
+    public override void CopyData(EntityFunctions reference)
+    {
+        if (reference is ProduceBubbles produceBubbles)
+        {
+            bubblePrefab = produceBubbles.bubblePrefab;
+            bubbleAmount = produceBubbles.bubbleAmount;
+            productionRate = produceBubbles.productionRate;
+            spawnRadius = produceBubbles.spawnRadius;
+        }
+    }
+
 }

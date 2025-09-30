@@ -4,5 +4,6 @@ using UnityEngine;
 public abstract class EntityFunctions : ScriptableObject
 {
     public abstract IEnumerator ExcuteCoroutine(Entity entity = null);
+    public abstract void CopyData(EntityFunctions reference);
 
 }
