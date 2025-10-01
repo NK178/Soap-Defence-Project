@@ -3,6 +3,12 @@ using UnityEngine;
 
 
 //THIS IS NOT A SINGLETON DESIGN, not a univeral data holder, can be used in many other places for different purposes
+public enum DATATYPE
+{
+    BOOLEAN, 
+    FLOAT,
+    NUM_DATATYPES
+}
 public class DataLibrary
 {
     
@@ -10,33 +16,65 @@ public class DataLibrary
     // 1/10 I could make this modular and verstile but for now I wont do any premature optimisation 
 
 
-    private Dictionary<int, bool> BoolValuePairs = new Dictionary<int, bool>(); 
+    private Dictionary<int, bool> boolValuePairs = new Dictionary<int, bool>(); 
+    private Dictionary<int, float> floatValuePairs = new Dictionary<int, float>();
+
+
+
+    public void AddFloat(int key, float value)
+    {
+        bool result = CheckIfKeyExists(key, DATATYPE.FLOAT);
+        if (result)
+            floatValuePairs[key] = value;
+        else
+            floatValuePairs.Add(key, value);
+    }
+
+    public void SetFloat(int key, float value)
+    {
+        floatValuePairs[key] = value;
+    }
+
+    public float GetFloat(int key)
+    {
+        floatValuePairs.TryGetValue(key, out float result);
+        return result;
+    }
 
 
     public void AddBool(int key, bool value)
     {
-        bool result = CheckIfKeyExists(key);
+        bool result = CheckIfKeyExists(key,DATATYPE.BOOLEAN);
         if (result)
-            BoolValuePairs[key] = value;
+            boolValuePairs[key] = value;
         else
-            BoolValuePairs.Add(key, value);
+            boolValuePairs.Add(key, value);
     }
-
 
     public void SetBool(int key, bool value)
     {
-        BoolValuePairs[key] = value;        
+        boolValuePairs[key] = value;        
     }
 
     public bool GetBool(int key)
     {
-        BoolValuePairs.TryGetValue(key, out bool result);
+        boolValuePairs.TryGetValue(key, out bool result);
         return result; 
     }
 
-    public bool CheckIfKeyExists(int key)
+    public bool CheckIfKeyExists(int key, DATATYPE dataType)
     {
-        return BoolValuePairs.ContainsKey(key);
+        bool result = false; 
+        switch (dataType)
+        {
+            case DATATYPE.BOOLEAN:
+                result = boolValuePairs.ContainsKey(key);
+                break; 
+            case DATATYPE.FLOAT:
+                result = floatValuePairs.ContainsKey(key);
+                break;
+        }
+        return result; 
     }
 
 

@@ -1,10 +1,4 @@
-using Mono.Cecil.Cil;
-using System.Collections;
 using System.Collections.Generic;
-using System.Resources;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.VisualScripting;
-using UnityEditor.XR;
 using UnityEngine;
 
 
@@ -44,13 +38,7 @@ public class Entity : MonoBehaviour
     [SerializeField] private List<EntityType> typeList;
     [SerializeField] private EntityState currentState;
 
-    //1/10 need to rethink this part, like the init part how should I resolve it 
-    //[SerializeField] private List<EntityState> statesList;
-
     [HideInInspector] public DataLibrary dataLibrary;
-       
-    //to be used in calculation like health and whatever 
-    private float[] currentStatsList; //can consider moving this into data library 
 
     //private IEnumerator stateUpdateCoroutine;
     private bool isActive;
@@ -58,10 +46,11 @@ public class Entity : MonoBehaviour
     private void Awake()
     {
         dataLibrary = new DataLibrary();
-        currentStatsList = new float[statsList.Count];
         for (int iter = 0; iter < statsList.Count; iter++)
         {
-            currentStatsList[iter] = statsList[iter].GetValue();
+            float valueToAdd = statsList[iter].GetValue();
+            int keyIndex = (int)statsList[iter].GetStatType();
+            dataLibrary.AddFloat(keyIndex, valueToAdd);
         }
         currentState.Init(this);
         isActive = true;
@@ -165,28 +154,14 @@ public class Entity : MonoBehaviour
     //look for the values in the active float list not the stats template list 
     public float GetCurrentStatValue(STATSTYPE statType)
     {
-        int index = 0;
-        for (int iter = 0; iter < statsList.Count; iter++)
-        {
-            if (statsList[iter].GetStatType() == statType)
-            {
-                index = iter; 
-                break;
-            }
-        }
-        return currentStatsList[index];
+        int keyIndex = (int)statType;
+        return dataLibrary.GetFloat(keyIndex);
     }
 
     public void SetCurrentStatValue(STATSTYPE statType, float value)
     {
-        for (int iter = 0; iter < statsList.Count; iter++)
-        {
-            if (statsList[iter].GetStatType() == statType)
-            {
-                currentStatsList[iter] = value;
-                break;
-            }
-        }
+        int keyIndex = (int)statType;
+        dataLibrary.SetFloat(keyIndex, value);
     }
 
 
