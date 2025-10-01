@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 
 [CreateAssetMenu(fileName = "EntityState", menuName = "Scriptable Objects/EntityState")]
@@ -19,27 +20,18 @@ public class EntityState : ScriptableObject
 
     [SerializeField] private List<EntityFunctions> functionsList; 
     [SerializeField] private List<TransitionState> transitionsList;
-    private bool isFunctionsActive = false; 
 
 
-    public void Init()
+    public void Init(Entity entity)
     {
-        isFunctionsActive = false;
+        ExcuteFunctions(entity);
+        ExcuteDecisionCoroutine(entity);
     }
 
     //i might do coroutine to this via the entity
     public void UpdateState(Entity entity)
     {
-        //only trigger once else bad things will happen 
-        if (!isFunctionsActive)
-        {
-            Debug.Log("FUNCTION EXCUTING");
-            ExcuteFunctions(entity);
-            ExcuteDecisionCoroutine(entity);
-            isFunctionsActive = true;   
-        }
-        CheckTransition(entity);
-            
+        CheckTransition(entity);       
     }
 
     private void ExcuteDecisionCoroutine(Entity entity)
@@ -64,18 +56,15 @@ public class EntityState : ScriptableObject
         {
             //stop all coroutines before changing to a new state(unless remain state) 
             bool decisionSucceed = transitionsList[i].decision.DecisionCheck(entity);
+            EntityState newState = new EntityState();
             if (decisionSucceed)
-            {
-                if (transitionsList[i].trueState.name != "RemainState")
-                    StopAllFunctions(entity);
-                entity.TransitionState(transitionsList[i].trueState);
-            }
-            else
-            {
-                if (transitionsList[i].falseState.name != "RemainState")
-                    StopAllFunctions(entity);
-                entity.TransitionState(transitionsList[i].falseState);
-            }
+                newState = transitionsList[i].trueState;
+            else 
+                newState = transitionsList[i].falseState;
+
+            if (newState.name != "RemainState")
+                StopAllFunctions(entity);
+            entity.TransitionState(newState);
         }
     }
     
@@ -83,6 +72,5 @@ public class EntityState : ScriptableObject
     private void StopAllFunctions(Entity entity)
     {
         entity.StopAllCoroutines();
-        isFunctionsActive = false;
     }
 }

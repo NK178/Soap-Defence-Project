@@ -19,7 +19,7 @@ public class CooldownTimer : EntityStateDecision
         }
         else
             return false;
-        
+
     }
 
     public override IEnumerator ExcuteCoroutine(Entity entity)
@@ -29,7 +29,6 @@ public class CooldownTimer : EntityStateDecision
             Debug.LogError("DataLibrary is null on entity: " + entity.name);
             yield break;
         }
-
         //check whether exists already handled in datalibrary itself
         entity.dataLibrary.AddBool(GetInstanceID(), false);
         yield return new WaitForSeconds(coolDownTime);

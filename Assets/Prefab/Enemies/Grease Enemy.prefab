@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entity
   tagCollider: {fileID: 2270786319815938782}
+  animator: {fileID: 0}
   statsList:
   - {fileID: 11400000, guid: 0f34c855174aa4746b326288b4b6482b, type: 2}
   functionsList:
@@ -55,10 +56,7 @@ MonoBehaviour:
   typeList:
   - {fileID: 11400000, guid: 465e4f7826ac1d94d9985374d43a4e0a, type: 2}
   - {fileID: 11400000, guid: 7284dc2cb52bd954f9d8d87082e7311e, type: 2}
-  statesList:
-  - {fileID: 11400000, guid: 7f219893211e3904fae74ef9d43de721, type: 2}
-  - {fileID: 11400000, guid: 6eb88942daa653743954fe4286c71501, type: 2}
-  - {fileID: 11400000, guid: c3647773c1d28f94886858606bfee6ed, type: 2}
+  currentState: {fileID: 11400000, guid: 7f219893211e3904fae74ef9d43de721, type: 2}
 --- !u!61 &3017120372458054782
 BoxCollider2D:
   m_ObjectHideFlags: 0
