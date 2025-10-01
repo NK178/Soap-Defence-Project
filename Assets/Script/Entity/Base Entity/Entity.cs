@@ -42,18 +42,21 @@ public class Entity : MonoBehaviour
     [SerializeField] private List<EntityStats> statsList;
     [SerializeField] private List<EntityFunctions> functionsList;
     [SerializeField] private List<EntityType> typeList;
+
+    //1/10 need to rethink this part, like the init part how should I resolve it 
     [SerializeField] private List<EntityState> statesList;
+
+    [HideInInspector] public DataLibrary dataLibrary;
        
     //to be used in calculation like health and whatever 
-    private float[] currentStatsList;
+    private float[] currentStatsList; //can consider moving this into data library 
     private EntityState currentState;
-   
-
     //private IEnumerator stateUpdateCoroutine;
     private bool isActive;
 
     private void Awake()
     {
+        dataLibrary = new DataLibrary();
         currentStatsList = new float[statsList.Count];
         for (int iter = 0; iter < statsList.Count; iter++)
         {
@@ -64,12 +67,12 @@ public class Entity : MonoBehaviour
         if (statesList.Count > 0)
         {
             //assume first state as starting state
-            currentState = statesList[0];
-            currentState.Init();
+            //currentState.Init();
             foreach (EntityState state in statesList)
             {
                 state.Init();
             }
+            currentState = statesList[0];
         }
         //stateUpdateCoroutine = HandleStateUpdates();
         //StartCoroutine(stateUpdateCoroutine);

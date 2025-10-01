@@ -6,26 +6,34 @@ using TMPro;
 [CreateAssetMenu(fileName = "CooldownTimer", menuName = "Scriptable Objects/CooldownTimer")]
 public class CooldownTimer : EntityStateDecision
 {
-    [SerializeField] private float coolDownTime; 
-    bool isCoolDownDone = false; 
+    [SerializeField] private float coolDownTime;  
 
     public override bool DecisionCheck(Entity entity)
     {
-        //Debug.Log("TIMER BOOL : " + isCoolDownDone);
+        bool isCoolDownDone = entity.dataLibrary.GetBool(GetInstanceID());
         if (isCoolDownDone)
         {
-            isCoolDownDone = false;
-            return true; 
+            //reset 
+            entity.dataLibrary.SetBool(GetInstanceID(), false);
+            return true;
         }
-        else 
+        else
             return false;
+        
     }
 
     public override IEnumerator ExcuteCoroutine(Entity entity)
     {
-        //Debug.Log("TIMER RUNNING");
+        if (entity.dataLibrary == null)
+        {
+            Debug.LogError("DataLibrary is null on entity: " + entity.name);
+            yield break;
+        }
+
+        //check whether exists already handled in datalibrary itself
+        entity.dataLibrary.AddBool(GetInstanceID(), false);
         yield return new WaitForSeconds(coolDownTime);
-        isCoolDownDone = true;
-        //Debug.Log("TIMER HAS RAN DOWN");
+        entity.dataLibrary.SetBool(GetInstanceID(), true);
     }
+
 }

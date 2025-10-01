@@ -11,4 +11,5 @@ public abstract class EntityStateDecision : ScriptableObject
     {
         yield break;
     }
+
 }
