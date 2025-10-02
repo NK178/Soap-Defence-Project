@@ -1023,6 +1023,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225931225}
   m_CullTransparentMesh: 1
+--- !u!1 &414620779
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 414620780}
+  - component: {fileID: 414620781}
+  m_Layer: 0
+  m_Name: Enemy Spawn Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &414620780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414620779}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 35.28, y: -2.08, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &414620781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414620779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9889c71f661a57946b5ecc65111ce2df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnerManager
+  spawnerList: []
+  waveDataList:
+  - {fileID: 11400000, guid: 878a7f075e39adf4ca6ec579b98b7738, type: 2}
 --- !u!1 &425626157
 GameObject:
   m_ObjectHideFlags: 0
@@ -7800,6 +7847,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soap Kettle
       objectReference: {fileID: 0}
+    - target: {fileID: 5891929248567244599, guid: c1265b3399785a045a1942f4d332fc1b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5987510789221886561, guid: c1265b3399785a045a1942f4d332fc1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -25.04
@@ -8960,7 +9011,7 @@ Transform:
   m_GameObject: {fileID: 1694795873}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.21, y: -0.36, z: 0}
+  m_LocalPosition: {x: -26.97, y: -3.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11727,11 +11778,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3274630691947792957, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 32.83
+      value: 26.94
       objectReference: {fileID: 0}
     - target: {fileID: 3274630691947792957, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1
+      value: -3.21
       objectReference: {fileID: 0}
     - target: {fileID: 3274630691947792957, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11785,3 +11836,4 @@ SceneRoots:
   - {fileID: 166052081113741215}
   - {fileID: 1414658385}
   - {fileID: 1834660571}
+  - {fileID: 414620780}
