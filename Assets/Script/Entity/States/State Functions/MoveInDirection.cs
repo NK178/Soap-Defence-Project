@@ -9,6 +9,7 @@ public class MoveInDirection : EntityFunctions
 
     public override IEnumerator ExcuteCoroutine(Entity entity = null)
     {
+        string dataKey = this.name + "_velocity";
         while (true)
         {
             Vector3 prevPos = entity.gameObject.transform.position;
@@ -17,7 +18,8 @@ public class MoveInDirection : EntityFunctions
             entity.gameObject.transform.position = newPos;
 
             //store velocity for calculations yay 
-            entity.dataLibrary.AddVector3(GetInstanceID(), velocity);
+            Vector3 test = direction * moveSpeed; 
+            entity.dataLibrary.AddVector3(dataKey, test);
             yield return null;
         }
     }

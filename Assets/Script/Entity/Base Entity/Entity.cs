@@ -48,8 +48,13 @@ public class Entity : MonoBehaviour
         dataLibrary = new DataLibrary();
         for (int iter = 0; iter < statsList.Count; iter++)
         {
+            //float valueToAdd = statsList[iter].GetValue();
+            //int keyIndex = (int)statsList[iter].GetStatType();
+            //dataLibrary.AddFloat(keyIndex, valueToAdd);
+
+
             float valueToAdd = statsList[iter].GetValue();
-            int keyIndex = (int)statsList[iter].GetStatType();
+            string keyIndex = statsList[iter].GetStatType().ToString();
             dataLibrary.AddFloat(keyIndex, valueToAdd);
         }
         currentState.Init(this);
@@ -154,13 +159,15 @@ public class Entity : MonoBehaviour
     //look for the values in the active float list not the stats template list 
     public float GetCurrentStatValue(STATSTYPE statType)
     {
-        int keyIndex = (int)statType;
+        //int keyIndex = (int)statType;
+        string keyIndex = statType.ToString();
         return dataLibrary.GetFloat(keyIndex);
     }
 
     public void SetCurrentStatValue(STATSTYPE statType, float value)
     {
-        int keyIndex = (int)statType;
+        //int keyIndex = (int)statType;
+        string keyIndex = statType.ToString();  
         dataLibrary.SetFloat(keyIndex, value);
     }
 

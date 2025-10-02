@@ -50,11 +50,11 @@ public class SoapBarProjectileAttack : EntityFunctions
                 if (typeData != null)
                     typeData.SetReferenceEntity(entity);    
 
-                float projectileSpeed = 25f;
+                float projectileSpeed = 30f;
                 Vector3 targetPosition = target.transform.position - spawnPosition;
-                target
-                                //Vector3 targetSpeed = 5f * Vector2.left * Time.deltaTime;
-                                Vector3 projectileGravity = 9.81f * Vector2.down;
+                Vector3 targetSpeed = target.dataLibrary.GetVector3("MoveInDirection_velocity");
+                //Vector3 targetSpeed = 5f * Vector2.left * Time.deltaTime; 
+                Vector3 projectileGravity = 9.81f * Vector2.down;
                 Vector3 fireVelocity = Vector3.zero;
 
                 solve_ballistic_with_fixed_speed(targetPosition, targetSpeed, projectileGravity, projectileSpeed, out fireVelocity);
