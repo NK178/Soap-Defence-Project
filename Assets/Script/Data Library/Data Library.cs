@@ -7,6 +7,7 @@ public enum DATATYPE
 {
     BOOLEAN, 
     FLOAT,
+    VECTOR3,
     NUM_DATATYPES
 }
 public class DataLibrary
@@ -18,8 +19,27 @@ public class DataLibrary
 
     private Dictionary<int, bool> boolValuePairs = new Dictionary<int, bool>(); 
     private Dictionary<int, float> floatValuePairs = new Dictionary<int, float>();
+    private Dictionary<int, Vector3> vector3ValuePairs = new Dictionary<int, Vector3>();
 
+    public void AddVector3(int key, Vector3 value)
+    {
+        bool result = CheckIfKeyExists(key, DATATYPE.VECTOR3);
+        if (result)
+            vector3ValuePairs[key] = value;
+        else
+            vector3ValuePairs.Add(key, value);
+    }
 
+    public void SetVector3(int key, Vector3 value)
+    {
+        vector3ValuePairs[key] = value;
+    }
+
+    public Vector3 GetVector3(int key)
+    {
+        vector3ValuePairs.TryGetValue(key, out Vector3 result);
+        return result;
+    }
 
     public void AddFloat(int key, float value)
     {
@@ -72,6 +92,9 @@ public class DataLibrary
                 break; 
             case DATATYPE.FLOAT:
                 result = floatValuePairs.ContainsKey(key);
+                break;
+            case DATATYPE.VECTOR3:
+                result = vector3ValuePairs.ContainsKey(key);
                 break;
         }
         return result; 

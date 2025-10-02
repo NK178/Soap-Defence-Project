@@ -15,6 +15,9 @@ public class MoveInDirection : EntityFunctions
             Vector3 velocity = direction * moveSpeed * Time.deltaTime;
             Vector3 newPos = prevPos + velocity;
             entity.gameObject.transform.position = newPos;
+
+            //store velocity for calculations yay 
+            entity.dataLibrary.AddVector3(GetInstanceID(), velocity);
             yield return null;
         }
     }

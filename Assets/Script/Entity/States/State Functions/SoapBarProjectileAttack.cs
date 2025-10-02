@@ -15,8 +15,6 @@ public class SoapBarProjectileAttack : EntityFunctions
 
     [SerializeField] private GameObject soapChipPrefab;
     [SerializeField] private float attackRate; 
-
-    private float fixedSpeed = 10f;
     
     
     public override IEnumerator ExcuteCoroutine(Entity entity = null)
@@ -24,44 +22,25 @@ public class SoapBarProjectileAttack : EntityFunctions
         //run infintely until stopped 
         while (true)
         {
-            Vector3 position = entity.gameObject.transform.position;
-            Vector3 spawnPosition = new Vector3(position.x, position.y, position.z);
+            Vector3 spawnPosition = entity.gameObject.transform.position;
 
             //raycast to find nearest enemy 
             bool isEnemyFound = false;
             RaycastHit2D hit = Physics2D.Raycast(spawnPosition, Vector2.right, 75f, LayerMask.GetMask("enemy"));
             Vector3 endPosition = spawnPosition + Vector3.right * 75f;
             Debug.DrawRay(spawnPosition, endPosition, Color.red);
+            Entity target = null;
             if (hit.collider != null)
-                isEnemyFound = true;
-
-            ////testing fixed speed version 
-            //if (isEnemyFound)
-            //{
-            //    //calculate trajectory which will be hard bruh cyka
-            //    GameObject objectReference = Instantiate(soapChipPrefab, spawnPosition, parentObject.transform.rotation);
-            //    ProjectileBallistics projectile = objectReference.GetComponent<ProjectileBallistics>();
-
-            //    //bad system probably needs to change but will do for now 
-            //    RequireParentReference typeData = projectile.GetComponent<RequireParentReference>();
-            //    if (typeData != null)
-            //        typeData.SetReferenceEntity(parentObject.GetComponent<Entity>());
-
-            //    float projectileSpeed = 15f;
-            //    Vector3 targetPosition = projectile.transform.position - parentObject.transform.position;
-            //    Vector3 targetSpeed = 5f * Vector2.right;
-            //    Vector3 projectileGravity = 9.81f * Vector2.down; 
-            //    Vector3 fireVelocity = Vector3.zero;
-
-            //    solve_ballistic_with_fixed_speed(targetPosition, targetSpeed, projectileGravity, projectileSpeed, out fireVelocity);
-            //    projectile.Initialize(projectile.transform.position, 9.81f);
-            //    projectile.AddImpulse(fireVelocity);
-            //    Debug.Log(fireVelocity);
-            //}
-
-            //this one works, lateral speed version 
-            if (isEnemyFound)
             {
+                target = hit.collider.gameObject.GetComponent<Entity>();
+                if (target != null)
+                    isEnemyFound = true;
+            }
+
+            //testing fixed speed version 
+            if (isEnemyFound && target != null)
+            {
+                
                 //calculate trajectory which will be hard bruh cyka
                 GameObject objectReference = Instantiate(soapChipPrefab, spawnPosition, entity.gameObject.transform.rotation);
                 ProjectileBallistics projectile = objectReference.GetComponent<ProjectileBallistics>();
@@ -69,17 +48,71 @@ public class SoapBarProjectileAttack : EntityFunctions
                 //bad system probably needs to change but will do for now 
                 RequireParentReference typeData = projectile.GetComponent<RequireParentReference>();
                 if (typeData != null)
-                    typeData.SetReferenceEntity(entity);
+                    typeData.SetReferenceEntity(entity);    
 
-                float lateralSpeed = 13f;
-                float maxHeight = 8f;
+                float projectileSpeed = 25f;
+                Vector3 targetPosition = target.transform.position - spawnPosition;
+                target
+                                //Vector3 targetSpeed = 5f * Vector2.left * Time.deltaTime;
+                                Vector3 projectileGravity = 9.81f * Vector2.down;
                 Vector3 fireVelocity = Vector3.zero;
-                float projGravity = 0f;
-                solve_ballistic_arc_lateral(projectile.transform.position, lateralSpeed, hit.collider.gameObject.transform.position,
-                    maxHeight, out fireVelocity, out projGravity);
-                projectile.Initialize(projectile.transform.position, projGravity);
+
+                solve_ballistic_with_fixed_speed(targetPosition, targetSpeed, projectileGravity, projectileSpeed, out fireVelocity);
+                projectile.Initialize(spawnPosition, 9.81f);
                 projectile.AddImpulse(fireVelocity);
+                Debug.Log(fireVelocity);
+                Debug.DrawRay(spawnPosition, fireVelocity, Color.red, 2f);
+                Debug.DrawLine(spawnPosition, targetPosition + spawnPosition, Color.green, 2f);
             }
+
+
+
+            ////this one works, lateral speed version MOVING TARGET VERSION 
+            //if (isEnemyFound)
+            //{
+            //    //calculate trajectory which will be hard bruh cyka
+            //    GameObject objectReference = Instantiate(soapChipPrefab, spawnPosition, entity.gameObject.transform.rotation);
+            //    ProjectileBallistics projectile = objectReference.GetComponent<ProjectileBallistics>();
+
+            //    //bad system probably needs to change but will do for now 
+            //    RequireParentReference typeData = projectile.GetComponent<RequireParentReference>();
+            //    if (typeData != null)
+            //        typeData.SetReferenceEntity(entity);
+
+
+            //    Vector3 impactPoint = Vector3.zero;
+            //    Vector3 targetVelocity = new Vector3(-1, 0, 0) * 5;
+            //    float lateralSpeed = 13f;
+            //    float maxHeight = 8f;
+            //    Vector3 fireVelocity = Vector3.zero;
+            //    float projGravity = 0f;
+            //    solve_ballistic_arc_lateral_moving(projectile.transform.position, lateralSpeed, hit.collider.gameObject.transform.position,
+            //       targetVelocity, maxHeight, out fireVelocity, out projGravity, out impactPoint);
+            //    projectile.Initialize(projectile.transform.position, projGravity);
+            //    projectile.AddImpulse(fireVelocity);
+            //}
+
+            ////this one works, lateral speed version STATIONARY TARGET 
+            //if (isEnemyFound)
+            //{
+            //    //calculate trajectory which will be hard bruh cyka
+            //    GameObject objectReference = Instantiate(soapChipPrefab, spawnPosition, entity.gameObject.transform.rotation);
+            //    ProjectileBallistics projectile = objectReference.GetComponent<ProjectileBallistics>();
+
+            //    //bad system probably needs to change but will do for now 
+            //    RequireParentReference typeData = projectile.GetComponent<RequireParentReference>();
+            //    if (typeData != null)
+            //        typeData.SetReferenceEntity(entity);
+
+            //    float lateralSpeed = 13f;
+            //    float maxHeight = 8f;
+            //    Vector3 fireVelocity = Vector3.zero;
+            //    float projGravity = 0f;
+            //    solve_ballistic_arc_lateral(projectile.transform.position, lateralSpeed, hit.collider.gameObject.transform.position,
+            //        maxHeight, out fireVelocity, out projGravity);
+            //    projectile.Initialize(projectile.transform.position, projGravity);
+            //    projectile.AddImpulse(fireVelocity);
+            //}
 
             //this one works, actual speed version 
             //if (isEnemyFound)
@@ -127,14 +160,40 @@ public class SoapBarProjectileAttack : EntityFunctions
         // Find the smallest positive time solution
         bool foundValidTime = false;
 
+        //for (int i = 0; i < numTimes; i++)
+        //{
+        //    Debug.Log("T VALUE: " + solutions[i]);
+        //    if (solutions[i] > 0 && solutions[i] < t)
+        //    {
+        //        t = (float)solutions[i];
+        //        foundValidTime = true;
+        //    }
+        //}
+
+
+        float smallest = float.MaxValue;
+        float secondSmallest = float.MaxValue;
+
         for (int i = 0; i < numTimes; i++)
         {
-            if (solutions[i] > 0 && solutions[i] < t)
+            if (solutions[i] > 0)
             {
-                t = (float)solutions[i];
-                foundValidTime = true;
+                if (solutions[i] < smallest)
+                {
+                    secondSmallest = smallest;
+                    smallest = (float)solutions[i];
+                }
+                else if (solutions[i] < secondSmallest)
+                {
+                    secondSmallest = (float)solutions[i];
+                }
             }
         }
+        t = (secondSmallest != float.MaxValue) ? secondSmallest : smallest;
+        if (t > 0)
+            foundValidTime = true;
+
+
 
         if (!foundValidTime)
         {
@@ -142,7 +201,8 @@ public class SoapBarProjectileAttack : EntityFunctions
             return false;
         }
 
-        Debug.Log("Using T value: " + t);
+        Debug.Log("Using T value: " + t);   
+
 
         // Calculate where the target will be at time t
         Vector3 futureTargetPos = targetPos + t * targetVel;
@@ -211,6 +271,69 @@ public class SoapBarProjectileAttack : EntityFunctions
 
         return true;
     }
+
+
+    public static bool solve_ballistic_arc_lateral_moving(Vector3 proj_pos, float lateral_speed, Vector3 target, Vector3 target_velocity, float max_height_offset, out Vector3 fire_velocity, out float gravity, out Vector3 impact_point)
+    {
+
+        // Handling these cases is up to your project's coding standards
+        Debug.Assert(proj_pos != target && lateral_speed > 0, "fts.solve_ballistic_arc_lateral called with invalid data");
+
+        // Initialize output variables
+        fire_velocity = Vector3.zero;
+        gravity = 0f;
+        impact_point = Vector3.zero;
+
+        // Ground plane terms
+        Vector3 targetVelXZ = new Vector3(target_velocity.x, 0f, target_velocity.z);
+        Vector3 diffXZ = target - proj_pos;
+        diffXZ.y = 0;
+
+        // Derivation
+        //   (1) Base formula: |P + V*t| = S*t
+        //   (2) Substitute variables: |diffXZ + targetVelXZ*t| = S*t
+        //   (3) Square both sides: Dot(diffXZ,diffXZ) + 2*Dot(diffXZ, targetVelXZ)*t + Dot(targetVelXZ, targetVelXZ)*t^2 = S^2 * t^2
+        //   (4) Quadratic: (Dot(targetVelXZ,targetVelXZ) - S^2)t^2 + (2*Dot(diffXZ, targetVelXZ))*t + Dot(diffXZ, diffXZ) = 0
+        float c0 = Vector3.Dot(targetVelXZ, targetVelXZ) - lateral_speed * lateral_speed;
+        float c1 = 2f * Vector3.Dot(diffXZ, targetVelXZ);
+        float c2 = Vector3.Dot(diffXZ, diffXZ);
+        double t0, t1;
+        int n = fts.SolveQuadric(c0, c1, c2, out t0, out t1);
+
+        // pick smallest, positive time
+        bool valid0 = n > 0 && t0 > 0;
+        bool valid1 = n > 1 && t1 > 0;
+
+        float t;
+        if (!valid0 && !valid1)
+            return false;
+        else if (valid0 && valid1)
+            t = Mathf.Min((float)t0, (float)t1);
+        else
+            t = valid0 ? (float)t0 : (float)t1;
+
+        // Calculate impact point
+        impact_point = target + (target_velocity * t);
+
+        // Calculate fire velocity along XZ plane
+        Vector3 dir = impact_point - proj_pos;
+        fire_velocity = new Vector3(dir.x, 0f, dir.z).normalized * lateral_speed;
+
+        // Solve system of equations. Hit max_height at t=.5*time. Hit target at t=time.
+        //
+        // peak = y0 + vertical_speed*halfTime + .5*gravity*halfTime^2
+        // end = y0 + vertical_speed*time + .5*gravity*time^s
+        // Wolfram Alpha: solve b = a + .5*v*t + .5*g*(.5*t)^2, c = a + vt + .5*g*t^2 for g, v
+        float a = proj_pos.y;       // initial
+        float b = Mathf.Max(proj_pos.y, impact_point.y) + max_height_offset;  // peak
+        float c = impact_point.y;   // final
+
+        gravity = -4 * (a - 2 * b + c) / (t * t);
+        fire_velocity.y = -(3 * a - 4 * b + c) / t;
+
+        return true;
+    }
+
 
     //this works, lets see if it can be better 
     public Vector3 CalculateProjectileVelocity(GameObject self, GameObject targetObj)
