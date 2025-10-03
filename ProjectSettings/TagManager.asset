@@ -8,8 +8,8 @@ TagManager:
   - bubble
   - collectable
   - topCollider
-  - 'enemy '
   - defenceProjectiles
+  - enemy
   layers:
   - Default
   - TransparentFX

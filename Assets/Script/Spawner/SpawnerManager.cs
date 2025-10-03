@@ -38,7 +38,6 @@ public class SpawnerManager : MonoBehaviour
                 LoadNextWave();
                 ExcuteWaveTimer();
             }
-
         }
     }
 

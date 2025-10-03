@@ -20,6 +20,7 @@ public class CheckColliderByTag : MonoBehaviour
     {
         foreach (EventCollideByTag target in list)
         {
+            Debug.Log(this.name + " COLLIDING WITH " + collision.gameObject.name + " TAG: " + collision.gameObject.tag);
             if (target.tag == collision.gameObject.tag)
             {
                 //Debug.Log("COLLIDING WITH " + collision.gameObject.name);

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a665db18e645a4e4188094c9f615b128, type: 3}
   m_Name: DEBUGTIMER
   m_EditorClassIdentifier: Assembly-CSharp::CooldownTimer
-  coolDownTime: 10
+  coolDownTime: 3
