@@ -280,7 +280,7 @@ public class SoapBarProjectileAttack : EntityFunctions
             }
         }
 
-        Debug.Log($"Target: {targetPos}, Distance: {targetPos.magnitude}");
+        //Debug.Log($"Target: {targetPos}, Distance: {targetPos.magnitude}");
         for (int i = 0; i < numTimes; i++)
         {
             if (solutions[i] > 0)
@@ -288,7 +288,7 @@ public class SoapBarProjectileAttack : EntityFunctions
                 float testT = (float)solutions[i];
                 Vector3 testVel = (targetPos + testT * targetVel - 0.5f * gravity * testT * testT) / testT;
                 float angle = Vector3.Angle(testVel, Vector3.up);
-                Debug.Log($"Solution[{i}]: t={testT:F3}, angle from vertical={angle:F1}°, speed={testVel.magnitude:F2}");
+                //Debug.Log($"Solution[{i}]: t={testT:F3}, angle from vertical={angle:F1}°, speed={testVel.magnitude:F2}");
             }
         }
 
@@ -323,7 +323,7 @@ public class SoapBarProjectileAttack : EntityFunctions
             return false;
         }
 
-        Debug.Log("Using T value: " + t);
+        //Debug.Log("Using T value: " + t);
 
 
         // Calculate where the target will be at time t

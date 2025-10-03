@@ -56,6 +56,7 @@ public class EntityState : ScriptableObject
         {
             //stop all coroutines before changing to a new state(unless remain state) 
             bool decisionSucceed = transitionsList[i].decision.DecisionCheck(entity);
+            //DONT INSTANIATE DIRECTLY COS YES, DONT DO THIS !!!!!
             EntityState newState = new EntityState();
             if (decisionSucceed)
                 newState = transitionsList[i].trueState;

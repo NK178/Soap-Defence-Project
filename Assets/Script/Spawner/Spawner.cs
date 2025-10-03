@@ -16,17 +16,21 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] private int timeMaxRange; 
     [SerializeField] private int timeMinRange;
+    //[HideInInspector] public IEnumerator spawnCoroutine; 
     private Queue<Entity> entityQueue;
 
+    
 
     void Awake()
     {
-        entityQueue = new Queue<Entity>();
+        if (entityQueue == null) 
+            entityQueue = new Queue<Entity>();
+        //spawnCoroutine = ExcuteSpawnCoroutine();
     }
 
     private void SpawnEntity()
     {
-        if (entityQueue.Count != 0)
+        if (entityQueue.Count > 0)
         {
             Entity reference = entityQueue.Dequeue();
             Entity newSpawn = Instantiate(reference, gameObject.transform.position, gameObject.transform.rotation);
@@ -36,15 +40,22 @@ public class Spawner : MonoBehaviour
 
     public IEnumerator ExcuteSpawnCoroutine()
     {
-        int waitTime = Random.Range(timeMinRange, timeMaxRange);
-        yield return new WaitForSeconds(waitTime);
-        SpawnEntity();
+        //self disable when empty 
+        while (entityQueue.Count > 0)
+        {
+            int waitTime = Random.Range(timeMinRange, timeMaxRange);
+            yield return new WaitForSeconds(waitTime);
+            SpawnEntity();
+        }
     }
 
-
+    //broken due to load timing cyka 
     public void AddItemsIntoQueue(Entity entity)
     {
-        entityQueue.Enqueue(entity);
+        if (entityQueue == null)
+            entityQueue = new Queue<Entity>();
+        else 
+            entityQueue.Enqueue(entity);
     }
 
 

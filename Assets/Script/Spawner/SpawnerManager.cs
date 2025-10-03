@@ -15,13 +15,16 @@ public class SpawnerManager : MonoBehaviour
     public bool isActive;
     private bool changeWave;
     private int waveIndex;
+    //private IEnumerator waveCooldown;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         //start from one I guess 
-        waveIndex = 1;
-        isActive = changeWave = true;
+        waveIndex = 0;
+        //isActive = false;
+        changeWave = true;
+        LoadNextWave();
     }
 
     // Update is called once per frame
@@ -30,7 +33,11 @@ public class SpawnerManager : MonoBehaviour
         if (isActive)
         {
             if (changeWave)
-                StartNewWave();
+            {
+                StartWave();
+                LoadNextWave();
+                ExcuteWaveTimer();
+            }
 
         }
     }
@@ -39,18 +46,23 @@ public class SpawnerManager : MonoBehaviour
     //TO DO 2/10
     private IEnumerator ExcuteWaveTimer()
     {
-        yield return new WaitForSeconds(timeBetweenWaves);  
+        changeWave = false;
+        yield return new WaitForSeconds(timeBetweenWaves);
+        changeWave = true;
     }
 
 
-    private void StartNewWave()
+    private void StartWave()
     {
-        AssignEntitiesToSpawners();
+        for (int i = 0; i < spawnerList.Count; i++)
+        {
+            StartCoroutine(spawnerList[i].ExcuteSpawnCoroutine());
+        }
         waveIndex++;
         changeWave = false;
     }
 
-    private void AssignEntitiesToSpawners()
+    private void LoadNextWave()
     {
 
         SpawnerData data = GetCurrentWaveData();
@@ -62,7 +74,7 @@ public class SpawnerManager : MonoBehaviour
         {
             int quantity = data.dataList[iter].quantity;
             Entity entity = data.dataList[iter].entity;
-            for (int j = 0; j < quantity; j++)
+            for (   int j = 0; j < quantity; j++)
             {
                 int spanwerIndex = Random.Range(0, spawnerList.Count - 1);
                 spawnerList[spanwerIndex].AddItemsIntoQueue(entity);

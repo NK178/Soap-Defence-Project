@@ -1181,7 +1181,7 @@ MonoBehaviour:
   - {fileID: 388997986}
   waveDataList:
   - {fileID: 11400000, guid: 878a7f075e39adf4ca6ec579b98b7738, type: 2}
-  timeBetweenWaves: 10
+  timeBetweenWaves: 2
   isActive: 1
 --- !u!1 &425626157
 GameObject:
