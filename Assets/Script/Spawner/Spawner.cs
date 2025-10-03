@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Profiling.Memory.Experimental;
 using UnityEngine;
 
 
@@ -14,9 +15,8 @@ public class SpawnDetails
 public class Spawner : MonoBehaviour
 {
 
-    [SerializeField] private int timeMaxRange; 
-    [SerializeField] private int timeMinRange;
-    //[HideInInspector] public IEnumerator spawnCoroutine; 
+    [SerializeField] private float timeMaxRange; 
+    [SerializeField] private float timeMinRange;
     private Queue<Entity> entityQueue;
 
     
@@ -25,7 +25,6 @@ public class Spawner : MonoBehaviour
     {
         if (entityQueue == null) 
             entityQueue = new Queue<Entity>();
-        //spawnCoroutine = ExcuteSpawnCoroutine();
     }
 
     private void SpawnEntity()
@@ -34,6 +33,7 @@ public class Spawner : MonoBehaviour
         {
             Entity reference = entityQueue.Dequeue();
             Entity newSpawn = Instantiate(reference, gameObject.transform.position, gameObject.transform.rotation);
+            //Debug.Log(name + " SPAWNED ENTITY COUNT LEFT : " + entityQueue.Count);
         }
     }
 
@@ -43,18 +43,20 @@ public class Spawner : MonoBehaviour
         //self disable when empty 
         while (entityQueue.Count > 0)
         {
-            int waitTime = Random.Range(timeMinRange, timeMaxRange);
+            float waitTime = Random.Range(timeMinRange, timeMaxRange);
             yield return new WaitForSeconds(waitTime);
             SpawnEntity();
         }
     }
 
-    //broken due to load timing cyka 
+
     public void AddItemsIntoQueue(Entity entity)
     {
+        //timing issue cyka 
         if (entityQueue == null)
             entityQueue = new Queue<Entity>();
-        else 
+
+        if (entityQueue != null)
             entityQueue.Enqueue(entity);
     }
 

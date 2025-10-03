@@ -74,9 +74,10 @@ public class SpawnerManager : MonoBehaviour
         {
             int quantity = data.dataList[iter].quantity;
             Entity entity = data.dataList[iter].entity;
-            for (   int j = 0; j < quantity; j++)
+            for (int j = 0; j < quantity; j++)
             {
-                int spanwerIndex = Random.Range(0, spawnerList.Count - 1);
+                //for some reason the int version of range is max exclusive ???
+                int spanwerIndex = Random.Range(0, spawnerList.Count);
                 spawnerList[spanwerIndex].AddItemsIntoQueue(entity);
             }
         }
