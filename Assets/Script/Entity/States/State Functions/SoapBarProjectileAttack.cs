@@ -1,9 +1,11 @@
 ﻿using Mono.Cecil;
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 using static System.Net.WebRequestMethods;
 using static UnityEngine.RuleTile.TilingRuleOutput;
@@ -14,11 +16,12 @@ public class SoapBarProjectileAttack : EntityFunctions
 
 
     [SerializeField] private GameObject soapChipPrefab;
-    [SerializeField] private float attackRate; 
-    
-    
+    [SerializeField] private float attackRate;
+
+
     public override IEnumerator ExcuteCoroutine(Entity entity = null)
     {
+        Vector3 baseDistance = Vector3.zero;
         //run infintely until stopped 
         while (true)
         {
@@ -37,10 +40,38 @@ public class SoapBarProjectileAttack : EntityFunctions
                     isEnemyFound = true;
             }
 
-            //testing fixed speed version 
+            ////FIXED SPEED VERISON A DIFFERENT KIND PLS WORK 
+            //if (isEnemyFound && target != null)
+            //{
+
+            //    //calculate trajectory which will be hard bruh cyka
+            //    GameObject objectReference = Instantiate(soapChipPrefab, spawnPosition, entity.gameObject.transform.rotation);
+            //    ProjectileBallistics projectile = objectReference.GetComponent<ProjectileBallistics>();
+
+            //    //bad system probably needs to change but will do for now 
+            //    RequireParentReference typeData = projectile.GetComponent<RequireParentReference>();
+            //    if (typeData != null)
+            //        typeData.SetReferenceEntity(entity);
+
+            //    float projectileSpeed = 25f;
+            //    Vector3 targetPosition = target.transform.position - spawnPosition;
+            //    Vector3 targetSpeed = target.dataLibrary.GetVector3("MoveInDirection_velocity");
+            //    //Vector3 targetSpeed = 5f * Vector2.left * Time.deltaTime; 
+            //    Vector3 projectileGravity = 9.81f * Vector2.down;
+            //    Vector3 fireVelocity = Vector3.zero;
+
+            //    solve_ballistic_with_fixed_speed_methodV2(targetPosition, targetSpeed, 9.81f, projectile.gameObject.transform.position, projectileSpeed, out fireVelocity);
+            //    projectile.Initialize(spawnPosition, 9.81f);
+            //    projectile.AddImpulse(fireVelocity);
+            //    Debug.Log(fireVelocity);
+            //    Debug.DrawRay(spawnPosition, fireVelocity, Color.red, 2f);
+            //    Debug.DrawLine(spawnPosition, targetPosition + spawnPosition, Color.green, 2f);
+            //}
+
+            //FIXED SPEED VERSION V1 SEMI WORKS BUT NOT EXACTLY HOW I NEED IT TO BE
             if (isEnemyFound && target != null)
             {
-                
+
                 //calculate trajectory which will be hard bruh cyka
                 GameObject objectReference = Instantiate(soapChipPrefab, spawnPosition, entity.gameObject.transform.rotation);
                 ProjectileBallistics projectile = objectReference.GetComponent<ProjectileBallistics>();
@@ -48,9 +79,23 @@ public class SoapBarProjectileAttack : EntityFunctions
                 //bad system probably needs to change but will do for now 
                 RequireParentReference typeData = projectile.GetComponent<RequireParentReference>();
                 if (typeData != null)
-                    typeData.SetReferenceEntity(entity);    
+                    typeData.SetReferenceEntity(entity);
 
-                float projectileSpeed = 30f;
+
+                //testing
+                //if (baseDistance == Vector3.zero)
+                //    baseDistance = target.transform.position - spawnPosition;
+                //float baseprojectileSpeed = 24f;
+                //Vector3 targetPosition = target.transform.position - spawnPosition;
+                //float ratio = targetPosition.magnitude / baseDistance.magnitude;
+                //if (ratio < 0.5f)
+                //    ratio = 0.5f;
+                //float projectileSpeed = baseprojectileSpeed * ratio;
+                //Debug.Log("POWER RATIO " + ratio);
+                //Debug.Log("PROJECTILE SPEED " + projectileSpeed);
+
+
+                float projectileSpeed = 25f;
                 Vector3 targetPosition = target.transform.position - spawnPosition;
                 Vector3 targetSpeed = target.dataLibrary.GetVector3("MoveInDirection_velocity");
                 //Vector3 targetSpeed = 5f * Vector2.left * Time.deltaTime; 
@@ -137,18 +182,36 @@ public class SoapBarProjectileAttack : EntityFunctions
     }
 
 
-    //testing out fixed speed method see if this works 
-    //hmmmmmmmm
-    public static bool solve_ballistic_with_fixed_speed(Vector3 targetPos, Vector3 targetVel, Vector3 gravity, float projSpeed, out Vector3 fire_velocity)
+    public static bool solve_ballistic_with_fixed_speed_methodV2(Vector3 targetPos, Vector3 targetVel, float gravity, Vector3 projPos, float projSpeed, out Vector3 fire_velocity)
     {
         fire_velocity = Vector3.zero;
-        double c0 = 0.25 * Vector3.Dot(gravity, gravity);
-        double c1 = Vector3.Dot(gravity, targetVel);
-        double c2 = Vector3.Dot(targetPos, gravity) + Vector3.Dot(targetVel, targetVel) - projSpeed * projSpeed;
-        double c3 = 2 * Vector3.Dot(targetPos, targetVel);
-        double c4 = Vector3.Dot(targetPos, targetPos);
+        double G = gravity;
+
+        double A = projPos.x; 
+        double B = projPos.y; 
+        double C = projPos.z; 
+        double M = targetPos.x;   
+        double N = targetPos.y;   
+        double O = targetPos.z;
+        double P = targetVel.x; 
+        double Q = targetVel.y; 
+        double R = targetVel.z; 
+        double S = projSpeed;
+
+        double H = M - A;
+        double J = O - C;
+        double K = N - B;
+        double L = -.5f * G;
+
+        double c0 = L * L;
+        double c1 = -2 * Q * L;
+        double c2 = Q * Q - 2 * K * L - S * S + P * P + R * R;
+        double c3 = 2 * K * Q + 2 * H * P + 2 * J * R;
+        double c4 = K * K + H * H + J * J;
+
+
         double[] solutions = new double[4];
-        int numTimes = fts.SolveQuartic(c0, c1, c2, c3,  c4, out solutions[0], out solutions[1], out solutions[2], out solutions[3]);
+        int numTimes = fts.SolveQuartic(c0, c1, c2, c3, c4, out solutions[0], out solutions[1], out solutions[2], out solutions[3]);
         float t = float.MaxValue;
 
         if (numTimes == 0)
@@ -160,38 +223,97 @@ public class SoapBarProjectileAttack : EntityFunctions
         // Find the smallest positive time solution
         bool foundValidTime = false;
 
-        //for (int i = 0; i < numTimes; i++)
-        //{
-        //    Debug.Log("T VALUE: " + solutions[i]);
-        //    if (solutions[i] > 0 && solutions[i] < t)
-        //    {
-        //        t = (float)solutions[i];
-        //        foundValidTime = true;
-        //    }
-        //}
+        for (int i = 0; i < numTimes; i++)
+        {
+            //Debug.Log("T VALUE: " + solut ions[i]);
+            if (solutions[i] > 0 && solutions[i] < t)
+            {
+                t = (float)solutions[i];
+                foundValidTime = true;
+            }
+        }
 
 
-        float smallest = float.MaxValue;
-        float secondSmallest = float.MaxValue;
+        if (foundValidTime) {
+            double d = ((H + P * t) / t);
+            double e = ((K + Q * t - L * t * t) / t);
+            double f = ((J + R * t) / t);
 
+            fire_velocity = new Vector3((float)d, (float)e, (float)f);
+        }
+
+        return true;
+    }
+
+
+
+    //testing out fixed speed method see if this works 
+    //hmmmmmmmm
+    public static bool solve_ballistic_with_fixed_speed(Vector3 targetPos, Vector3 targetVel, Vector3 gravity, float projSpeed, out Vector3 fire_velocity)
+    {
+        fire_velocity = Vector3.zero;
+        double c0 = 0.25 * Vector3.Dot(gravity, gravity);
+        double c1 = Vector3.Dot(gravity, targetVel);
+        double c2 = Vector3.Dot(targetPos, gravity) + Vector3.Dot(targetVel, targetVel) - projSpeed * projSpeed;
+        double c3 = 2 * Vector3.Dot(targetPos, targetVel);
+        double c4 = Vector3.Dot(targetPos, targetPos);
+        double[] solutions = new double[4];
+        int numTimes = fts.SolveQuartic(c0, c1, c2, c3, c4, out solutions[0], out solutions[1], out solutions[2], out solutions[3]);
+        float t = float.MaxValue;
+
+        if (numTimes == 0)
+        {
+            Debug.Log("No valid time solutions found");
+            return false;
+        }
+
+        // Find the smallest positive time solution
+        bool foundValidTime = false;
+
+        for (int i = 0; i < numTimes; i++)
+        {
+            //Debug.Log("T VALUE: " + solut ions[i]);
+            if (solutions[i] > 0 && solutions[i] < t)
+            {
+                t = (float)solutions[i];
+                foundValidTime = true;
+            }
+        }
+
+        Debug.Log($"Target: {targetPos}, Distance: {targetPos.magnitude}");
         for (int i = 0; i < numTimes; i++)
         {
             if (solutions[i] > 0)
             {
-                if (solutions[i] < smallest)
-                {
-                    secondSmallest = smallest;
-                    smallest = (float)solutions[i];
-                }
-                else if (solutions[i] < secondSmallest)
-                {
-                    secondSmallest = (float)solutions[i];
-                }
+                float testT = (float)solutions[i];
+                Vector3 testVel = (targetPos + testT * targetVel - 0.5f * gravity * testT * testT) / testT;
+                float angle = Vector3.Angle(testVel, Vector3.up);
+                Debug.Log($"Solution[{i}]: t={testT:F3}, angle from vertical={angle:F1}°, speed={testVel.magnitude:F2}");
             }
         }
-        t = (secondSmallest != float.MaxValue) ? secondSmallest : smallest;
-        if (t > 0)
-            foundValidTime = true;
+
+
+        //float smallest = float.MaxValue;
+        //float secondSmallest = float.MaxValue;
+
+        //for (int i = 0; i < numTimes; i++)
+        //{
+        //    if (solutions[i] > 0)
+        //    {
+        //        if (solutions[i] < smallest)
+        //        {
+        //            secondSmallest = smallest;
+        //            smallest = (float)solutions[i];
+        //        }
+        //        else if (solutions[i] < secondSmallest)
+        //        {
+        //            secondSmallest = (float)solutions[i];
+        //        }
+        //    }
+        //}
+        //t = (secondSmallest != float.MaxValue) ? secondSmallest : smallest;
+        //if (t > 0)
+        //    foundValidTime = true;
 
 
 
@@ -201,7 +323,7 @@ public class SoapBarProjectileAttack : EntityFunctions
             return false;
         }
 
-        Debug.Log("Using T value: " + t);   
+        Debug.Log("Using T value: " + t);
 
 
         // Calculate where the target will be at time t
