@@ -729,7 +729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheckColliderByTag
   list:
-  - tag: 'enemy '
+  - tag: enemy
     onTriggerEnter:
       m_PersistentCalls:
         m_Calls:

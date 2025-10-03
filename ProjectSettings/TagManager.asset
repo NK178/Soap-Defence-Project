@@ -10,6 +10,7 @@ TagManager:
   - topCollider
   - defenceProjectiles
   - enemy
+  - 'enemy '
   layers:
   - Default
   - TransparentFX
