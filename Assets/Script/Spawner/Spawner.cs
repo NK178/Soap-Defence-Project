@@ -1,9 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Profiling.Memory.Experimental;
 using UnityEngine;
-
 
 [System.Serializable]
 public class SpawnDetails
@@ -18,13 +16,14 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float timeMaxRange; 
     [SerializeField] private float timeMinRange;
     private Queue<Entity> entityQueue;
-
+    private bool fastSpawn;
     
 
     void Awake()
     {
         if (entityQueue == null) 
             entityQueue = new Queue<Entity>();
+        fastSpawn = false;
     }
 
     private void SpawnEntity()
@@ -40,13 +39,20 @@ public class Spawner : MonoBehaviour
 
     public IEnumerator ExcuteSpawnCoroutine()
     {
+        float waitTime = 0f;
+
         //self disable when empty 
         while (entityQueue.Count > 0)
         {
-            float waitTime = Random.Range(timeMinRange, timeMaxRange);
+            //spawn fast have little delay but still fast 
+            if (fastSpawn)
+                waitTime = 0.5f; //abritary num 
+            else 
+                waitTime = Random.Range(timeMinRange, timeMaxRange);
             yield return new WaitForSeconds(waitTime);
             SpawnEntity();
         }
+        fastSpawn = false;
     }
 
 
@@ -60,6 +66,11 @@ public class Spawner : MonoBehaviour
             entityQueue.Enqueue(entity);
     }
 
+    public void ActivateFastSpawn()
+    {
+        fastSpawn = true;
+    }
 
-    
+
+
 }

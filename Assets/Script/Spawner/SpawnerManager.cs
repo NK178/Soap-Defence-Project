@@ -53,8 +53,15 @@ public class SpawnerManager : MonoBehaviour
 
     private void StartWave()
     {
+        SpawnerData data = GetCurrentWaveData();
+        if (data == null)
+            return;
+
         for (int i = 0; i < spawnerList.Count; i++)
         {
+            //check if wave is fast spawn mode 
+            if (data.fastSpawn)
+                spawnerList[i].ActivateFastSpawn();
             StartCoroutine(spawnerList[i].ExcuteSpawnCoroutine());
         }
         waveIndex++;
