@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,22 +7,24 @@ public class SpawnerManager : MonoBehaviour
 
     [SerializeField] private List<Spawner> spawnerList;
     [SerializeField] private List<SpawnerData> waveDataList;
-    [SerializeField] private float timeBetweenWaves; 
+    [SerializeField] private float timeBetweenWaves;
 
-
+    private List<Entity> activeSpawnList;
     //temp public make it private later 
     public bool isActive;
     private bool changeWave;
+    [HideInInspector] public bool areAllWavesSent;
     private int waveIndex;
-    //private IEnumerator waveCooldown;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        activeSpawnList = new List<Entity>();
         //start from one I guess 
         waveIndex = 0;
         //isActive = false;
         changeWave = true;
+        areAllWavesSent = false;
         LoadNextWave();
     }
 
@@ -32,17 +33,22 @@ public class SpawnerManager : MonoBehaviour
     {
         if (isActive)
         {
-            if (changeWave)
+            if (changeWave && !areAllWavesSent)
             {
                 StartWave();
                 LoadNextWave();
                 ExcuteWaveTimer();
             }
+
+            if (waveIndex == waveDataList.Count)
+            {
+                Debug.Log("WAVE DATA SENT");
+                areAllWavesSent = true;
+            }
         }
     }
 
-    
-    //TO DO 2/10
+   
     private IEnumerator ExcuteWaveTimer()
     {
         changeWave = false;
@@ -62,7 +68,7 @@ public class SpawnerManager : MonoBehaviour
             //check if wave is fast spawn mode 
             if (data.fastSpawn)
                 spawnerList[i].ActivateFastSpawn();
-            StartCoroutine(spawnerList[i].ExcuteSpawnCoroutine());
+            StartCoroutine(spawnerList[i].ExcuteSpawnCoroutine(this));
         }
         waveIndex++;
         changeWave = false;
@@ -89,6 +95,27 @@ public class SpawnerManager : MonoBehaviour
         }
     }
 
+    public bool AreAllSpawnsInactive()
+    {
+        foreach (Entity entity in activeSpawnList)
+        {
+            if (entity.GetActiveStatus())
+                return false; 
+        }
+        return true;
+    } 
+
+
+    public bool AreAllSpawnersEmpty()
+    {
+        foreach (Spawner spawner in spawnerList)
+        {
+            if (spawner.GetCurrentSpawnDataCount() > 0)
+                return false;
+        }
+        return true;
+    }
+
     private SpawnerData GetCurrentWaveData()
     {
         for(int i = 0; i < waveDataList.Count; i++)
@@ -98,4 +125,20 @@ public class SpawnerManager : MonoBehaviour
         }
         return null;
     }
+
+    public void AddActiveEntity(Entity entity)
+    {
+        if (isActive)
+        {
+            //Debug.Log("ADDING ACTIVE ENTITY: " + entity.name);
+            activeSpawnList.Add(entity);
+        }
+    }
+
+    public void GetActiveSpawnsList(out List<Entity> entityList)
+    {
+        //shallow copy should be fine I think
+        entityList = activeSpawnList;
+    }
 }
+

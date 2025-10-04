@@ -29,6 +29,7 @@ public class OnMouseInteracts : MonoBehaviour
     [HideInInspector] public GameObject currentTarget;
     InputAction leftClick;
     InputAction leftRelease;
+    private bool isActive;
 
     private void OnEnable()
     {
@@ -44,6 +45,7 @@ public class OnMouseInteracts : MonoBehaviour
             leftRelease.performed += HandleMouseRelease;
             leftRelease.Enable();
         }
+        isActive = true;
     }
 
     private void OnDisable()
@@ -54,6 +56,8 @@ public class OnMouseInteracts : MonoBehaviour
 
     public void HandleMouseEnterExit()
     {
+        if (!isActive)
+            return;
         //let this be useless first 
         GameObject referenceObject = null;
 
@@ -88,7 +92,8 @@ public class OnMouseInteracts : MonoBehaviour
 
     public void HandleMousePress(InputAction.CallbackContext ctx)
     {
-
+        if (!isActive)
+            return;
         if (ctx.performed)
         {
             for (int iter = 0; iter < responseList.Count; iter++)
@@ -106,7 +111,8 @@ public class OnMouseInteracts : MonoBehaviour
 
     public void HandleMouseRelease(InputAction.CallbackContext ctx)
     {
-
+        if (!isActive)
+            return;
         if (ctx.performed)
         {
             for (int iter = 0; iter < responseList.Count; iter++)
@@ -124,10 +130,12 @@ public class OnMouseInteracts : MonoBehaviour
 
     private void Update()
     {
+        if (!isActive)
+            return;
         HandleMouseEnterExit();
     }
 
-        bool IsMouseCollidingValid(MouseEventsByTag eventTag, ref GameObject referenceObject)
+    bool IsMouseCollidingValid(MouseEventsByTag eventTag, ref GameObject referenceObject)
     {
         bool validCollide = false;
         Vector2 worldMousePos = mouseInstance.GetWorldMousePos();
@@ -141,6 +149,11 @@ public class OnMouseInteracts : MonoBehaviour
         else
             referenceObject = null;
         return validCollide;
+    }
+
+
+    public void SetActiveStatus(bool condition) {
+        isActive = condition;
     }
 
 

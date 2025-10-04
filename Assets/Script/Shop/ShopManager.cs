@@ -20,7 +20,7 @@ public class ShopManager : MonoBehaviour
 
 
     private bool isEmpty = true;
-
+    private bool isActive;
 
     private void Awake()
     {
@@ -39,11 +39,18 @@ public class ShopManager : MonoBehaviour
         playerMoney.value = startingCash;
         if (playerMoney.value > maxMoney)
             playerMoney.value = maxMoney;
+
+
+        isActive = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //if (!isActive)
+        //    return; 
+
+
         if (!isEmpty)
         {
             HandleUI();
@@ -74,7 +81,8 @@ public class ShopManager : MonoBehaviour
     //check if valid buy 
     public void HandleDragStart(ShopItem item, PointerEventData eventData)
     {
-
+        if (!isActive)
+            return;
         //Debug.Log($"Started dragging {item.name}");
         //check price 
         if (item.CheckIfCanBuy())
@@ -82,9 +90,10 @@ public class ShopManager : MonoBehaviour
             selectedItem = item;
             isDragging = true;
         }
+
     }
 
-    //this one is handled by the mouse functions not drag drop 
+        //this one is handled by the mouse functions not drag drop 
     public void HandleDragEndByMouse()
     {
 
@@ -158,6 +167,8 @@ public class ShopManager : MonoBehaviour
 
     public void HandleBubbleCollection()
     {
+        //if (!isActive)
+        //    return;
         AddMoney(bubbleAddAmt);
         if (mouseReference.currentTarget != null)
         {
@@ -192,6 +203,9 @@ public class ShopManager : MonoBehaviour
         return playerMoney.value;
     }
 
-
+    public void SetActiveStatus(bool condition)
+    {
+        isActive = condition;
+    }
 
 }

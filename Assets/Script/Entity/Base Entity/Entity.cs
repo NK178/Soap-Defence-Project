@@ -42,6 +42,7 @@ public class Entity : MonoBehaviour
 
     //private IEnumerator stateUpdateCoroutine;
     private bool isActive;
+    private bool isAlive;
 
     private void Awake()
     {
@@ -58,7 +59,7 @@ public class Entity : MonoBehaviour
             dataLibrary.AddFloat(keyIndex, valueToAdd);
         }
         currentState.Init(this);
-        isActive = true;
+        isActive = isAlive = true;
     }
 
     // Update is called once per frame
@@ -67,7 +68,13 @@ public class Entity : MonoBehaviour
         if (isActive)
         {
             EntityStateUpdate();
+            if (!isAlive)
+            {
+                StopAllCoroutines();
+                isActive = false;
+            }
         }
+        
     }
 
     private void EntityStateUpdate()
@@ -226,7 +233,16 @@ public class Entity : MonoBehaviour
                 break;
         }
     }
+    
+    public void SetEntityAliveStatus(bool condition)
+    {
+        isAlive = condition; 
+    }
 
+    public bool GetActiveStatus()
+    {
+        return isActive; 
+    }
 
     /////////////////////// can consider using in a upgraded version but for now dont use this 
     //public IEnumerator HandleStateUpdates()

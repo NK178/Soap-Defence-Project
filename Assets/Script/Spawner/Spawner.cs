@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -26,18 +27,19 @@ public class Spawner : MonoBehaviour
         fastSpawn = false;
     }
 
-    private void SpawnEntity()
+    private void SpawnEntity(SpawnerManager manager)
     {
         if (entityQueue.Count > 0)
         {
             Entity reference = entityQueue.Dequeue();
             Entity newSpawn = Instantiate(reference, gameObject.transform.position, gameObject.transform.rotation);
+            manager.AddActiveEntity(newSpawn);
             //Debug.Log(name + " SPAWNED ENTITY COUNT LEFT : " + entityQueue.Count);
         }
     }
 
 
-    public IEnumerator ExcuteSpawnCoroutine()
+    public IEnumerator ExcuteSpawnCoroutine(SpawnerManager manager)
     {
         float waitTime = 0f;
 
@@ -50,7 +52,7 @@ public class Spawner : MonoBehaviour
             else 
                 waitTime = Random.Range(timeMinRange, timeMaxRange);
             yield return new WaitForSeconds(waitTime);
-            SpawnEntity();
+            SpawnEntity(manager);
         }
         fastSpawn = false;
     }
@@ -71,6 +73,10 @@ public class Spawner : MonoBehaviour
         fastSpawn = true;
     }
 
+    public int GetCurrentSpawnDataCount()
+    {
+        return entityQueue.Count;
+    }
 
 
 }
