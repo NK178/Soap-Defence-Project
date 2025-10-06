@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: EntityFusionDataWrapper
   m_EditorClassIdentifier: Assembly-CSharp::EntityFusionDataWrapper
   data:
-    inputList: []
+    inputList:
+    - {fileID: 0}
     outputList: []
     fusionDecision: {fileID: 11400000, guid: d8d39e8a67170df499ea0d0396b4ec17, type: 2}
