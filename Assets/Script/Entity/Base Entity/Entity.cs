@@ -16,6 +16,7 @@ public enum ENTITYTYPE
     SUPPORT,
     ATTACK,
     D_SOAP, //defences 
+    D_WATER,
     E_GREASE, //enemies
     E_DIRT,
     NUM_TYPE
