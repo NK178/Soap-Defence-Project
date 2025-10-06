@@ -3,10 +3,6 @@ using UnityEngine;
 
 
 
-public interface IFusionData {
-    Type type { get; }
-}
-
 
 
 
