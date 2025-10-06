@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEditor.XR;
 using UnityEngine;
 
+//I shoudl change this SO name to smth like entity raycast range check 
 [CreateAssetMenu(fileName = "RaycastCheckInRange", menuName = "Scriptable Objects/RaycastCheckInRange")]
 public class RaycastCheckInRange : EntityStateDecision
 {

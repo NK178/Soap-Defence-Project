@@ -5293,7 +5293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f5888e96301334d85ae508ba060ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entity
-  tagCollider: {fileID: 0}
+  tagCollider: {fileID: 1007810123}
   animator: {fileID: 0}
   statsList:
   - {fileID: 11400000, guid: a3cd6d3adb2394c4fbddb4287ebc5db9, type: 2}

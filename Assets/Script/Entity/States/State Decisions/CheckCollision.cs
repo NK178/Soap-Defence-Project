@@ -11,13 +11,15 @@ public class CheckCollision : EntityStateDecision
     public override bool DecisionCheck(Entity entity)
     {
         CheckColliderByTag collider = entity.GetTagCollider();
+        bool result = false;
         if (collider != null)
         {
-            if (collider.gameObject.tag == tagName)
-                return true;
-            else
-                return false;
+            if (collider.currentColliding != null)
+            {
+                if (collider.currentColliding.gameObject.tag == tagName)
+                    result = true;
+            }
         }
-        return false;
+        return result;
     }
 }

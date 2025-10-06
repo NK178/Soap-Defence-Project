@@ -68,15 +68,15 @@ public class Entity : MonoBehaviour
             {
                 StopAllCoroutines();
                 isActive = false;
+            }
 
-                //debug
-                if (this.name == "Water Puddle")
-                {
-                    Debug.Log("CURRENT STATE " + currentState.name);
-                }
+            //debug
+            if (this.name == "Water Puddle")
+            {
+                Debug.Log("CURRENT STATE " + currentState.name);
             }
         }
-        
+
     }
 
     private void EntityStateUpdate()
