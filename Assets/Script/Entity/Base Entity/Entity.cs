@@ -134,14 +134,17 @@ public class Entity : MonoBehaviour
         TypeInteractions typeInteraction = null;
         Entity refEntity = null;
         //check if it is a projectile with the type 
-        if (tagCollider.currentColliding != null)
+        for (int iter = 0; iter < tagCollider.allColliding.Count; iter++)
         {
-            RequireParentReference typeData = tagCollider.currentColliding.GetComponent<RequireParentReference>();
+            RequireParentReference typeData = tagCollider.allColliding[iter].GetComponent<RequireParentReference>();
             if (typeData != null)
                 refEntity = typeData.GetReferenceEntity();
 
             if (refEntity != null)
+            {
                 typeInteraction = TypeInteractionMap.instance.GetTypeInteraction(refEntity.GetMaterialType());
+                break;
+            }
         }
 
         if (typeInteraction != null)
@@ -149,6 +152,22 @@ public class Entity : MonoBehaviour
             float damageToTake = CalculateDamageByType(typeInteraction, refEntity.GetCurrentStatValue(STATSTYPE.DAMAGE));
             TakeDamage(damageToTake);
         }
+
+        //if (tagCollider.currentColliding != null)
+        //{
+        //RequireParentReference typeData = tagCollider.currentColliding.GetComponent<RequireParentReference>();
+        //if (typeData != null)
+        //    refEntity = typeData.GetReferenceEntity();
+
+        //if (refEntity != null)
+        //    typeInteraction = TypeInteractionMap.instance.GetTypeInteraction(refEntity.GetMaterialType());
+        //}
+
+        //if (typeInteraction != null)
+        //{
+        //    float damageToTake = CalculateDamageByType(typeInteraction, refEntity.GetCurrentStatValue(STATSTYPE.DAMAGE));
+        //    TakeDamage(damageToTake);
+        //}
     }
 
 

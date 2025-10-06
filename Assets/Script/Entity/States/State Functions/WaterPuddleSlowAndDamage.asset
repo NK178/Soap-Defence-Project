@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf43cf8a863ac114e94684f8ea32f3ab, type: 3}
-  m_Name: MoveInDirection
-  m_EditorClassIdentifier: Assembly-CSharp::MoveInDirection
-  direction: {x: -1, y: 0}
-  referenceMoveSpeed: 5
+  m_Script: {fileID: 11500000, guid: 9717b8c0899f45b44929644f0c411016, type: 3}
+  m_Name: WaterPuddleSlowAndDamage
+  m_EditorClassIdentifier: Assembly-CSharp::SlowAndDamageTargets
+  speedModifier: 0.5

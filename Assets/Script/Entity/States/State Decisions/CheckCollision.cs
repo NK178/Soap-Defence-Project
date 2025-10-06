@@ -12,14 +12,27 @@ public class CheckCollision : EntityStateDecision
     {
         CheckColliderByTag collider = entity.GetTagCollider();
         bool result = false;
+        bool validCollider = false;
         if (collider != null)
+            validCollider = true;
+
+        if (validCollider)
         {
-            if (collider.currentColliding != null)
+            for (int iter = 0; iter < collider.allColliding.Count; iter++)
             {
-                if (collider.currentColliding.gameObject.tag == tagName)
+                if (collider.allColliding[iter].gameObject.tag == tagName)
+                {
                     result = true;
+                    break;
+                }
             }
         }
+
+        //if (collider.currentColliding != null)
+        //{
+        //    if (collider.currentColliding.gameObject.tag == tagName)
+        //        result = true;
+        //}
         return result;
     }
 }
