@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 324980a5d7b42b943878caa3dc8c63a2, type: 3}
   m_Name: Grease Type
   m_EditorClassIdentifier: Assembly-CSharp::EntityType
-  type: 4
+  type: 6

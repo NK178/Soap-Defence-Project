@@ -1374,7 +1374,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &414620780
 Transform:
   m_ObjectHideFlags: 0
@@ -5227,6 +5227,7 @@ GameObject:
   - component: {fileID: 1007810122}
   - component: {fileID: 1007810121}
   - component: {fileID: 1007810120}
+  - component: {fileID: 1007810123}
   m_Layer: 7
   m_Name: Water Puddle
   m_TagString: Untagged
@@ -5264,7 +5265,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -5295,14 +5296,13 @@ MonoBehaviour:
   tagCollider: {fileID: 0}
   animator: {fileID: 0}
   statsList:
-  - {fileID: 11400000, guid: 2175a28795420d0429cd80e7f91852e1, type: 2}
-  - {fileID: 11400000, guid: 84f85179352f609478f1a43360e4afe4, type: 2}
-  functionsList:
-  - {fileID: 11400000, guid: 325a8d5733d788f45acb411922e156df, type: 2}
+  - {fileID: 11400000, guid: a3cd6d3adb2394c4fbddb4287ebc5db9, type: 2}
+  - {fileID: 11400000, guid: fec7832e200e7934fb1e43598a833a31, type: 2}
   typeList:
-  - {fileID: 11400000, guid: 465e4f7826ac1d94d9985374d43a4e0a, type: 2}
-  - {fileID: 11400000, guid: 940dc97fb86db7b478f98c4dce0d517e, type: 2}
-  currentState: {fileID: 11400000, guid: 0d87f75a9b9bc7c448f6ed4cd59e5aea, type: 2}
+  - {fileID: 11400000, guid: 286a7c895450db844a70e2bf22a2a7e1, type: 2}
+  - {fileID: 11400000, guid: 7a1fd14f5f36e9143a557be58bbbe3d9, type: 2}
+  - {fileID: 11400000, guid: cfeecfd6481998445aab3ed969016e0f, type: 2}
+  currentState: {fileID: 11400000, guid: 6f944f140bf130645b85e940b3e47d7b, type: 2}
 --- !u!4 &1007810122
 Transform:
   m_ObjectHideFlags: 0
@@ -5312,13 +5312,34 @@ Transform:
   m_GameObject: {fileID: 1007810119}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.55, y: -3.47, z: 0}
+  m_LocalPosition: {x: 8.82, y: -1.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52942359}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1007810123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007810119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea3d81ee5d6ff14fa5d9094fca8b3b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckColliderByTag
+  list:
+  - tag: enemy
+    onTriggerEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    onTriggerExit:
+      m_PersistentCalls:
+        m_Calls: []
+  currentColliding: {fileID: 0}
 --- !u!1 &1014762107
 GameObject:
   m_ObjectHideFlags: 0
@@ -9703,8 +9724,6 @@ MonoBehaviour:
   statsList:
   - {fileID: 11400000, guid: 2175a28795420d0429cd80e7f91852e1, type: 2}
   - {fileID: 11400000, guid: 84f85179352f609478f1a43360e4afe4, type: 2}
-  functionsList:
-  - {fileID: 11400000, guid: 325a8d5733d788f45acb411922e156df, type: 2}
   typeList:
   - {fileID: 11400000, guid: 465e4f7826ac1d94d9985374d43a4e0a, type: 2}
   - {fileID: 11400000, guid: 940dc97fb86db7b478f98c4dce0d517e, type: 2}
@@ -9755,7 +9774,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -12498,7 +12517,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1060069644945781301, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3274630691947792957, guid: ca6364bc0623adb42a8358279c6b3ae4, type: 3}
       propertyPath: m_LocalPosition.x

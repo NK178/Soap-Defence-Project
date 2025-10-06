@@ -15,3 +15,5 @@ MonoBehaviour:
   layerName: defence
   raycastDirection: {x: -1, y: 0}
   raycastDistance: 4
+  ignoreType:
+  - {fileID: 11400000, guid: 7a1fd14f5f36e9143a557be58bbbe3d9, type: 2}

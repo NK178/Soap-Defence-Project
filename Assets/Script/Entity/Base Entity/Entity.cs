@@ -15,6 +15,7 @@ public enum ENTITYTYPE
     TANK,
     SUPPORT,
     ATTACK,
+    GROUNDED,
     D_SOAP, //defences 
     D_WATER,
     E_GREASE, //enemies
@@ -35,7 +36,6 @@ public class Entity : MonoBehaviour
     [SerializeField] private CheckColliderByTag tagCollider;
     [SerializeField] private Animator animator; 
     [SerializeField] private List<EntityStats> statsList;
-    [SerializeField] private List<EntityFunctions> functionsList;
     [SerializeField] private List<EntityType> typeList;
     [SerializeField] private EntityState currentState;
 
@@ -50,11 +50,6 @@ public class Entity : MonoBehaviour
         dataLibrary = new DataLibrary();
         for (int iter = 0; iter < statsList.Count; iter++)
         {
-            //float valueToAdd = statsList[iter].GetValue();
-            //int keyIndex = (int)statsList[iter].GetStatType();
-            //dataLibrary.AddFloat(keyIndex, valueToAdd);
-
-
             float valueToAdd = statsList[iter].GetValue();
             string keyIndex = statsList[iter].GetStatType().ToString();
             dataLibrary.AddFloat(keyIndex, valueToAdd);
@@ -73,6 +68,12 @@ public class Entity : MonoBehaviour
             {
                 StopAllCoroutines();
                 isActive = false;
+
+                //debug
+                if (this.name == "Water Puddle")
+                {
+                    Debug.Log("CURRENT STATE " + currentState.name);
+                }
             }
         }
         
@@ -243,6 +244,11 @@ public class Entity : MonoBehaviour
     public bool GetActiveStatus()
     {
         return isActive; 
+    }
+
+    public CheckColliderByTag GetTagCollider()
+    {
+        return tagCollider; 
     }
 
     /////////////////////// can consider using in a upgraded version but for now dont use this 
