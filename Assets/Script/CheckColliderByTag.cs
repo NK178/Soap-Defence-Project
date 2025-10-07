@@ -32,28 +32,7 @@ public class CheckColliderByTag : MonoBehaviour
             {
                 allColliding.Add(collision.gameObject);
                 target.onTriggerEnter.Invoke();
-
-                //extra check that I maybe no need? 
-                //bool shouldAdd = true;
-                //foreach (GameObject gameObject in allColliding)
-                //{
-                //    if (gameObject == collision.gameObject)
-                //    {
-                //        shouldAdd = false; 
-                //        break;
-                //    }
-                //}
-                //if (shouldAdd)
-                //    allColliding.Add(collision.gameObject);
-                //Debug.Log("COLLIDING WITH " + collision.gameObject.name);
             }
-
-            //if (target.tag == collision.gameObject.tag)
-            //{
-            //    //Debug.Log("COLLIDING WITH " + collision.gameObject.name);
-            //    currentColliding = collision.gameObject;
-            //    target.onTriggerEnter.Invoke();
-            //}
         }
     }
 
@@ -77,16 +56,6 @@ public class CheckColliderByTag : MonoBehaviour
                 }
                 target.onTriggerExit.Invoke();
             }
-
-            //if (target.tag == collision.gameObject.tag)
-            //{
-            //    target.onTriggerExit.Invoke();
-            //}
-
-            //if (collision.gameObject == currentColliding)
-            //{
-            //    currentColliding = null;
-            //}
         }
     }
 }

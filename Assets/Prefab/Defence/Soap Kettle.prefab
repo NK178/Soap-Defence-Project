@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 907992520066352434}
   m_Layer: 0
   m_Name: Soap Kettle
-  m_TagString: Untagged
+  m_TagString: defence
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,8 +162,7 @@ MonoBehaviour:
   animator: {fileID: 2441641294123858148}
   statsList:
   - {fileID: 11400000, guid: eab44dada62ba0040ae817b2cc9720d5, type: 2}
-  functionsList:
-  - {fileID: 11400000, guid: 318042cd3b6d89d4e8e20346b1c8743e, type: 2}
   typeList:
   - {fileID: 11400000, guid: 286a7c895450db844a70e2bf22a2a7e1, type: 2}
   currentState: {fileID: 11400000, guid: afe79d48d5710454aa53da91ba108dc9, type: 2}
+  entityName: 0

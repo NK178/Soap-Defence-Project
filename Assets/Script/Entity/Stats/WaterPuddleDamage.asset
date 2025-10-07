@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1424858e21228f54ebf054a85af27417, type: 3}
   m_Name: WaterPuddleDamage
   m_EditorClassIdentifier: Assembly-CSharp::EntityStats
-  value: 10
+  value: 5
   statType: 1

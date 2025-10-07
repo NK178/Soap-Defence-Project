@@ -9440,8 +9440,11 @@ MonoBehaviour:
     strongAgainst: {fileID: 11400000, guid: 7284dc2cb52bd954f9d8d87082e7311e, type: 2}
     weakAgainst: {fileID: 11400000, guid: 005e8b555b1685c4e8f67cee99ff9e6f, type: 2}
   - baseType: {fileID: 11400000, guid: 7284dc2cb52bd954f9d8d87082e7311e, type: 2}
-    strongAgainst: {fileID: 11400000, guid: 0532a1eb48224c54abffd02dbb2ad578, type: 2}
+    strongAgainst: {fileID: 11400000, guid: cfeecfd6481998445aab3ed969016e0f, type: 2}
     weakAgainst: {fileID: 11400000, guid: 940dc97fb86db7b478f98c4dce0d517e, type: 2}
+  - baseType: {fileID: 11400000, guid: cfeecfd6481998445aab3ed969016e0f, type: 2}
+    strongAgainst: {fileID: 11400000, guid: 0532a1eb48224c54abffd02dbb2ad578, type: 2}
+    weakAgainst: {fileID: 11400000, guid: 7284dc2cb52bd954f9d8d87082e7311e, type: 2}
 --- !u!1 &1675142362
 GameObject:
   m_ObjectHideFlags: 0

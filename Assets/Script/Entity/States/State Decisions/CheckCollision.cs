@@ -27,12 +27,6 @@ public class CheckCollision : EntityStateDecision
                 }
             }
         }
-
-        //if (collider.currentColliding != null)
-        //{
-        //    if (collider.currentColliding.gameObject.tag == tagName)
-        //        result = true;
-        //}
         return result;
     }
 }

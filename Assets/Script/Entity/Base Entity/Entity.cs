@@ -69,12 +69,6 @@ public class Entity : MonoBehaviour
                 StopAllCoroutines();
                 isActive = false;
             }
-
-            //debug
-            if (this.name == "Water Puddle")
-            {
-                Debug.Log("CURRENT STATE " + currentState.name);
-            }
         }
 
     }
@@ -109,7 +103,7 @@ public class Entity : MonoBehaviour
         float currentHealth = GetCurrentStatValue(STATSTYPE.HEALTH);
         float newHealth = currentHealth - damage;
         SetCurrentStatValue(STATSTYPE.HEALTH, newHealth);
-        //Debug.Log(this.gameObject.name + "'S NEW HEALTH " + newHealth);
+        Debug.Log(this.gameObject.name + "'S NEW HEALTH " + newHealth);
     }
 
 
@@ -125,6 +119,8 @@ public class Entity : MonoBehaviour
             float damageToTake = CalculateDamageByType(typeInteraction, attacker.GetCurrentStatValue(STATSTYPE.DAMAGE));
             TakeDamage(damageToTake);
         }
+        else
+            Debug.Log("NO TYPE INTERACTION FOUND, GONNA DO NOTHING");
     }
 
     //29/9 could be a future problem if there are more than one projectiles acting on the entity but we'll deal with that later 
@@ -152,22 +148,6 @@ public class Entity : MonoBehaviour
             float damageToTake = CalculateDamageByType(typeInteraction, refEntity.GetCurrentStatValue(STATSTYPE.DAMAGE));
             TakeDamage(damageToTake);
         }
-
-        //if (tagCollider.currentColliding != null)
-        //{
-        //RequireParentReference typeData = tagCollider.currentColliding.GetComponent<RequireParentReference>();
-        //if (typeData != null)
-        //    refEntity = typeData.GetReferenceEntity();
-
-        //if (refEntity != null)
-        //    typeInteraction = TypeInteractionMap.instance.GetTypeInteraction(refEntity.GetMaterialType());
-        //}
-
-        //if (typeInteraction != null)
-        //{
-        //    float damageToTake = CalculateDamageByType(typeInteraction, refEntity.GetCurrentStatValue(STATSTYPE.DAMAGE));
-        //    TakeDamage(damageToTake);
-        //}
     }
 
 

@@ -6,30 +6,39 @@ using UnityEngine;
 public class SlowAndDamageTargets : EntityFunctions
 {
 
-
-    [SerializeField] private float speedModifier; 
+    [SerializeField] private float secondsPerDamageTick;
+    [SerializeField] private float speedModifier;
 
     public override IEnumerator ExcuteCoroutine(Entity entity = null)
     {
         string dataKey = "MoveInDirection_speedModifier";
         CheckColliderByTag tagCollider = entity.GetTagCollider();
-        List<Entity> targetList = new List<Entity>();
-        for (int iter = 0; iter < tagCollider.allColliding.Count; iter++)
+
+        while (true)
         {
-            Entity reference = tagCollider.allColliding[iter].gameObject.GetComponent<Entity>();
-            if (reference != null)
+            List<Entity> targetList = new List<Entity>();
+            for (int iter = 0; iter < tagCollider.allColliding.Count; iter++)
             {
-                string typeName = reference.GetMaterialType().GetEntityType().ToString();
-                if (typeName.StartsWith("E_"))
-                    targetList.Add(reference);
+                Entity reference = tagCollider.allColliding[iter].gameObject.GetComponent<Entity>();
+                if (reference != null)
+                {
+                    string typeName = reference.GetMaterialType().GetEntityType().ToString();
+                    if (typeName.StartsWith("E_"))
+                        targetList.Add(reference);
+                }
+            }
+
+            for (int iter = 0; iter < targetList.Count; iter++)
+            {
+                targetList[iter].dataLibrary.SetFloat(dataKey, speedModifier);
+            }
+
+            yield return new WaitForSeconds(secondsPerDamageTick);
+
+            for (int iter = 0; iter < targetList.Count; iter++)
+            {
+                targetList[iter].HandleDamageFromEntity(entity);
             }
         }
-
-        for (int iter = 0; iter < targetList.Count; iter++)
-        {
-            targetList[iter].dataLibrary.SetFloat(dataKey, speedModifier);
-        }
-
-        yield return null;  
     }
 }
