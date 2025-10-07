@@ -9,6 +9,7 @@ public class EntityNameList : ScriptableObject
         SOAPKETTLE, 
         SOAPBAR,
         WATERPUDDLE, 
+        SOAPYPUDDLE,
         GREASE, //shoudl rethink this one 
         NUM_NAMES
     }

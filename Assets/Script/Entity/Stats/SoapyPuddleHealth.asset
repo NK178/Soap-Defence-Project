@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9717b8c0899f45b44929644f0c411016, type: 3}
-  m_Name: WaterPuddleSlowAndDamage
-  m_EditorClassIdentifier: Assembly-CSharp::SlowAndDamageTargets
-  secondsPerDamageTick: 1
-  speedModifier: 0.75
+  m_Script: {fileID: 11500000, guid: 1424858e21228f54ebf054a85af27417, type: 3}
+  m_Name: SoapyPuddleHealth
+  m_EditorClassIdentifier: Assembly-CSharp::EntityStats
+  value: 300
+  statType: 0

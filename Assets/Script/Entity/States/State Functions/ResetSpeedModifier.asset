@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a70ef5a7771ce14c95ae0bbe25fe37e, type: 3}
   m_Name: ResetSpeedModifier
   m_EditorClassIdentifier: Assembly-CSharp::ResetStatBasedOnCollision
-  namesToCheckAgainst: 02000000
+  namesToCheckAgainst: 0200000003000000
   dataKey: MoveInDirection_speedModifier
   resetValue: 1
