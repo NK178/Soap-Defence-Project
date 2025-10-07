@@ -20,15 +20,18 @@ public class MoveInDirection : EntityFunctions
             else
                 entity.dataLibrary.AddFloat(speedModifierDataKey, speedModifier);
             float actualMoveSpeed = referenceMoveSpeed * speedModifier;
-            Debug.Log("CURRENT MOVE SPEED: " + actualMoveSpeed);
+            //Debug.Log("CURRENT MOVE SPEED: " + actualMoveSpeed);
+            Debug.Log("MOVE MODIFIER : " + speedModifier);
+
             Vector3 prevPos = entity.gameObject.transform.position;
             Vector3 velocity = direction * actualMoveSpeed * Time.deltaTime;
             Vector3 newPos = prevPos + velocity;
             entity.gameObject.transform.position = newPos;
 
             //store velocity for calculations yay 
-            Vector3 test = direction * referenceMoveSpeed; 
+            Vector3 test = direction * actualMoveSpeed;
             entity.dataLibrary.AddVector3(velocityDataKey, test);
+
             yield return null;
         }
     }

@@ -57,6 +57,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 465e4f7826ac1d94d9985374d43a4e0a, type: 2}
   - {fileID: 11400000, guid: 7284dc2cb52bd954f9d8d87082e7311e, type: 2}
   currentState: {fileID: 11400000, guid: 7f219893211e3904fae74ef9d43de721, type: 2}
+  entityName: 3
 --- !u!61 &3017120372458054782
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -162,7 +163,14 @@ MonoBehaviour:
     onTriggerExit:
       m_PersistentCalls:
         m_Calls: []
-  currentColliding: {fileID: 0}
+  - tag: defence
+    onTriggerEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    onTriggerExit:
+      m_PersistentCalls:
+        m_Calls: []
+  allColliding: []
 --- !u!1 &3905345270759740428
 GameObject:
   m_ObjectHideFlags: 0

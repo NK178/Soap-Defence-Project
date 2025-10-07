@@ -30,6 +30,6 @@ public class SlowAndDamageTargets : EntityFunctions
             targetList[iter].dataLibrary.SetFloat(dataKey, speedModifier);
         }
 
-        yield return null; 
+        yield return null;  
     }
 }

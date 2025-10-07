@@ -38,7 +38,7 @@ public class Entity : MonoBehaviour
     [SerializeField] private List<EntityStats> statsList;
     [SerializeField] private List<EntityType> typeList;
     [SerializeField] private EntityState currentState;
-
+    public EntityNameList.ENTITYNAME entityName; 
     [HideInInspector] public DataLibrary dataLibrary;
 
     //private IEnumerator stateUpdateCoroutine;
