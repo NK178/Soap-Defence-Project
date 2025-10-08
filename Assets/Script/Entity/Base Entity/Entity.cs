@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -103,7 +104,7 @@ public class Entity : MonoBehaviour
         float currentHealth = GetCurrentStatValue(STATSTYPE.HEALTH);
         float newHealth = currentHealth - damage;
         SetCurrentStatValue(STATSTYPE.HEALTH, newHealth);
-        Debug.Log(this.gameObject.name + "'S NEW HEALTH " + newHealth);
+        //Debug.Log(this.gameObject.name + "'S NEW HEALTH " + newHealth);
     }
 
 
@@ -149,6 +150,32 @@ public class Entity : MonoBehaviour
             TakeDamage(damageToTake);
         }
     }
+
+
+
+    //called in untiy events but will be handled in the fusion manager
+    //public void TriggerFusion()
+    //{
+
+    //    List<Entity> validFusionTargets = new List<Entity>();
+    //    for (int iter = 0; iter < tagCollider.allColliding.Count; iter++)
+    //    {
+    //        Entity reference = tagCollider.allColliding[iter].gameObject.GetComponent<Entity>();
+    //        if (reference != null)
+    //        {
+    //            EntityType entityType = reference.GetMaterialType();
+    //            if (entityType.GetEntityType().ToString().StartsWith("D_"))
+    //                validFusionTargets.Add(reference);
+    //        }
+    //    }
+
+    //    if (validFusionTargets.Count > 0)
+    //    {
+    //        //Need to include self into the list to check fusion 
+    //        validFusionTargets.Add(this);
+    //        FusionManager.instance.TriggerFusionIfValid(validFusionTargets); 
+    //    }
+    //}
 
 
     public void TransitionState(EntityState newState)

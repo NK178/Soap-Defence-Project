@@ -93,7 +93,7 @@ public class ShopManager : MonoBehaviour
 
     }
 
-        //this one is handled by the mouse functions not drag drop 
+    //this one is handled by the mouse functions not drag drop 
     public void HandleDragEndByMouse()
     {
 
@@ -139,30 +139,72 @@ public class ShopManager : MonoBehaviour
         isDragging = false;
     }
 
-    bool HandleEntityDrop(Entity entity)
+    bool HandleEntityDrop(Entity refEntity)
     {
-
         bool validDrop = false;
+
         //pls work I beg u
         GameObject target = mouseReference.currentTarget;
-        if (target != null)
-        {
-            if (target.transform.childCount == 0)
-                validDrop = true;
-        }
+        if (target == null)
+            return false;
 
-        if (validDrop)
+        Debug.Log("TARGET NAME " + target.gameObject.name);
+
+        //Case if drop onto another entity for fusion 
+        if (target.GetComponent<Entity>() != null)
         {
-            //Debug.Log("VALID DROP");
+            //Get colliding entity 
+            Entity entity2 = target.GetComponent<Entity>();
+            List<Entity> validFusionList = new List<Entity> { refEntity, entity2 };
+            FusionManager.instance.TriggerFusionIfValid(validFusionList);
+            validDrop = true;
+        }
+        else if (target.transform.childCount == 0)
+        {
             Vector3 gridPosition = target.transform.position;
-            GameObject newEntity = Instantiate(entity.gameObject, gridPosition, transform.rotation);
+            GameObject newEntity = Instantiate(refEntity.gameObject, gridPosition, transform.rotation);
             //make the entity be a child of the gameobejct 
             newEntity.transform.SetParent(target.transform);
             validDrop = true;
         }
-        //else
-            //Debug.Log("INVALID DROP");
+
+        Debug.Log("DROP STATUS: " + validDrop);
+
         return validDrop;
+
+        //bool validDrop = false;
+
+        ////pls work I beg u
+        //GameObject target = mouseReference.currentTarget;
+        //if (target != null)
+        //{
+        //    //Case if drop onto another entity for fusion 
+        //    if (target.GetComponent<Entity>() != null)
+        //    {
+        //        //Get colliding entity 
+        //        Entity entity2 = target.GetComponent<Entity>();
+        //        List<Entity> validFusionList = new List<Entity> { entity, entity2 };
+        //        FusionManager.instance.TriggerFusionIfValid(validFusionList);
+
+        //    }
+        //    //Case if drop onto gridTile
+        //    else if (target.transform.childCount == 0) 
+        //        validDrop = true;
+
+        //}
+
+        //if (validDrop)
+        //{
+        //    //Debug.Log("VALID DROP");
+        //    Vector3 gridPosition = target.transform.position;
+        //    GameObject newEntity = Instantiate(entity.gameObject, gridPosition, transform.rotation);
+        //    //make the entity be a child of the gameobejct 
+        //    newEntity.transform.SetParent(target.transform);
+        //    validDrop = true;
+        //}
+        ////else
+        //    //Debug.Log("INVALID DROP");
+        //return validDrop;
     }
 
     public void HandleBubbleCollection()

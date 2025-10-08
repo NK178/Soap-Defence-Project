@@ -18,12 +18,11 @@ public class EntityFusionDecision : FusionDecision<Entity>
 
 
         //not efficent but it is what it is for now 
-        for (int iter = 0; iter < recipe.Count; iter++)
+        for (int i = 0; i < recipe.Count; i++)
         {
-            Entity content = recipe[iter];
             for (int j = 0; j < tempList.Count; j++)
             {
-                if (tempList[j] == content)
+                if (tempList[j].entityName == recipe[i].entityName)
                 {
                     tempList.Remove(tempList[j]);
                     break;

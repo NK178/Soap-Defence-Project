@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EntityFusionDataWrapper
   data:
     inputList:
-    - {fileID: 0}
-    outputList: []
+    - {fileID: 8259018294276540347, guid: a0fa6d49e6a8bbb42a0f4a846a19aaaa, type: 3}
+    - {fileID: 2334647195338618960, guid: 0ce4eadcb11ec2d4abaf785e41b94422, type: 3}
+    outputList:
+    - {fileID: 4365711021617459629, guid: c7395a70c482fe54f9c580ce691b2cc0, type: 3}
     fusionDecision: {fileID: 11400000, guid: d8d39e8a67170df499ea0d0396b4ec17, type: 2}
+    fusionResponse: {fileID: 11400000, guid: f366195b70e90114e8c05f3d9bf4ac9a, type: 2}
