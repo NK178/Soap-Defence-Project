@@ -8,7 +8,10 @@ TagManager:
   - bubble
   - collectable
   - topCollider
+  - defenceProjectiles
+  - enemy
   - 'enemy '
+  - defence
   layers:
   - Default
   - TransparentFX
@@ -17,7 +20,7 @@ TagManager:
   - Water
   - UI
   - enemy
-  - 
+  - defence
   - 
   - 
   - 

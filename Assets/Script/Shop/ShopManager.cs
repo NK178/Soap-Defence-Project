@@ -20,7 +20,7 @@ public class ShopManager : MonoBehaviour
 
 
     private bool isEmpty = true;
-
+    private bool isActive;
 
     private void Awake()
     {
@@ -39,11 +39,18 @@ public class ShopManager : MonoBehaviour
         playerMoney.value = startingCash;
         if (playerMoney.value > maxMoney)
             playerMoney.value = maxMoney;
+
+
+        isActive = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //if (!isActive)
+        //    return; 
+
+
         if (!isEmpty)
         {
             HandleUI();
@@ -74,14 +81,16 @@ public class ShopManager : MonoBehaviour
     //check if valid buy 
     public void HandleDragStart(ShopItem item, PointerEventData eventData)
     {
-
-        Debug.Log($"Started dragging {item.name}");
+        if (!isActive)
+            return;
+        //Debug.Log($"Started dragging {item.name}");
         //check price 
         if (item.CheckIfCanBuy())
         {
             selectedItem = item;
             isDragging = true;
         }
+
     }
 
     //this one is handled by the mouse functions not drag drop 
@@ -92,7 +101,7 @@ public class ShopManager : MonoBehaviour
         object newPurchase = null;
         if (selectedItem != null)
         {
-            Debug.Log($"Dropped {selectedItem.name}");
+            //Debug.Log($"Dropped {selectedItem.name}");
             if (selectedItem.CheckIfCanBuy())
             {
                 newPurchase = selectedItem.Buy();
@@ -109,7 +118,7 @@ public class ShopManager : MonoBehaviour
             {
                 //apparenlty can do this and switch the typing so now entity got all the newpurchase stuff wow 
                 case Entity entity:
-                    Debug.Log("TYPE ENTITY");
+                    //Debug.Log("TYPE ENTITY");
                     succesfulDrop = HandleEntityDrop(entity);
                     break;
                 default:
@@ -130,34 +139,44 @@ public class ShopManager : MonoBehaviour
         isDragging = false;
     }
 
-    bool HandleEntityDrop(Entity entity)
+    bool HandleEntityDrop(Entity refEntity)
     {
-
         bool validDrop = false;
+
         //pls work I beg u
         GameObject target = mouseReference.currentTarget;
-        if (target != null)
-        {
-            if (target.transform.childCount == 0)
-                validDrop = true;
-        }
+        if (target == null)
+            return false;
 
-        if (validDrop)
+        //Debug.Log("TARGET NAME " + target.gameObject.name);
+
+        //Case if drop onto another entity for fusion 
+        if (target.GetComponent<Entity>() != null)
         {
-            Debug.Log("VALID DROP");
+            //Get colliding entity 
+            Entity entity2 = target.GetComponent<Entity>();
+            List<Entity> validFusionList = new List<Entity> { refEntity, entity2 };
+            FusionManager.instance.TriggerFusionIfValid(validFusionList);
+            validDrop = true;
+        }
+        else if (target.transform.childCount == 0)
+        {
             Vector3 gridPosition = target.transform.position;
-            GameObject newEntity = Instantiate(entity.gameObject, gridPosition, transform.rotation);
+            GameObject newEntity = Instantiate(refEntity.gameObject, gridPosition, transform.rotation);
             //make the entity be a child of the gameobejct 
             newEntity.transform.SetParent(target.transform);
             validDrop = true;
         }
-        else
-            Debug.Log("INVALID DROP");
+
+        //Debug.Log("DROP STATUS: " + validDrop);
+
         return validDrop;
     }
 
     public void HandleBubbleCollection()
     {
+        //if (!isActive)
+        //    return;
         AddMoney(bubbleAddAmt);
         if (mouseReference.currentTarget != null)
         {
@@ -192,6 +211,9 @@ public class ShopManager : MonoBehaviour
         return playerMoney.value;
     }
 
-
+    public void SetActiveStatus(bool condition)
+    {
+        isActive = condition;
+    }
 
 }

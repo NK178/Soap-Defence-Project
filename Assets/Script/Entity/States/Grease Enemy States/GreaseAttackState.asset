@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9481e47e7ba618841897bd0f50d26fc7, type: 3}
+  m_Name: GreaseAttackState
+  m_EditorClassIdentifier: Assembly-CSharp::EntityState
+  functionsList:
+  - {fileID: 11400000, guid: 7e96c928b52cf3a49b8942268a26f06f, type: 2}
+  - {fileID: 11400000, guid: f9c6ede1fb40b534c90b9bdf72f5b3ab, type: 2}
+  transitionsList:
+  - decision: {fileID: 11400000, guid: 97c23149e76280f429772969b57c89ef, type: 2}
+    trueState: {fileID: 11400000, guid: 422d9ec84283f2049862f281ca13f4be, type: 2}
+    falseState: {fileID: 11400000, guid: 6eb88942daa653743954fe4286c71501, type: 2}

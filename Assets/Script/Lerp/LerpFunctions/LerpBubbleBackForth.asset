@@ -16,5 +16,5 @@ MonoBehaviour:
   isActive: 0
   oscillation_axis: 0
   oscillation_startDirection: 0
-  amplitude: 6
-  frequency: 1.8
+  amplitude: 0.3
+  frequency: 2

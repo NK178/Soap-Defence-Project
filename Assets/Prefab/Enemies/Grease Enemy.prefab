@@ -9,10 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3274630691947792957}
+  - component: {fileID: 3017120372458054782}
+  - component: {fileID: 3803462743003128267}
   - component: {fileID: 204423227281940706}
+  - component: {fileID: 2270786319815938782}
   m_Layer: 6
   m_Name: Grease Enemy
-  m_TagString: 'enemy '
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,6 +36,79 @@ Transform:
   - {fileID: 2633189331396177533}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &3017120372458054782
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060069644945781301}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.0076847076, y: -0.007685423}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 5.995304, y: 5.964564}
+  m_EdgeRadius: 0
+--- !u!50 &3803462743003128267
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060069644945781301}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &204423227281940706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,13 +121,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f5888e96301334d85ae508ba060ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entity
+  tagCollider: {fileID: 2270786319815938782}
+  animator: {fileID: 0}
   statsList:
   - {fileID: 11400000, guid: 0f34c855174aa4746b326288b4b6482b, type: 2}
-  functionsList:
-  - {fileID: 11400000, guid: 318042cd3b6d89d4e8e20346b1c8743e, type: 2}
+  - {fileID: 11400000, guid: e20e4f56b7d67124d855e9539d49f306, type: 2}
   typeList:
-  - {fileID: 11400000, guid: b4a27725198095e459c9c4c35fc38a50, type: 2}
   - {fileID: 11400000, guid: 465e4f7826ac1d94d9985374d43a4e0a, type: 2}
+  - {fileID: 11400000, guid: 7284dc2cb52bd954f9d8d87082e7311e, type: 2}
+  currentState: {fileID: 11400000, guid: 7f219893211e3904fae74ef9d43de721, type: 2}
+  entityName: 3
+--- !u!114 &2270786319815938782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060069644945781301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea3d81ee5d6ff14fa5d9094fca8b3b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckColliderByTag
+  list:
+  - tag: defenceProjectiles
+    onTriggerEnter:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 204423227281940706}
+          m_TargetAssemblyTypeName: Entity, Assembly-CSharp
+          m_MethodName: HandleDamageFromProjectiles
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onTriggerExit:
+      m_PersistentCalls:
+        m_Calls: []
+  - tag: defence
+    onTriggerEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    onTriggerExit:
+      m_PersistentCalls:
+        m_Calls: []
+  allColliding: []
 --- !u!1 &3905345270759740428
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,7 +198,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 150, y: 150, z: 150}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3274630691947792957}

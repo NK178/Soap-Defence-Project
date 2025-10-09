@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,16 +15,22 @@ public class CheckColliderByTag : MonoBehaviour
     //special just for tag checking and hopefully resolves my collision reference quams 
     public EventCollideByTag[] list;
 
-    [HideInInspector] public GameObject currentColliding;
+    //[HideInInspector] public GameObject currentColliding;
+    [HideInInspector] public List<GameObject> allColliding; 
+
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         foreach (EventCollideByTag target in list)
         {
+            bool validCollision = false;
             if (target.tag == collision.gameObject.tag)
+                validCollision = true;
+
+
+            if (validCollision)
             {
-                //Debug.Log("COLLIDING WITH " + collision.gameObject.name);
-                currentColliding = collision.gameObject;
+                allColliding.Add(collision.gameObject);
                 target.onTriggerEnter.Invoke();
             }
         }
@@ -33,14 +40,21 @@ public class CheckColliderByTag : MonoBehaviour
     {
         foreach (EventCollideByTag target in list)
         {
+            bool validExit = false;
             if (target.tag == collision.gameObject.tag)
-            {
-                target.onTriggerExit.Invoke();
-            }
+                validExit = true;
 
-            if (collision.gameObject == currentColliding)
+            if (validExit)
             {
-                currentColliding = null;
+                foreach (GameObject gameObject in allColliding)
+                {
+                    if (gameObject == collision.gameObject)
+                    {
+                        allColliding.Remove(gameObject);
+                        break;
+                    }
+                }
+                target.onTriggerExit.Invoke();
             }
         }
     }

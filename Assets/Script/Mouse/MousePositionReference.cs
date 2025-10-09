@@ -2,7 +2,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
 //basically a global class to get mouse position from 
 // u need this or u die
 // use inspector reference is better I think

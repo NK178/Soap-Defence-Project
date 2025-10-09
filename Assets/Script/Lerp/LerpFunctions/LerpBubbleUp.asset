@@ -15,5 +15,5 @@ MonoBehaviour:
   lerpType: {fileID: 11400000, guid: c8be9072ed864064bbf656d6f54f4020, type: 2}
   isActive: 0
   directionToLerp: 0
-  moveSpeed: 50
-  accelerationTime: 2
+  moveSpeed: 3
+  accelerationTime: 1

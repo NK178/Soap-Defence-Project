@@ -29,6 +29,7 @@ public class OnMouseInteracts : MonoBehaviour
     [HideInInspector] public GameObject currentTarget;
     InputAction leftClick;
     InputAction leftRelease;
+    private bool isActive;
 
     private void OnEnable()
     {
@@ -44,6 +45,7 @@ public class OnMouseInteracts : MonoBehaviour
             leftRelease.performed += HandleMouseRelease;
             leftRelease.Enable();
         }
+        isActive = true;
     }
 
     private void OnDisable()
@@ -54,6 +56,8 @@ public class OnMouseInteracts : MonoBehaviour
 
     public void HandleMouseEnterExit()
     {
+        if (!isActive)
+            return;
         //let this be useless first 
         GameObject referenceObject = null;
 
@@ -88,7 +92,8 @@ public class OnMouseInteracts : MonoBehaviour
 
     public void HandleMousePress(InputAction.CallbackContext ctx)
     {
-
+        if (!isActive)
+            return;
         if (ctx.performed)
         {
             for (int iter = 0; iter < responseList.Count; iter++)
@@ -100,15 +105,14 @@ public class OnMouseInteracts : MonoBehaviour
                     break;
                 }
             }
-
-            TESTING = true;
         }
     }
 
 
     public void HandleMouseRelease(InputAction.CallbackContext ctx)
     {
-
+        if (!isActive)
+            return;
         if (ctx.performed)
         {
             for (int iter = 0; iter < responseList.Count; iter++)
@@ -123,38 +127,15 @@ public class OnMouseInteracts : MonoBehaviour
         }
     }
 
-    bool TESTING = false;
+
     private void Update()
     {
+        if (!isActive)
+            return;
         HandleMouseEnterExit();
-
-
-        if (TESTING)
-        {
-
-            //TESTING 
-            Vector3 spawnPosition = new Vector3(400, 300, 0);
-
-            // Clear any existing debug lines first
-            Debug.ClearDeveloperConsole();
-
-            RaycastHit2D hit = Physics2D.Raycast(spawnPosition, Vector2.right, 20f, LayerMask.GetMask("enemy"));
-
-            Vector3 endPosition = spawnPosition + Vector3.right * 200f;
-            Debug.DrawLine(spawnPosition, endPosition, Color.red, 2f); // 2 second duration
-
-            Debug.Log($"SPAWN: {spawnPosition}");
-            Debug.Log($"END: {endPosition}");
-
-            if (hit.collider != null)
-            {
-                Debug.Log("ENEMY HIT: " + hit.collider.name);
-                Debug.DrawLine(spawnPosition, hit.point, Color.green, 2f);
-            }
-        }
     }
 
-        bool IsMouseCollidingValid(MouseEventsByTag eventTag, ref GameObject referenceObject)
+    bool IsMouseCollidingValid(MouseEventsByTag eventTag, ref GameObject referenceObject)
     {
         bool validCollide = false;
         Vector2 worldMousePos = mouseInstance.GetWorldMousePos();
@@ -168,6 +149,11 @@ public class OnMouseInteracts : MonoBehaviour
         else
             referenceObject = null;
         return validCollide;
+    }
+
+
+    public void SetActiveStatus(bool condition) {
+        isActive = condition;
     }
 
 
