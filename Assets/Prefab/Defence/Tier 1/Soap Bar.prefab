@@ -99,9 +99,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 279701846173418643}
-  - component: {fileID: 8259018294276540347}
   - component: {fileID: 7618757313042564689}
   - component: {fileID: 665585746298388762}
+  - component: {fileID: 8259018294276540347}
   m_Layer: 7
   m_Name: Soap Bar
   m_TagString: defence
@@ -125,28 +125,6 @@ Transform:
   - {fileID: 3661726761526998099}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8259018294276540347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5146130849842965243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23f5888e96301334d85ae508ba060ef3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Entity
-  tagCollider: {fileID: 0}
-  animator: {fileID: 0}
-  statsList:
-  - {fileID: 11400000, guid: 2175a28795420d0429cd80e7f91852e1, type: 2}
-  - {fileID: 11400000, guid: 84f85179352f609478f1a43360e4afe4, type: 2}
-  typeList:
-  - {fileID: 11400000, guid: 465e4f7826ac1d94d9985374d43a4e0a, type: 2}
-  - {fileID: 11400000, guid: 940dc97fb86db7b478f98c4dce0d517e, type: 2}
-  currentState: {fileID: 11400000, guid: 0d87f75a9b9bc7c448f6ed4cd59e5aea, type: 2}
-  entityName: 1
 --- !u!61 &7618757313042564689
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -220,3 +198,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8259018294276540347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5146130849842965243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23f5888e96301334d85ae508ba060ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entity
+  tagCollider: {fileID: 0}
+  animator: {fileID: 0}
+  statsList:
+  - {fileID: 11400000, guid: 2175a28795420d0429cd80e7f91852e1, type: 2}
+  - {fileID: 11400000, guid: 84f85179352f609478f1a43360e4afe4, type: 2}
+  typeList:
+  - {fileID: 11400000, guid: 465e4f7826ac1d94d9985374d43a4e0a, type: 2}
+  - {fileID: 11400000, guid: 940dc97fb86db7b478f98c4dce0d517e, type: 2}
+  currentState: {fileID: 11400000, guid: 0d87f75a9b9bc7c448f6ed4cd59e5aea, type: 2}
+  entityName: 1

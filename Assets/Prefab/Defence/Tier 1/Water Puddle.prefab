@@ -99,10 +99,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1583125805667730590}
-  - component: {fileID: 2334647195338618960}
   - component: {fileID: 7246228838765350407}
-  - component: {fileID: 365440155492688552}
   - component: {fileID: 4198559433413183633}
+  - component: {fileID: 2334647195338618960}
+  - component: {fileID: 365440155492688552}
   m_Layer: 7
   m_Name: Water Puddle
   m_TagString: defence
@@ -126,29 +126,6 @@ Transform:
   - {fileID: 7082431086709271567}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2334647195338618960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8070503813933510661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23f5888e96301334d85ae508ba060ef3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Entity
-  tagCollider: {fileID: 365440155492688552}
-  animator: {fileID: 0}
-  statsList:
-  - {fileID: 11400000, guid: a3cd6d3adb2394c4fbddb4287ebc5db9, type: 2}
-  - {fileID: 11400000, guid: fec7832e200e7934fb1e43598a833a31, type: 2}
-  typeList:
-  - {fileID: 11400000, guid: 286a7c895450db844a70e2bf22a2a7e1, type: 2}
-  - {fileID: 11400000, guid: 7a1fd14f5f36e9143a557be58bbbe3d9, type: 2}
-  - {fileID: 11400000, guid: cfeecfd6481998445aab3ed969016e0f, type: 2}
-  currentState: {fileID: 11400000, guid: 6f944f140bf130645b85e940b3e47d7b, type: 2}
-  entityName: 2
 --- !u!61 &7246228838765350407
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -195,27 +172,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 6.0106745, y: 5.995304}
   m_EdgeRadius: 0
---- !u!114 &365440155492688552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8070503813933510661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ea3d81ee5d6ff14fa5d9094fca8b3b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CheckColliderByTag
-  list:
-  - tag: enemy
-    onTriggerEnter:
-      m_PersistentCalls:
-        m_Calls: []
-    onTriggerExit:
-      m_PersistentCalls:
-        m_Calls: []
-  allColliding: []
 --- !u!50 &4198559433413183633
 Rigidbody2D:
   serializedVersion: 5
@@ -243,3 +199,47 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2334647195338618960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8070503813933510661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23f5888e96301334d85ae508ba060ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entity
+  tagCollider: {fileID: 365440155492688552}
+  animator: {fileID: 0}
+  statsList:
+  - {fileID: 11400000, guid: a3cd6d3adb2394c4fbddb4287ebc5db9, type: 2}
+  - {fileID: 11400000, guid: fec7832e200e7934fb1e43598a833a31, type: 2}
+  typeList:
+  - {fileID: 11400000, guid: 286a7c895450db844a70e2bf22a2a7e1, type: 2}
+  - {fileID: 11400000, guid: 7a1fd14f5f36e9143a557be58bbbe3d9, type: 2}
+  - {fileID: 11400000, guid: cfeecfd6481998445aab3ed969016e0f, type: 2}
+  currentState: {fileID: 11400000, guid: 6f944f140bf130645b85e940b3e47d7b, type: 2}
+  entityName: 2
+--- !u!114 &365440155492688552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8070503813933510661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea3d81ee5d6ff14fa5d9094fca8b3b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckColliderByTag
+  list:
+  - tag: enemy
+    onTriggerEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    onTriggerExit:
+      m_PersistentCalls:
+        m_Calls: []
+  allColliding: []

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EntityState
   functionsList:
   - {fileID: 11400000, guid: e41cbbd9522145849ab7678dfc9069ba, type: 2}
+  - {fileID: 11400000, guid: f9c6ede1fb40b534c90b9bdf72f5b3ab, type: 2}
   transitionsList:
   - decision: {fileID: 11400000, guid: 117d93f6757f4914f878518c7470a441, type: 2}
     trueState: {fileID: 11400000, guid: 6eb88942daa653743954fe4286c71501, type: 2}

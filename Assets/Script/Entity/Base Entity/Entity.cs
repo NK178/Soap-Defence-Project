@@ -151,33 +151,6 @@ public class Entity : MonoBehaviour
         }
     }
 
-
-
-    //called in untiy events but will be handled in the fusion manager
-    //public void TriggerFusion()
-    //{
-
-    //    List<Entity> validFusionTargets = new List<Entity>();
-    //    for (int iter = 0; iter < tagCollider.allColliding.Count; iter++)
-    //    {
-    //        Entity reference = tagCollider.allColliding[iter].gameObject.GetComponent<Entity>();
-    //        if (reference != null)
-    //        {
-    //            EntityType entityType = reference.GetMaterialType();
-    //            if (entityType.GetEntityType().ToString().StartsWith("D_"))
-    //                validFusionTargets.Add(reference);
-    //        }
-    //    }
-
-    //    if (validFusionTargets.Count > 0)
-    //    {
-    //        //Need to include self into the list to check fusion 
-    //        validFusionTargets.Add(this);
-    //        FusionManager.instance.TriggerFusionIfValid(validFusionTargets); 
-    //    }
-    //}
-
-
     public void TransitionState(EntityState newState)
     {
         if (newState.name != "RemainState")

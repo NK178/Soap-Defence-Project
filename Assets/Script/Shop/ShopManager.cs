@@ -148,7 +148,7 @@ public class ShopManager : MonoBehaviour
         if (target == null)
             return false;
 
-        Debug.Log("TARGET NAME " + target.gameObject.name);
+        //Debug.Log("TARGET NAME " + target.gameObject.name);
 
         //Case if drop onto another entity for fusion 
         if (target.GetComponent<Entity>() != null)
@@ -168,43 +168,9 @@ public class ShopManager : MonoBehaviour
             validDrop = true;
         }
 
-        Debug.Log("DROP STATUS: " + validDrop);
+        //Debug.Log("DROP STATUS: " + validDrop);
 
         return validDrop;
-
-        //bool validDrop = false;
-
-        ////pls work I beg u
-        //GameObject target = mouseReference.currentTarget;
-        //if (target != null)
-        //{
-        //    //Case if drop onto another entity for fusion 
-        //    if (target.GetComponent<Entity>() != null)
-        //    {
-        //        //Get colliding entity 
-        //        Entity entity2 = target.GetComponent<Entity>();
-        //        List<Entity> validFusionList = new List<Entity> { entity, entity2 };
-        //        FusionManager.instance.TriggerFusionIfValid(validFusionList);
-
-        //    }
-        //    //Case if drop onto gridTile
-        //    else if (target.transform.childCount == 0) 
-        //        validDrop = true;
-
-        //}
-
-        //if (validDrop)
-        //{
-        //    //Debug.Log("VALID DROP");
-        //    Vector3 gridPosition = target.transform.position;
-        //    GameObject newEntity = Instantiate(entity.gameObject, gridPosition, transform.rotation);
-        //    //make the entity be a child of the gameobejct 
-        //    newEntity.transform.SetParent(target.transform);
-        //    validDrop = true;
-        //}
-        ////else
-        //    //Debug.Log("INVALID DROP");
-        //return validDrop;
     }
 
     public void HandleBubbleCollection()

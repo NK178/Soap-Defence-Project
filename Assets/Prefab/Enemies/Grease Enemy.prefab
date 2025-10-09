@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3274630691947792957}
-  - component: {fileID: 204423227281940706}
   - component: {fileID: 3017120372458054782}
   - component: {fileID: 3803462743003128267}
+  - component: {fileID: 204423227281940706}
   - component: {fileID: 2270786319815938782}
   m_Layer: 6
   m_Name: Grease Enemy
@@ -36,28 +36,6 @@ Transform:
   - {fileID: 2633189331396177533}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &204423227281940706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1060069644945781301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23f5888e96301334d85ae508ba060ef3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Entity
-  tagCollider: {fileID: 2270786319815938782}
-  animator: {fileID: 0}
-  statsList:
-  - {fileID: 11400000, guid: 0f34c855174aa4746b326288b4b6482b, type: 2}
-  - {fileID: 11400000, guid: e20e4f56b7d67124d855e9539d49f306, type: 2}
-  typeList:
-  - {fileID: 11400000, guid: 465e4f7826ac1d94d9985374d43a4e0a, type: 2}
-  - {fileID: 11400000, guid: 7284dc2cb52bd954f9d8d87082e7311e, type: 2}
-  currentState: {fileID: 11400000, guid: 7f219893211e3904fae74ef9d43de721, type: 2}
-  entityName: 3
 --- !u!61 &3017120372458054782
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -131,6 +109,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &204423227281940706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060069644945781301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23f5888e96301334d85ae508ba060ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entity
+  tagCollider: {fileID: 2270786319815938782}
+  animator: {fileID: 0}
+  statsList:
+  - {fileID: 11400000, guid: 0f34c855174aa4746b326288b4b6482b, type: 2}
+  - {fileID: 11400000, guid: e20e4f56b7d67124d855e9539d49f306, type: 2}
+  typeList:
+  - {fileID: 11400000, guid: 465e4f7826ac1d94d9985374d43a4e0a, type: 2}
+  - {fileID: 11400000, guid: 7284dc2cb52bd954f9d8d87082e7311e, type: 2}
+  currentState: {fileID: 11400000, guid: 7f219893211e3904fae74ef9d43de721, type: 2}
+  entityName: 3
 --- !u!114 &2270786319815938782
 MonoBehaviour:
   m_ObjectHideFlags: 0
