@@ -141,6 +141,7 @@ public class OnMouseInteracts : MonoBehaviour
     {
         bool validCollide = false;
         Vector2 worldMousePos = mouseInstance.GetWorldMousePos();
+        //apparenlty OverlapPoint searches for the one with the lowest Z-position , (OverlapPointAll sorts lowest to highest)
         Collider2D hit = Physics2D.OverlapPoint(worldMousePos);
         if (hit != null && hit.gameObject.CompareTag(eventTag.tagName))
         {

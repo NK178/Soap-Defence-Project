@@ -81,7 +81,7 @@ public class ShopManager : MonoBehaviour
     //check if valid buy 
     public void HandleDragStart(ShopItem item, PointerEventData eventData)
     {
-        if (!isActive)
+        if (!isActive || item == null)
             return;
         //Debug.Log($"Started dragging {item.name}");
         //check price 

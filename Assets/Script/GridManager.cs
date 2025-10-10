@@ -28,7 +28,7 @@ public class GridManager : MonoBehaviour
                 T component = secondChild.GetComponent<T>();
                 if (component != null)
                 {
-                    Debug.Log("FOUND DEFENCE: " + secondChild.name);
+                    //Debug.Log("FOUND DEFENCE: " + secondChild.name);
                     refList.Add(secondChild.GetComponent<T>());
                 }
             }

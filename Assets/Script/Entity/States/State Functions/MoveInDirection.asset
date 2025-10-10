@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MoveInDirection
   m_EditorClassIdentifier: Assembly-CSharp::MoveInDirection
   direction: {x: -1, y: 0}
-  referenceMoveSpeed: 5
+  referenceMoveSpeed: 2

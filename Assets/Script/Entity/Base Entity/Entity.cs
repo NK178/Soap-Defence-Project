@@ -70,6 +70,8 @@ public class Entity : MonoBehaviour
             {
                 StopAllCoroutines();
                 isActive = false;
+                //for now I will leave it like this 
+                Destroy(this.gameObject);
             }
         }
 

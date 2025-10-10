@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoapBarProjectileAttack
   soapChipPrefab: {fileID: 4466068466400021363, guid: 2a1d9838850f6b346a0f495732cd4992, type: 3}
   attackRate: 3
-  fixedProjectileSpeed: 35
+  fixedProjectileSpeed: 39
   gravityScale: 24
