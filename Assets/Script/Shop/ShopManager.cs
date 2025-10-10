@@ -139,7 +139,7 @@ public class ShopManager : MonoBehaviour
         isDragging = false;
     }
 
-    bool HandleEntityDrop(Entity refEntity)
+    public bool HandleEntityDrop(Entity refEntity)
     {
         bool validDrop = false;
 
@@ -163,6 +163,7 @@ public class ShopManager : MonoBehaviour
         {
             Vector3 gridPosition = target.transform.position;
             GameObject newEntity = Instantiate(refEntity.gameObject, gridPosition, transform.rotation);
+            newEntity.transform.localScale = new Vector3(1, 1, 1);
             //make the entity be a child of the gameobejct 
             newEntity.transform.SetParent(target.transform);
             validDrop = true;

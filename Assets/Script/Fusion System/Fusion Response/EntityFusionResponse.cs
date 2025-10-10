@@ -27,7 +27,7 @@ public class EntityFusionResponse : FusionResponse<Entity>
             if (entity.gameObject.scene.IsValid())
             {
                 //check if its a child, only save this value once as the grid location
-                if (entity.gameObject.transform.parent != null && target == null)
+                if (entity.gameObject.transform.parent != null && target == null && entity.GetActiveStatus())
                     target = entity.gameObject.transform.parent;
 
                 //add valid scene object to be removed

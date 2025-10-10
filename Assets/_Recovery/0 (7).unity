@@ -7272,7 +7272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6262192ecef027b4d84d2eb805bb7b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OnMouseInteracts
-  defaultSpriteScale: {x: 2, y: 2, z: 2}
   mouseInstance: {fileID: 1179770089}
   nameLeftClickPress: LeftMousePressed
   nameLeftClickRelease: LeftMouseReleased
@@ -7327,7 +7326,7 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 1387848339}
           m_TargetAssemblyTypeName: WrenchTool, Assembly-CSharp
-          m_MethodName: HandleWrenchMouseRelease
+          m_MethodName: DropEntity
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -7366,18 +7365,6 @@ MonoBehaviour:
         - m_Target: {fileID: 2068532523}
           m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
           m_MethodName: HandleDragEndByMouse
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1387848339}
-          m_TargetAssemblyTypeName: WrenchTool, Assembly-CSharp
-          m_MethodName: HandleWrenchMouseRelease
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -9562,9 +9549,7 @@ MonoBehaviour:
   mouseImage: {fileID: 1179770085}
   gridManagerReference: {fileID: 1834660572}
   spawnerManagerReference: {fileID: 414620781}
-  wrenchToolReference: {fileID: 1387848339}
   DEBUGkeyName: Interact
-  wrenchKeyName: Key2
 --- !u!4 &1647802736
 Transform:
   m_ObjectHideFlags: 0

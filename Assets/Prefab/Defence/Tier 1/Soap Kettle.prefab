@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f5888e96301334d85ae508ba060ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entity
+  sprite: {fileID: 7066273984111945118}
   tagCollider: {fileID: 0}
   animator: {fileID: 2441641294123858148}
   statsList:

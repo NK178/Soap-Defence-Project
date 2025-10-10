@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 
 public class GameManager : MonoBehaviour
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SpriteRenderer mouseImage;
     [SerializeField] private GridManager gridManagerReference;
     [SerializeField] private SpawnerManager spawnerManagerReference;
+    [SerializeField] private WrenchTool wrenchToolReference; 
 
     private MousePositionReference mousePosReference;
     private OnMouseInteracts onMouseInteracts;
@@ -23,8 +25,11 @@ public class GameManager : MonoBehaviour
     private bool hasPlayerLost;
 
     //Debug 
-    [SerializeField] private string DEBUGkeyName; 
+    [SerializeField] private string DEBUGkeyName;
+    [SerializeField] private string wrenchKeyName;
     private InputAction DEBUGkey;
+    private InputAction wrenchKey;
+    private bool updateMouseSprite; 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -33,6 +38,7 @@ public class GameManager : MonoBehaviour
         isGameRunning = true;
         hasPlayerWon = false;
         hasPlayerLost = false;
+        updateMouseSprite = true;
         mousePosReference = mouseReference.GetComponent<MousePositionReference>();
         onMouseInteracts = mouseReference.GetComponent<OnMouseInteracts>();
 
@@ -47,12 +53,18 @@ public class GameManager : MonoBehaviour
             DEBUGkey.started += DEBUGHandleKey;
             DEBUGkey.Enable();
         }
+        wrenchKey = InputSystem.actions.FindAction(wrenchKeyName);
+        if (wrenchKey != null)
+        {
+            wrenchKey.started += ToggleWrench;
+            wrenchKey.Enable();
+        }
     }
 
     private void OnDisable()
     {
-        DEBUGkey.performed -= DEBUGHandleKey;
-
+        DEBUGkey.started -= DEBUGHandleKey;
+        wrenchKey.started -= ToggleWrench;
     }
 
     // just used for debugging 
@@ -69,6 +81,14 @@ public class GameManager : MonoBehaviour
         }   
     }
 
+    private void ToggleWrench(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            wrenchToolReference.ToggleWrench();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -78,20 +98,24 @@ public class GameManager : MonoBehaviour
 
         Vector3 worldMousePos = mousePosReference.GetWorldMousePos();
 
+
         if (ShopManager.instance.isDragging)
         {
-            ShopItem currentItem = ShopManager.instance.GetCurrentItem();
-            SpriteRenderer sR = mouseImage.GetComponent<SpriteRenderer>();
-            if (currentItem != null && sR != null)
-            {
-                sR.sprite = currentItem.GetSprite();
-            }
+            HandleMouseUIByShop();
+            mouseImage.enabled = true;
+            mouseImage.gameObject.transform.position = worldMousePos;
+        }
+        else if (wrenchToolReference.GetActiveStatus() && wrenchToolReference.IsObjectPickedUp())
+        {
+            HandleMouseUIByWrench();
+            updateMouseSprite = false;
             mouseImage.enabled = true;
             mouseImage.gameObject.transform.position = worldMousePos;
         }
         else
         {
             mouseImage.enabled = false;
+            updateMouseSprite = true;
         }
 
         //Check for player win 
@@ -100,6 +124,30 @@ public class GameManager : MonoBehaviour
             //basically everything is gone
             if (spawnerManagerReference.AreAllSpawnsInactive() && spawnerManagerReference.AreAllSpawnersEmpty())
                 TriggerPlayerWin();
+        }
+    }
+
+    private void HandleMouseUIByShop()
+    {
+        ShopItem currentItem = ShopManager.instance.GetCurrentItem();
+        SpriteRenderer sR = mouseImage.GetComponent<SpriteRenderer>();
+        if (currentItem != null && sR != null)
+        {
+            sR.sprite = currentItem.GetSprite();
+            mouseImage.gameObject.transform.localScale = onMouseInteracts.defaultSpriteScale;
+        }
+    }
+
+    private void HandleMouseUIByWrench()
+    {
+        Entity reference = wrenchToolReference.GetEntityReference();
+        SpriteRenderer sR = mouseImage.GetComponent<SpriteRenderer>();
+        float spriteScale = reference.transform.localScale.x; 
+        if (reference != null)
+        {
+            sR.sprite = reference.GetEntitySprite();
+            sR.color = reference.gameObject.GetComponentInChildren<SpriteRenderer>().color; //not needed I think
+            sR.gameObject.transform.localScale = new Vector3(1/spriteScale, 1/spriteScale, 1);
         }
     }
 

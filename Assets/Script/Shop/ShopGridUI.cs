@@ -1,8 +1,4 @@
-using Unity.Collections.LowLevel.Unsafe;
-using Unity.VisualScripting;
-using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.U2D.IK;
 
 
 //inherit from base class

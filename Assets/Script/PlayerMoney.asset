@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27bb75e75976ee418ad45948d2668bc, type: 3}
   m_Name: PlayerMoney
   m_EditorClassIdentifier: Assembly-CSharp::FloatSO
-  value: 100
+  value: 5000

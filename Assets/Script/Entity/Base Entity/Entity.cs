@@ -34,6 +34,7 @@ public enum ENTITYANIMS {
 
 public class Entity : MonoBehaviour
 {
+    [SerializeField] private SpriteRenderer sprite; 
     [SerializeField] private CheckColliderByTag tagCollider;
     [SerializeField] private Animator animator; 
     [SerializeField] private List<EntityStats> statsList;
@@ -240,6 +241,11 @@ public class Entity : MonoBehaviour
         isAlive = condition; 
     }
 
+    public void SetActiveStatus(bool condition)
+    {
+        isActive = condition; 
+    }
+
     public bool GetActiveStatus()
     {
         return isActive; 
@@ -248,6 +254,11 @@ public class Entity : MonoBehaviour
     public CheckColliderByTag GetTagCollider()
     {
         return tagCollider; 
+    }
+
+    public Sprite GetEntitySprite()
+    {
+        return sprite.sprite;
     }
 
     /////////////////////// can consider using in a upgraded version but for now dont use this 

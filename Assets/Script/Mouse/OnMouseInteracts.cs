@@ -22,11 +22,13 @@ public class MouseEventsByTag
 public class OnMouseInteracts : MonoBehaviour
 {
     //idk if this is good or bad design but I will roll with it for now 
+    public Vector3 defaultSpriteScale;
     [SerializeField] protected MousePositionReference mouseInstance;
     [SerializeField] private string nameLeftClickPress;
     [SerializeField] private string nameLeftClickRelease;
     [SerializeField] private List<MouseEventsByTag> responseList;
     [HideInInspector] public GameObject currentTarget;
+
     InputAction leftClick;
     InputAction leftRelease;
     private bool isActive;
