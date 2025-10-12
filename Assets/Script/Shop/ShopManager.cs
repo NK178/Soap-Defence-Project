@@ -1,8 +1,9 @@
-using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.EventSystems;
-using UnityEditor.UIElements;
 using Unity.VisualScripting;
+using UnityEditor.UIElements;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using static UnityEditor.Progress;
 
 public class ShopManager : MonoBehaviour
 {
@@ -91,6 +92,14 @@ public class ShopManager : MonoBehaviour
             isDragging = true;
         }
 
+    }
+
+    public void CancelDrag()
+    {
+        if (!isActive || selectedItem == null)
+            return;
+        selectedItem = null;
+        isDragging = false;
     }
 
     //this one is handled by the mouse functions not drag drop 

@@ -139,5 +139,9 @@ public class WrenchTool : MonoBehaviour, InterfaceDragHandler, IPointerClickHand
         return isObjectPickedUp;
     }
 
+    public void SetWrenchActive(bool condition)
+    {
+        isWrenchActive = condition;
+    }
 
 }

@@ -240,5 +240,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eab44dada62ba0040ae817b2cc9720d5, type: 2}
   typeList:
   - {fileID: 11400000, guid: 286a7c895450db844a70e2bf22a2a7e1, type: 2}
+  - {fileID: 11400000, guid: 940dc97fb86db7b478f98c4dce0d517e, type: 2}
   currentState: {fileID: 11400000, guid: afe79d48d5710454aa53da91ba108dc9, type: 2}
   entityName: 0

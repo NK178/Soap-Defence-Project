@@ -50,11 +50,12 @@ public class CheckColliderByTag : MonoBehaviour
                 {
                     if (gameObject == collision.gameObject)
                     {
+                        target.onTriggerExit.Invoke();
                         allColliding.Remove(gameObject);
                         break;
                     }
                 }
-                target.onTriggerExit.Invoke();
+                //target.onTriggerExit.Invoke();
             }
         }
     }

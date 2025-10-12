@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private string wrenchKeyName;
     private InputAction DEBUGkey;
     private InputAction wrenchKey;
-    private bool updateMouseSprite; 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -38,7 +37,6 @@ public class GameManager : MonoBehaviour
         isGameRunning = true;
         hasPlayerWon = false;
         hasPlayerLost = false;
-        updateMouseSprite = true;
         mousePosReference = mouseReference.GetComponent<MousePositionReference>();
         onMouseInteracts = mouseReference.GetComponent<OnMouseInteracts>();
 
@@ -99,23 +97,23 @@ public class GameManager : MonoBehaviour
         Vector3 worldMousePos = mousePosReference.GetWorldMousePos();
 
 
+
         if (ShopManager.instance.isDragging)
         {
+            wrenchToolReference.SetWrenchActive(false);
             HandleMouseUIByShop();
             mouseImage.enabled = true;
             mouseImage.gameObject.transform.position = worldMousePos;
         }
-        else if (wrenchToolReference.GetActiveStatus() && wrenchToolReference.IsObjectPickedUp())
+        else if (wrenchToolReference.GetActiveStatus())
         {
             HandleMouseUIByWrench();
-            updateMouseSprite = false;
             mouseImage.enabled = true;
             mouseImage.gameObject.transform.position = worldMousePos;
         }
         else
         {
             mouseImage.enabled = false;
-            updateMouseSprite = true;
         }
 
         //Check for player win 
@@ -140,14 +138,27 @@ public class GameManager : MonoBehaviour
 
     private void HandleMouseUIByWrench()
     {
-        Entity reference = wrenchToolReference.GetEntityReference();
         SpriteRenderer sR = mouseImage.GetComponent<SpriteRenderer>();
-        float spriteScale = reference.transform.localScale.x; 
-        if (reference != null)
+        //if object is not picked up do glove sprite 
+        if (!wrenchToolReference.IsObjectPickedUp())
         {
-            sR.sprite = reference.GetEntitySprite();
-            sR.color = reference.gameObject.GetComponentInChildren<SpriteRenderer>().color; //not needed I think
-            sR.gameObject.transform.localScale = new Vector3(1/spriteScale, 1/spriteScale, 1);
+            sR.sprite = onMouseInteracts.defaultSprite;
+            onMouseInteracts.StopAnimatorAndClear();
+            mouseImage.gameObject.transform.localScale = onMouseInteracts.defaultSpriteScale;
+        }
+        else
+        {
+            Entity reference = wrenchToolReference.GetEntityReference();
+            Animator entityAnimator = null;
+            if (reference != null)
+                entityAnimator = reference.GetAnimator();
+
+            float spriteScale = reference.transform.localScale.x;
+            if (entityAnimator != null)
+            {
+                onMouseInteracts.SetAndPlayDefaultAnim(entityAnimator);
+                sR.gameObject.transform.localScale = new Vector3(1 / spriteScale, 1 / spriteScale, 1);
+            }
         }
     }
 
@@ -159,8 +170,20 @@ public class GameManager : MonoBehaviour
         {
             foreach (Entity entity in listEntityToDeactive)
             {
-                entity.SetEntityAliveStatus(false);
+                entity.SetActiveStatus(false);
+                entity.StopAllCoroutines();
             }
+        }
+    }
+
+    private void DeactiveEnemies()
+    {
+        List<Entity> activeList = new List<Entity>();
+        spawnerManagerReference.GetActiveSpawnsList(out activeList);
+        foreach (Entity entity in activeList)
+        {
+            entity.SetActiveStatus(false);
+            entity.StopAllCoroutines();
         }
     }
 
@@ -171,6 +194,7 @@ public class GameManager : MonoBehaviour
         hasPlayerWon = true;
         hasPlayerLost = false;
         DeactiveDefences();
+        DeactiveEnemies();
         Debug.Log("WIN");
         isGameRunning = false;
     }
@@ -184,6 +208,7 @@ public class GameManager : MonoBehaviour
         onMouseInteracts.SetActiveStatus(false);
         shopManagerReference.SetActiveStatus(false);
         DeactiveDefences();
+        DeactiveEnemies();
         Debug.Log("LOSE");
         isGameRunning = false;
     }

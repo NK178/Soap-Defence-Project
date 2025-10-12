@@ -23,7 +23,9 @@ public class OnMouseInteracts : MonoBehaviour
 {
     //idk if this is good or bad design but I will roll with it for now 
     public Vector3 defaultSpriteScale;
+    public Sprite defaultSprite; //temp ; 
     [SerializeField] protected MousePositionReference mouseInstance;
+    [SerializeField] private Animator animator; 
     [SerializeField] private string nameLeftClickPress;
     [SerializeField] private string nameLeftClickRelease;
     [SerializeField] private List<MouseEventsByTag> responseList;
@@ -157,6 +159,18 @@ public class OnMouseInteracts : MonoBehaviour
 
     public void SetActiveStatus(bool condition) {
         isActive = condition;
+    }
+
+    public void StopAnimatorAndClear()
+    {
+        animator.StopPlayback();
+        animator.runtimeAnimatorController = null;
+    }
+
+    public void SetAndPlayDefaultAnim(Animator anim)
+    {
+        animator.runtimeAnimatorController = anim.runtimeAnimatorController;
+        animator.SetBool(ENTITYANIMS.DEFAULT.ToString(),true);
     }
 
 

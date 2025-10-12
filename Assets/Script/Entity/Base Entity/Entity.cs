@@ -73,6 +73,10 @@ public class Entity : MonoBehaviour
                 //for now I will leave it like this 
                 Destroy(this.gameObject);
             }
+
+            if (GetCurrentStatValue(STATSTYPE.HEALTH) <= 0)
+                isAlive = false;
+            
         }
 
     }
@@ -107,7 +111,7 @@ public class Entity : MonoBehaviour
         float currentHealth = GetCurrentStatValue(STATSTYPE.HEALTH);
         float newHealth = currentHealth - damage;
         SetCurrentStatValue(STATSTYPE.HEALTH, newHealth);
-        //Debug.Log(this.gameObject.name + "'S NEW HEALTH " + newHealth);
+        Debug.Log(this.gameObject.name + "'S NEW HEALTH " + newHealth);
     }
 
 
@@ -246,6 +250,11 @@ public class Entity : MonoBehaviour
     public void SetActiveStatus(bool condition)
     {
         isActive = condition; 
+    }
+
+    public Animator GetAnimator()
+    {
+        return animator; 
     }
 
     public bool GetActiveStatus()

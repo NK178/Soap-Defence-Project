@@ -1,4 +1,6 @@
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering.Universal;
 
 
 //inherit from base class
@@ -20,7 +22,8 @@ public class ShopGridUI : GeneralUI, InterfaceDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        //ShopManager.instance.HandleDragEnd(item, eventData);
+        ShopManager.instance.CancelDrag();
+        
     }
 
     public void SetItem(ShopItem item)

@@ -42,7 +42,7 @@ public class SpawnerManager : MonoBehaviour
 
             if (waveIndex == waveDataList.Count)
             {
-                Debug.Log("WAVE DATA SENT");
+                //Debug.Log("WAVE DATA SENT");
                 areAllWavesSent = true;
             }
         }
