@@ -6874,6 +6874,7 @@ GameObject:
   - component: {fileID: 1164844442}
   - component: {fileID: 1164844444}
   - component: {fileID: 1164844443}
+  - component: {fileID: 1164844445}
   m_Layer: 5
   m_Name: 'Saw Tool '
   m_TagString: Untagged
@@ -6939,6 +6940,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1164844441}
   m_CullTransparentMesh: 1
+--- !u!114 &1164844445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164844441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeacd32b0a6b49844bdd3e9c5a4f319a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SawTool
+  mouseReference: {fileID: 1179770090}
 --- !u!1 &1171349486
 GameObject:
   m_ObjectHideFlags: 0
@@ -7363,6 +7377,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1164844445}
+          m_TargetAssemblyTypeName: SawTool, Assembly-CSharp
+          m_MethodName: HandleShovelMouseRelease
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onMouseRelease:
       m_PersistentCalls:
         m_Calls:
@@ -7381,6 +7407,18 @@ MonoBehaviour:
         - m_Target: {fileID: 1387848339}
           m_TargetAssemblyTypeName: WrenchTool, Assembly-CSharp
           m_MethodName: HandleWrenchMouseRelease
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1164844445}
+          m_TargetAssemblyTypeName: SawTool, Assembly-CSharp
+          m_MethodName: HandleShovelMouseRelease
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -9731,7 +9769,7 @@ GameObject:
   - component: {fileID: 1647802737}
   - component: {fileID: 1647802738}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: LevelManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9755,6 +9793,7 @@ MonoBehaviour:
   gridManagerReference: {fileID: 1834660572}
   spawnerManagerReference: {fileID: 414620781}
   wrenchToolReference: {fileID: 1387848339}
+  sawToolReference: {fileID: 1164844445}
   DEBUGkeyName: Interact
   wrenchKeyName: Key2
 --- !u!4 &1647802736

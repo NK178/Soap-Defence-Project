@@ -7,15 +7,28 @@ public class WrenchTool : MonoBehaviour, InterfaceDragHandler, IPointerClickHand
     Entity target;
     private bool isObjectPickedUp;
     private bool isWrenchActive;
+    private bool isActive;
 
     void Awake()
     {
         target = null;
         isObjectPickedUp = isWrenchActive = false;
+        isActive = true;
+    }
+
+    void Update()
+    {
+        if (!isActive)
+        {
+            isObjectPickedUp = isWrenchActive = false;
+            target = null; 
+        }
     }
 
     private bool IfMouseTargetIsEntity()
     {
+        if (!isActive)
+            return false;
         Entity reference = null;
         if (mouseReference.currentTarget != null)
         {
@@ -29,6 +42,8 @@ public class WrenchTool : MonoBehaviour, InterfaceDragHandler, IPointerClickHand
 
     public void PickUpEntity()
     {
+        if (!isActive)
+            return; 
         if (!isObjectPickedUp && isWrenchActive)
         {
             if (IfMouseTargetIsEntity())
@@ -43,7 +58,7 @@ public class WrenchTool : MonoBehaviour, InterfaceDragHandler, IPointerClickHand
 
     public void HandleWrenchMouseRelease()
     {
-        if (!isWrenchActive)
+        if (!isWrenchActive || !isActive)
             return; 
 
         //drop da entity 
@@ -52,6 +67,7 @@ public class WrenchTool : MonoBehaviour, InterfaceDragHandler, IPointerClickHand
             Debug.Log("DROPPING " + target.gameObject.name);
             HandleDrop(target);
             isObjectPickedUp = false;
+            isWrenchActive = false;
         }
         //pick up if nothing yet 
         else
@@ -63,7 +79,7 @@ public class WrenchTool : MonoBehaviour, InterfaceDragHandler, IPointerClickHand
     private void HandleDrop(Entity reference)
     {
         GameObject target = mouseReference.currentTarget;
-        if (target == null)
+        if (target == null || !isActive)
             return;
 
         //to prevent unsafe deletions, I will just move the entity instead doing delete and spawning a new one like how shopmanager does 
@@ -83,6 +99,8 @@ public class WrenchTool : MonoBehaviour, InterfaceDragHandler, IPointerClickHand
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!isActive)
+            return;
         isWrenchActive = true;
         Debug.Log("WRENCH STATUS " + isWrenchActive);
     }
@@ -94,6 +112,8 @@ public class WrenchTool : MonoBehaviour, InterfaceDragHandler, IPointerClickHand
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!isActive)
+            return;
         //if hovering over entity let it be handled elsewhere 
         if (!IfMouseTargetIsEntity())
         {
@@ -115,6 +135,8 @@ public class WrenchTool : MonoBehaviour, InterfaceDragHandler, IPointerClickHand
 
     public void ToggleWrench()
     {
+        if (!isActive)
+            return;
         isWrenchActive = !isWrenchActive;
         if (!isWrenchActive)
         {
@@ -129,7 +151,7 @@ public class WrenchTool : MonoBehaviour, InterfaceDragHandler, IPointerClickHand
         return target; 
     }
 
-    public bool GetActiveStatus()
+    public bool GetWrenchActiveStatus()
     {
         return isWrenchActive;  
     }
@@ -142,6 +164,11 @@ public class WrenchTool : MonoBehaviour, InterfaceDragHandler, IPointerClickHand
     public void SetWrenchActive(bool condition)
     {
         isWrenchActive = condition;
+    }
+
+    public void SetActiveStatus(bool condition)
+    {
+        isActive = condition;
     }
 
 }

@@ -43,9 +43,12 @@ public class SoapBarProjectileAttack : EntityFunctions
                 //bad system probably needs to change but will do for now 
                 RequireParentReference typeData = projectile.GetComponent<RequireParentReference>();
                 if (typeData != null)
+                {
                     typeData.SetReferenceEntity(entity);
+                    typeData.SetTargetEntity(target);
+                }
 
-                float projectileSpeed = fixedProjectileSpeed;
+                    float projectileSpeed = fixedProjectileSpeed;
                 Vector3 targetPosition = target.transform.position - spawnPosition;
                 Vector3 targetSpeed = target.dataLibrary.GetVector3("MoveInDirection_velocity");
                 Vector3 projectileGravity = gravityScale * Vector2.down;

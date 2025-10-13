@@ -137,16 +137,22 @@ public class Entity : MonoBehaviour
     {
         TypeInteractions typeInteraction = null;
         Entity refEntity = null;
+        GameObject projectile = null;
         //check if it is a projectile with the type 
         for (int iter = 0; iter < tagCollider.allColliding.Count; iter++)
         {
             RequireParentReference typeData = tagCollider.allColliding[iter].GetComponent<RequireParentReference>();
             if (typeData != null)
-                refEntity = typeData.GetReferenceEntity();
+            {
+                //Check if projectile target is the same as this entity 
+                if (typeData.GetTargetEntity() == this) 
+                    refEntity = typeData.GetReferenceEntity();
+            }
 
             if (refEntity != null)
             {
                 typeInteraction = TypeInteractionMap.instance.GetTypeInteraction(refEntity.GetMaterialType());
+                projectile = tagCollider.allColliding[iter].gameObject;
                 break;
             }
         }
@@ -154,6 +160,8 @@ public class Entity : MonoBehaviour
         if (typeInteraction != null)
         {
             float damageToTake = CalculateDamageByType(typeInteraction, refEntity.GetCurrentStatValue(STATSTYPE.DAMAGE));
+            //its not ideal to handle projectile deletion here, but doesnt seem like I have a choice so oh well, will refactor if needed
+            Destroy(projectile);
             TakeDamage(damageToTake);
         }
     }

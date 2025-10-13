@@ -1,14 +1,10 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Android;
-using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 
-public class GameManager : MonoBehaviour
+
+public class LevelManager : MonoBehaviour
 {
 
     [SerializeField] private GameObject mouseReference;
@@ -17,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GridManager gridManagerReference;
     [SerializeField] private SpawnerManager spawnerManagerReference;
     [SerializeField] private WrenchTool wrenchToolReference; 
+    [SerializeField] private SawTool sawToolReference; 
 
     private MousePositionReference mousePosReference;
     private OnMouseInteracts onMouseInteracts;
@@ -24,7 +21,7 @@ public class GameManager : MonoBehaviour
     private bool hasPlayerWon;
     private bool hasPlayerLost;
 
-    //Debug 
+    //Debug     
     [SerializeField] private string DEBUGkeyName;
     [SerializeField] private string wrenchKeyName;
     private InputAction DEBUGkey;
@@ -105,15 +102,24 @@ public class GameManager : MonoBehaviour
             mouseImage.enabled = true;
             mouseImage.gameObject.transform.position = worldMousePos;
         }
-        else if (wrenchToolReference.GetActiveStatus())
+        else if (wrenchToolReference.GetWrenchActiveStatus())
         {
             HandleMouseUIByWrench();
             mouseImage.enabled = true;
             mouseImage.gameObject.transform.position = worldMousePos;
+            shopManagerReference.SetBubbleCollectionStatus(false);
+            //sawToolReference.SetSawActive(false);
+        }
+        else if (sawToolReference.GetSawActiveStatus())
+        {
+            shopManagerReference.SetBubbleCollectionStatus(false);
+            //wrenchToolReference.SetWrenchActive(false);
         }
         else
         {
             mouseImage.enabled = false;
+            shopManagerReference.SetBubbleCollectionStatus(true);
+
         }
 
         //Check for player win 
@@ -193,8 +199,8 @@ public class GameManager : MonoBehaviour
             return;
         hasPlayerWon = true;
         hasPlayerLost = false;
+        wrenchToolReference.SetActiveStatus(false);
         DeactiveDefences();
-        DeactiveEnemies();
         Debug.Log("WIN");
         isGameRunning = false;
     }
@@ -207,10 +213,19 @@ public class GameManager : MonoBehaviour
         hasPlayerLost = true;
         onMouseInteracts.SetActiveStatus(false);
         shopManagerReference.SetActiveStatus(false);
+        wrenchToolReference.SetActiveStatus(false);
         DeactiveDefences();
         DeactiveEnemies();
         Debug.Log("LOSE");
         isGameRunning = false;
+    }
+
+    public bool GetUtilitiesActiveStatus()
+    {
+        if (wrenchToolReference.GetWrenchActiveStatus() || sawToolReference.GetSawActiveStatus())
+            return true;
+        else
+            return false;
     }
 
     public void DebugCall()

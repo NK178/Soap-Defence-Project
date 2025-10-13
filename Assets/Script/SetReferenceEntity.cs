@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class RequireParentReference : MonoBehaviour
 { 
-    private Entity referenceEntity; 
+    private Entity referenceEntity;
+    private Entity targetEntity; 
+
 
     public void SetReferenceEntity(Entity reference)
     {
@@ -12,5 +14,15 @@ public class RequireParentReference : MonoBehaviour
     public Entity GetReferenceEntity()
     {
         return referenceEntity;
+    }
+
+    public void SetTargetEntity(Entity reference)
+    {
+        targetEntity = reference;
+    }
+
+    public Entity GetTargetEntity()
+    {
+        return targetEntity;
     }
 }

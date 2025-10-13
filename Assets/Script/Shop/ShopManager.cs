@@ -19,9 +19,10 @@ public class ShopManager : MonoBehaviour
     public static ShopManager instance { get; private set; }
     [HideInInspector] public bool isDragging;
 
-
+    private bool canCollectBubble; 
     private bool isEmpty = true;
     private bool isActive;
+
 
     private void Awake()
     {
@@ -43,6 +44,7 @@ public class ShopManager : MonoBehaviour
 
 
         isActive = true;
+        canCollectBubble = true;
     }
 
     // Update is called once per frame
@@ -187,6 +189,8 @@ public class ShopManager : MonoBehaviour
     {
         //if (!isActive)
         //    return;
+        if (!canCollectBubble)
+            return; 
         AddMoney(bubbleAddAmt);
         if (mouseReference.currentTarget != null)
         {
@@ -224,6 +228,11 @@ public class ShopManager : MonoBehaviour
     public void SetActiveStatus(bool condition)
     {
         isActive = condition;
+    }
+
+    public void SetBubbleCollectionStatus(bool condition)
+    {
+        canCollectBubble = condition;
     }
 
 }
