@@ -90,6 +90,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryGridUI
   image: {fileID: 7086275352866945449}
+  selectedColour: 0.7
+  baseImage: {fileID: 5200804382217655970}
+  pictureImage: {fileID: 7086275352866945449}
 --- !u!1 &5512684410765830071
 GameObject:
   m_ObjectHideFlags: 0

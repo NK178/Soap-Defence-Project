@@ -1,6 +1,8 @@
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.UIElements;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Timeline;
@@ -115,7 +117,6 @@ public class ShopManager : MonoBehaviour
         bool shoudlAdd = true;
         for (int iter = 0; iter < itemList.Count; iter++)
         {
-            // ERROR HERE LOADING MULTIPLE ITEMS, PROBABLY GET OUTPUT NULL 
             if (itemList[iter].GetOutput().name == newItem.GetOutput().name)
             {
                 shoudlAdd = false;
@@ -146,6 +147,32 @@ public class ShopManager : MonoBehaviour
             isDragging = true;
         }
 
+    }
+
+    public void RemoveItemFromShop(ShopItem item)
+    {
+        ShopItem target = null;
+        int index = -1;
+        for (int iter = 0; iter < itemList.Count; iter++)
+        {
+            if (itemList[iter].GetOutput().name == item.GetOutput().name)
+            {
+                index = iter;
+                target = itemList[iter];
+                break;
+            }
+        }
+
+        ShopGridUI gridUI = null; 
+        if (index != -1)
+            gridUI = UIGrid[index].gameObject.GetComponent<ShopGridUI>();
+
+        if (gridUI != null)
+        {
+            gridUI.GetImage().sprite = null;
+            gridUI.SetItem(null);
+            itemList.Remove(target);
+        }
     }
 
     public void CancelDrag()

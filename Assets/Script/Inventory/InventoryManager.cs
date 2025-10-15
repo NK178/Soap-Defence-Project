@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -8,6 +9,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private InventoryData inventoryData;
     private List<InventoryGridUI> inventoryUIList;
     private bool isTriggered;
+
     private bool isActive;
     public static int totalAvailableDefences; 
     void Awake()
@@ -59,6 +61,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+
 
 
 

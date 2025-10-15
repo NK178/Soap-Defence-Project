@@ -9795,6 +9795,7 @@ MonoBehaviour:
   sawToolReference: {fileID: 1164844445}
   DEBUGkeyName: Interact
   wrenchKeyName: Key2
+  sawKeyName: Key3
 --- !u!4 &1647802736
 Transform:
   m_ObjectHideFlags: 0
@@ -12607,6 +12608,7 @@ MonoBehaviour:
   - {fileID: 225931225}
   - {fileID: 64202158}
   isDragging: 0
+  areDefencesEnough: 0
 --- !u!1 &2090796867
 GameObject:
   m_ObjectHideFlags: 0

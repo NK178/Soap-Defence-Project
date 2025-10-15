@@ -24,8 +24,11 @@ public class LevelManager : MonoBehaviour
     //Debug     
     [SerializeField] private string DEBUGkeyName;
     [SerializeField] private string wrenchKeyName;
+    [SerializeField] private string sawKeyName;
+
     private InputAction DEBUGkey;
     private InputAction wrenchKey;
+    private InputAction sawKey;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -54,12 +57,19 @@ public class LevelManager : MonoBehaviour
             wrenchKey.started += ToggleWrench;
             wrenchKey.Enable();
         }
+        sawKey = InputSystem.actions.FindAction(sawKeyName);
+        if (sawKey != null)
+        {
+            sawKey.started += ToggleSaw;
+            sawKey.Enable();
+        }
     }
 
     private void OnDisable()
     {
         DEBUGkey.started -= DEBUGHandleKey;
         wrenchKey.started -= ToggleWrench;
+        sawKey.started -= ToggleSaw;
     }
 
     // just used for debugging 
@@ -81,6 +91,14 @@ public class LevelManager : MonoBehaviour
         if (ctx.started)
         {
             wrenchToolReference.ToggleWrench();
+        }
+    }
+
+    private void ToggleSaw(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            sawToolReference.ToggleSaw();
         }
     }
 

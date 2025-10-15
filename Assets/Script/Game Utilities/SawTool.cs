@@ -74,4 +74,9 @@ public class SawTool : MonoBehaviour, InterfaceDragHandler, IPointerClickHandler
     {
         isSawActive = condition;
     }
+
+    public void ToggleSaw()
+    {
+        isSawActive = !isSawActive;
+    }
 }

@@ -40,6 +40,9 @@ public class GameManager : MonoBehaviour
         
        switch (currentState)
        {
+            case GAMESTATES.MENU:
+                HandleMenuState();
+                break;
             case GAMESTATES.PLAY:
                 HandlePlayState();
                 break;
@@ -47,14 +50,19 @@ public class GameManager : MonoBehaviour
         
     }
 
-    private void HandlePlayState()
+    private void HandleMenuState()
     {
-        //Play button willl trigger level to start 
+        //prepping to enter play mode 
         if (currentLevelManager == null)
             currentLevelManager = FindAnyObjectByType<LevelManager>();
-        else
-        {
+    }
+
+    private void HandlePlayState()
+    {
+        //effectivly this is the game loop 
+        if (currentLevelManager != null) { 
             bool isGameRunning = currentLevelManager.IsGameRunning();
+
             //status can be false before/after game 
             if (!isGameRunning)
             {
@@ -65,8 +73,9 @@ public class GameManager : MonoBehaviour
                 }
                 else if (currentLevelManager.DidPlayerLose())
                 {
-                        //allow player to restart level? 
+                    //allow player to restart level? 
                 }
+                //menu 
                 //else
                 //{
                 //    //plant selector unless tutorial 
@@ -76,6 +85,37 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    //private void HandlePlayState()
+    //{
+    //    //Play button willl trigger level to start 
+    //    if (currentLevelManager == null)
+    //        currentLevelManager = FindAnyObjectByType<LevelManager>();
+    //    else
+    //    {
+    //        bool isGameRunning = currentLevelManager.IsGameRunning();
+    //        //status can be false before/after game 
+    //        if (!isGameRunning)
+    //        {
+    //            if (currentLevelManager.DidPlayerWin())
+    //            {
+    //                //mark level for completion? 
+    //                Debug.Log("Player Win");
+    //            }
+    //            else if (currentLevelManager.DidPlayerLose())
+    //            {
+    //                    //allow player to restart level? 
+    //            }
+    //            //menu 
+    //            //else
+    //            //{
+    //            //    //plant selector unless tutorial 
+    //            //    //temp trigger 
+    //            //    currentLevelManager.StartGame();
+    //            //}
+    //        }
+    //    }
+    //}
 
     public bool CanStartLevel()
     {
@@ -88,35 +128,43 @@ public class GameManager : MonoBehaviour
     public void StartLevel()
     {
         if (currentLevelManager != null)
+        {
             currentLevelManager.StartGame();
+            currentState = GAMESTATES.PLAY; 
+        }
     }
 
 
-    //public bool HandleStartLevel()
-    //{
-    //    if (currentLevelManager != null)
-    //    {
-    //        if (currentLevelManager.CanStartGame())
-    //        {
-    //            currentLevelManager.StartGame();
-    //            return true; 
-    //        }
-    //    }
-    //    return false; 
-    //}
-
-    public void StartPlay()
+    public void StartMenu()
     {
         //set up scene manager here 
         //for now temp is go to sampleScene
         SceneManager.LoadScene("SampleScene");
         SceneManager.LoadScene("InventoryScene",LoadSceneMode.Additive);
+        
 
-        currentState = GAMESTATES.PLAY;
+        //dont enter game mdoe first 
+        currentState = GAMESTATES.MENU;
     }
 
+    //public void StartPlay()
+    //{
+    //    //set up scene manager here 
+    //    //for now temp is go to sampleScene
+    //    SceneManager.LoadScene("SampleScene");
+    //    SceneManager.LoadScene("InventoryScene", LoadSceneMode.Additive);
+
+    //    currentState = GAMESTATES.PLAY;
+    //}
+
+    public GAMESTATES GetCurrentGameState()
+    {
+        return currentState; 
+    }
     public void ChangeSceneTest(string name)
     {
         SceneManager.LoadScene(name);
     }
+
+    
 }
