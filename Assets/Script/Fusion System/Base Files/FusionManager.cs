@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -32,11 +33,11 @@ public class FusionManager : MonoBehaviour
     {
 
     }
- 
-    public void TriggerFusionIfValid<T>(List<T> refList)
+
+    public bool TriggerFusionIfValid<T>(List<T> refList)
     {
         //first find compatible data type with the list,if find cast the base data into the specific ones 
-        List<FusionData<T>> validTypeDataList = new List<FusionData<T>>(); 
+        List<FusionData<T>> validTypeDataList = new List<FusionData<T>>();
         for (int iter = 0; iter < fusionRecipeList.Count; iter++)
         {
             FusionDataBase baseData = fusionRecipeList[iter].GetFusionData();
@@ -64,9 +65,13 @@ public class FusionManager : MonoBehaviour
         {
             typeFusionData.ResolveFusion(refList);
             Debug.Log("FUSION VALID");
+            return true;
         }
         else
+        {
             Debug.Log("FUSION INVALID U DUM");
+            return false;
+        }
     }
 
 }

@@ -1,17 +1,24 @@
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 
 //inherit from base class
-public class ShopGridUI : GeneralUI, InterfaceDragHandler
+public class InventoryGridUI : GeneralUI, InterfaceDragHandler, IPointerClickHandler
 {
     private ShopItem item;
 
 
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (ShopManager.instance != null)
+            ShopManager.instance.AddItemIntoList(item);
+    }
+
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        //Debug.Log("Dragging");
-        ShopManager.instance.HandleDragStart(item, eventData);
+        //ShopManager.instance.HandleDragStart(item, eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -21,9 +28,8 @@ public class ShopGridUI : GeneralUI, InterfaceDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        ShopManager.instance.CancelDrag();
-        
     }
+
 
     public void SetItem(ShopItem item)
     {

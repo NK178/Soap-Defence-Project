@@ -1466,7 +1466,6 @@ MonoBehaviour:
   waveDataList:
   - {fileID: 11400000, guid: 878a7f075e39adf4ca6ec579b98b7738, type: 2}
   timeBetweenWaves: 10
-  isActive: 1
   areAllWavesSent: 0
 --- !u!1 &425626157
 GameObject:
@@ -12597,10 +12596,7 @@ MonoBehaviour:
   maxMoney: 500
   startingCash: 500
   bubbleAddAmt: 10
-  itemList:
-  - {fileID: 11400000, guid: 4331ffcf677806e4395baa7f62330798, type: 2}
-  - {fileID: 11400000, guid: a45c1a6a4144bdf478daa1c4ba6802a2, type: 2}
-  - {fileID: 11400000, guid: 09ac69eb56ab9174393535964869b6a8, type: 2}
+  itemList: []
   UIGrid:
   - {fileID: 2112091638}
   - {fileID: 1402117019}

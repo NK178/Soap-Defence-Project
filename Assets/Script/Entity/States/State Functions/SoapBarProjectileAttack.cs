@@ -18,6 +18,7 @@ public class SoapBarProjectileAttack : EntityFunctions
         //run infintely until stopped 
         while (true)
         {
+            yield return new WaitForSeconds(attackRate);
             Vector3 spawnPosition = entity.gameObject.transform.position;
 
             //raycast to find nearest enemy 
@@ -63,7 +64,7 @@ public class SoapBarProjectileAttack : EntityFunctions
                     Debug.DrawLine(spawnPosition, targetPosition + spawnPosition, Color.green, 2f);
                 }
             }
-            yield return new WaitForSeconds(attackRate);
+            //yield return new WaitForSeconds(attackRate);
         }
     }
 

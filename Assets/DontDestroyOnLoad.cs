@@ -1,14 +1,10 @@
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class PersistTester : MonoBehaviour
+public class DontDestroyOnLoad : MonoBehaviour
 {
 
-
-    public static PersistTester instance; 
-
-
+    public static DontDestroyOnLoad instance;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         if (instance != null)
@@ -25,12 +21,6 @@ public class PersistTester : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
         
-    }
-
-    public void ChangeSceneTest(string name)
-    {
-        SceneManager.LoadScene(name);
     }
 }

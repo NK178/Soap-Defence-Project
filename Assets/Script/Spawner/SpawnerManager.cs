@@ -11,7 +11,7 @@ public class SpawnerManager : MonoBehaviour
 
     private List<Entity> activeSpawnList;
     //temp public make it private later 
-    public bool isActive;
+    private bool isActive;
     private bool changeWave;
     [HideInInspector] public bool areAllWavesSent;
     private int waveIndex;
@@ -24,7 +24,7 @@ public class SpawnerManager : MonoBehaviour
         waveIndex = 0;
         //isActive = false;
         changeWave = true;
-        areAllWavesSent = false;
+        areAllWavesSent = isActive = false;
         LoadNextWave();
     }
 
@@ -139,6 +139,11 @@ public class SpawnerManager : MonoBehaviour
     {
         //shallow copy should be fine I think
         entityList = activeSpawnList;
+    }
+
+    public void SetActiveStatus(bool condition)
+    {
+        isActive = condition; 
     }
 }
 

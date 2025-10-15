@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Timeline;
 using static UnityEditor.Progress;
 
 public class ShopManager : MonoBehaviour
@@ -18,6 +19,7 @@ public class ShopManager : MonoBehaviour
     private ShopItem selectedItem;
     public static ShopManager instance { get; private set; }
     [HideInInspector] public bool isDragging;
+    [HideInInspector] public bool areDefencesEnough;
 
     private bool canCollectBubble; 
     private bool isEmpty = true;
@@ -45,6 +47,7 @@ public class ShopManager : MonoBehaviour
 
         isActive = true;
         canCollectBubble = true;
+        areDefencesEnough = true;
     }
 
     // Update is called once per frame
@@ -58,7 +61,29 @@ public class ShopManager : MonoBehaviour
         {
             HandleUI();
         }
+        areDefencesEnough = DidPlayerBringEnoughDefences();
     }
+
+
+    private bool DidPlayerBringEnoughDefences()
+    {
+        if (itemList == null)
+            return false;
+        //if 8 for 8 
+        else if (itemList.Count == UIGrid.Count)
+            return true;
+        //if total items more than total shop space (8), player must bring all 8 
+        else if (InventoryManager.totalAvailableDefences >= UIGrid.Count)
+            return false;
+        //if total items NOT more sthan total shop space (8), player brings at least 1 defence
+        else if (itemList.Count > 0)
+            return true;
+        //no defence at all 
+        else 
+            return false; 
+    }
+
+    
 
 
     void HandleUI()
@@ -78,6 +103,33 @@ public class ShopManager : MonoBehaviour
                 gridUI.SetItem(itemList[iter]);
             }
         }
+
+    }
+
+    public void AddItemIntoList(ShopItem newItem)
+    {
+        if (itemList == null)
+            itemList = new List<ShopItem>();
+
+        //check for duplicates 
+        bool shoudlAdd = true;
+        for (int iter = 0; iter < itemList.Count; iter++)
+        {
+            // ERROR HERE LOADING MULTIPLE ITEMS, PROBABLY GET OUTPUT NULL 
+            if (itemList[iter].GetOutput().name == newItem.GetOutput().name)
+            {
+                shoudlAdd = false;
+                break;
+            }
+        }
+
+        if (shoudlAdd)
+        {
+            itemList.Add(newItem);
+            isEmpty = false;
+        }
+        else
+            Debug.Log("ADD ITEM FAILED");
 
     }
 
@@ -167,8 +219,9 @@ public class ShopManager : MonoBehaviour
             //Get colliding entity 
             Entity entity2 = target.GetComponent<Entity>();
             List<Entity> validFusionList = new List<Entity> { refEntity, entity2 };
-            FusionManager.instance.TriggerFusionIfValid(validFusionList);
-            validDrop = true;
+
+            //not all entity drops may be valid 
+            validDrop = FusionManager.instance.TriggerFusionIfValid(validFusionList);
         }
         else if (target.transform.childCount == 0)
         {

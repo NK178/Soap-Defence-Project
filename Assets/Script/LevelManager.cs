@@ -31,7 +31,7 @@ public class LevelManager : MonoBehaviour
     void Awake()
     {
         mouseImage.enabled = false;
-        isGameRunning = true;
+        isGameRunning = false;
         hasPlayerWon = false;
         hasPlayerLost = false;
         mousePosReference = mouseReference.GetComponent<MousePositionReference>();
@@ -200,6 +200,7 @@ public class LevelManager : MonoBehaviour
         hasPlayerWon = true;
         hasPlayerLost = false;
         wrenchToolReference.SetActiveStatus(false);
+        spawnerManagerReference.SetActiveStatus(false);
         DeactiveDefences();
         Debug.Log("WIN");
         isGameRunning = false;
@@ -214,6 +215,7 @@ public class LevelManager : MonoBehaviour
         onMouseInteracts.SetActiveStatus(false);
         shopManagerReference.SetActiveStatus(false);
         wrenchToolReference.SetActiveStatus(false);
+        spawnerManagerReference.SetActiveStatus(false); 
         DeactiveDefences();
         DeactiveEnemies();
         Debug.Log("LOSE");
@@ -226,6 +228,40 @@ public class LevelManager : MonoBehaviour
             return true;
         else
             return false;
+    }
+
+    public bool IsGameRunning()
+    {
+        return isGameRunning;
+    }
+
+    public bool DidPlayerWin()
+    {
+        return hasPlayerWon;
+    }
+
+    public bool DidPlayerLose()
+    {
+        return hasPlayerLost;
+    }
+
+    public void StartGame()
+    {
+        //check if the player has brought enough defences 
+        if (CanStartGame())
+        {
+            isGameRunning = true;
+            spawnerManagerReference.SetActiveStatus(true);
+        }
+        else
+        {
+            Debug.Log("NOT ENOUGH DEFENCES");
+        }
+    }
+
+    public bool CanStartGame()
+    {
+        return shopManagerReference.areDefencesEnough;
     }
 
     public void DebugCall()

@@ -57,12 +57,26 @@ public class ShopItem : ScriptableObject
         }
     }
 
+    public void TransferData(ShopItem data)
+    {
+        sprite = data.sprite; 
+        output = data.output;
+        foreach (ShopItemCondition newCondition in data.conditions)
+        {
+            conditions.Add(newCondition);   
+        }
+    }
+
+
     public Sprite GetSprite()
     {
         return sprite; 
     }
 
-
+    public ShopItemOutput GetOutput()
+    {
+        return output; 
+    }
 
 
 }
