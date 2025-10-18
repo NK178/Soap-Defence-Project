@@ -14,6 +14,7 @@ public enum GAMESTATES {
 }
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private FloatSO isTutorialPlayedBool;
     public static GameManager instance;
 
     private LevelManager currentLevelManager;
@@ -32,6 +33,9 @@ public class GameManager : MonoBehaviour
         }
         currentState = GAMESTATES.HOMESCREEN;
         currentLevelManager = null;
+
+        //idk how to initalize the tutorial played boolean but I leave it like this for now 
+        //isTutorialPlayedBool
     }
 
     // Update is called once per frame
@@ -86,37 +90,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //private void HandlePlayState()
-    //{
-    //    //Play button willl trigger level to start 
-    //    if (currentLevelManager == null)
-    //        currentLevelManager = FindAnyObjectByType<LevelManager>();
-    //    else
-    //    {
-    //        bool isGameRunning = currentLevelManager.IsGameRunning();
-    //        //status can be false before/after game 
-    //        if (!isGameRunning)
-    //        {
-    //            if (currentLevelManager.DidPlayerWin())
-    //            {
-    //                //mark level for completion? 
-    //                Debug.Log("Player Win");
-    //            }
-    //            else if (currentLevelManager.DidPlayerLose())
-    //            {
-    //                    //allow player to restart level? 
-    //            }
-    //            //menu 
-    //            //else
-    //            //{
-    //            //    //plant selector unless tutorial 
-    //            //    //temp trigger 
-    //            //    currentLevelManager.StartGame();
-    //            //}
-    //        }
-    //    }
-    //}
-
     public bool CanStartLevel()
     {
         if (currentLevelManager != null)
@@ -138,28 +111,38 @@ public class GameManager : MonoBehaviour
     public void StartMenu()
     {
         //set up scene manager here 
-        //for now temp is go to sampleScene
-        SceneManager.LoadScene("SampleScene");
-        SceneManager.LoadScene("InventoryScene",LoadSceneMode.Additive);
-        
+
+        //if tutorial has not been played
+        if (isTutorialPlayedBool.value == 0f)
+        {
+            //load dialogue scene first incase of null issues 
+            SceneManager.LoadScene("DialogueScene");
+            SceneManager.LoadScene("TutorialScene", LoadSceneMode.Additive);
+        }
+        else
+        {
+            //for now temp is go to sampleScene
+            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("InventoryScene", LoadSceneMode.Additive);
+        }
+
 
         //dont enter game mdoe first 
         currentState = GAMESTATES.MENU;
-    }
-
-    //public void StartPlay()
-    //{
-    //    //set up scene manager here 
-    //    //for now temp is go to sampleScene
-    //    SceneManager.LoadScene("SampleScene");
-    //    SceneManager.LoadScene("InventoryScene", LoadSceneMode.Additive);
-
-    //    currentState = GAMESTATES.PLAY;
-    //}
+    }   
 
     public GAMESTATES GetCurrentGameState()
     {
         return currentState; 
+    }
+
+    public bool IsInTutorialMode()
+    {
+        //if have not played tutorial 
+        if (isTutorialPlayedBool.value == 0f)
+            return true;
+        else
+            return false;
     }
     public void ChangeSceneTest(string name)
     {

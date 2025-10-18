@@ -57,4 +57,9 @@ public class InventoryGridUI : GeneralUI, InterfaceDragHandler, IPointerClickHan
         return item;
     }
 
+    public float GetBaseOpacity()
+    {
+        return selectedColour;
+    }
+
 }

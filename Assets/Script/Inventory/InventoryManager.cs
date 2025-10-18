@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,9 +12,19 @@ public class InventoryManager : MonoBehaviour
     private bool isTriggered;
 
     private bool isActive;
-    public static int totalAvailableDefences; 
+    public int totalAvailableDefences;
+    public static InventoryManager instance { get; private set; }
+
+
     void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
         totalAvailableDefences = 0;
         inventoryUIList = new List<InventoryGridUI>();
         LoadItems();
@@ -43,7 +54,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    void LoadItems()
+    private void LoadItems()
     {
         if (inventoryData == null)
             return; 
@@ -62,8 +73,28 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    
+    public void ToggleUIHighlight(ShopItem target, bool condition)
+    {
+        InventoryGridUI targetUI = null;
+        foreach (InventoryGridUI gridUI in inventoryUIList)
+        {
+            if (gridUI.GetItem().GetOutput().name == target.GetOutput().name)
+            {
+                targetUI = gridUI;
+                break;
+            }
+        }
 
+        if (targetUI != null)
+        {
+            if (condition)
+                targetUI.ChangeImageOpacity(1f);
+            else
+                targetUI.ChangeImageOpacity(targetUI.GetBaseOpacity());
 
+        }
+    }
 
 
 }

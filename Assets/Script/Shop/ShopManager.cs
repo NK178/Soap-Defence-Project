@@ -47,7 +47,7 @@ public class ShopManager : MonoBehaviour
             playerMoney.value = maxMoney;
 
 
-        isActive = true;
+        isActive = false;
         canCollectBubble = true;
         areDefencesEnough = true;
     }
@@ -63,7 +63,9 @@ public class ShopManager : MonoBehaviour
         {
             HandleUI();
         }
-        areDefencesEnough = DidPlayerBringEnoughDefences();
+        
+        if (!GameManager.instance.IsInTutorialMode())
+            areDefencesEnough = DidPlayerBringEnoughDefences();
     }
 
 
@@ -75,7 +77,7 @@ public class ShopManager : MonoBehaviour
         else if (itemList.Count == UIGrid.Count)
             return true;
         //if total items more than total shop space (8), player must bring all 8 
-        else if (InventoryManager.totalAvailableDefences >= UIGrid.Count)
+        else if (InventoryManager.instance.totalAvailableDefences >= UIGrid.Count)
             return false;
         //if total items NOT more sthan total shop space (8), player brings at least 1 defence
         else if (itemList.Count > 0)
@@ -172,6 +174,7 @@ public class ShopManager : MonoBehaviour
             gridUI.GetImage().sprite = null;
             gridUI.SetItem(null);
             itemList.Remove(target);
+            InventoryManager.instance.ToggleUIHighlight(target, true);
         }
     }
 

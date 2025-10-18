@@ -7,19 +7,19 @@ using UnityEngine.InputSystem;
 public class LevelManager : MonoBehaviour
 {
 
-    [SerializeField] private GameObject mouseReference;
-    [SerializeField] private ShopManager shopManagerReference;
-    [SerializeField] private SpriteRenderer mouseImage;
-    [SerializeField] private GridManager gridManagerReference;
-    [SerializeField] private SpawnerManager spawnerManagerReference;
-    [SerializeField] private WrenchTool wrenchToolReference; 
-    [SerializeField] private SawTool sawToolReference; 
+    [SerializeField] protected GameObject mouseReference;
+    [SerializeField] protected ShopManager shopManagerReference;
+    [SerializeField] protected SpriteRenderer mouseImage;
+    [SerializeField] protected GridManager gridManagerReference;
+    [SerializeField] protected SpawnerManager spawnerManagerReference;
+    [SerializeField] protected WrenchTool wrenchToolReference; 
+    [SerializeField] protected SawTool sawToolReference;
 
-    private MousePositionReference mousePosReference;
-    private OnMouseInteracts onMouseInteracts;
-    private bool isGameRunning;
-    private bool hasPlayerWon;
-    private bool hasPlayerLost;
+    protected MousePositionReference mousePosReference;
+    protected OnMouseInteracts onMouseInteracts;
+    protected bool isGameRunning;
+    protected bool hasPlayerWon;
+    protected bool hasPlayerLost;
 
     //Debug     
     [SerializeField] private string DEBUGkeyName;
@@ -39,8 +39,6 @@ public class LevelManager : MonoBehaviour
         hasPlayerLost = false;
         mousePosReference = mouseReference.GetComponent<MousePositionReference>();
         onMouseInteracts = mouseReference.GetComponent<OnMouseInteracts>();
-
-
     }
 
     private void OnEnable()
@@ -111,8 +109,6 @@ public class LevelManager : MonoBehaviour
 
         Vector3 worldMousePos = mousePosReference.GetWorldMousePos();
 
-
-
         if (ShopManager.instance.isDragging)
         {
             wrenchToolReference.SetWrenchActive(false);
@@ -149,7 +145,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void HandleMouseUIByShop()
+    protected void HandleMouseUIByShop()
     {
         ShopItem currentItem = ShopManager.instance.GetCurrentItem();
         SpriteRenderer sR = mouseImage.GetComponent<SpriteRenderer>();
@@ -160,7 +156,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void HandleMouseUIByWrench()
+    protected void HandleMouseUIByWrench()
     {
         SpriteRenderer sR = mouseImage.GetComponent<SpriteRenderer>();
         //if object is not picked up do glove sprite 
@@ -263,7 +259,7 @@ public class LevelManager : MonoBehaviour
         return hasPlayerLost;
     }
 
-    public void StartGame()
+    virtual public void StartGame()
     {
         //check if the player has brought enough defences 
         if (CanStartGame())

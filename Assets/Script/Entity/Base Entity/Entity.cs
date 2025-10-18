@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.UI.CanvasScaler;
 
 
 // for programmer to choose 
@@ -257,7 +258,14 @@ public class Entity : MonoBehaviour
 
     public void SetActiveStatus(bool condition)
     {
-        isActive = condition; 
+        if (!condition)
+            StopAllCoroutines();
+        else if (condition && !isActive)
+        {
+            if (currentState != null)
+                currentState.Init(this);
+        }
+        isActive = condition;
     }
 
     public Animator GetAnimator()

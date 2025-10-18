@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9647f2ddc3dfb4449712bf6907a120e, type: 3}
   m_Name: Soap Bar
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
-  sprite: {fileID: -5712959122012955994, guid: 0b38b6f3bab1cab4ea800b345b3c44a9, type: 3}
+  sprite: {fileID: 6930781038851378844, guid: 57e7fe7f0c9a20a4fb49f32a7ead2ab3, type: 3}
   conditions:
   - {fileID: 11400000, guid: c139614e83f0b6a49aa139df9d806cda, type: 2}
   output: {fileID: 11400000, guid: 3a2848860f1e44b4db9884ac04a6fffe, type: 2}
